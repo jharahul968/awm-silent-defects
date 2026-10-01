@@ -86,7 +86,6 @@ analysis/                   # All project scripts
     predictability_results.json
 data/                       # Dataset provenance (actual .jsonl files gitignored)
   README.md                 # HuggingFace dataset reference
-mcp-adapted-bench/          # MCP-adapted evaluation harness (BFCLv3, τ²-bench, MCP-Universe)
 awm/                        # AWM library (from upstream, minor bug fix applied)
 figures/                    # Plots and diagrams
 Project_Proposal.pdf        # Course project proposal
@@ -133,6 +132,7 @@ Results are written to `analysis/results/`.
 
 - **Dataset:** [Snowflake/AgentWorldModel-1K](https://huggingface.co/datasets/Snowflake/AgentWorldModel-1K) (HuggingFace, Apache 2.0)
 - **Upstream code:** [Snowflake-Labs/agent-world-model](https://github.com/Snowflake-Labs/agent-world-model)
+- **MCP benchmark harness:** [Raibows/mcp-adapted-bench](https://github.com/Raibows/mcp-adapted-bench) (BFCLv3, τ²-bench, MCP-Universe)
 - **Paper:** Wang et al., "Agent World Model: Infinity Synthetic Environments for Agentic Reinforcement Learning," ICML 2026. [arXiv:2602.10090](https://arxiv.org/abs/2602.10090)
 
 This project extends the AWM artifact for a data-mining study and is not affiliated with Snowflake or the original authors.
