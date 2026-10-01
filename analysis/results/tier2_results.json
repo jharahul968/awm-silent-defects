@@ -1,0 +1,280 @@
+{
+  "dataset": {
+    "n_environments": 999,
+    "n_rows": 613017,
+    "n_corrupted": 486527,
+    "corruption_rate": 0.7936598821892378,
+    "features": [
+      "has_negative_value",
+      "num_negative_values",
+      "log_max_numeric",
+      "log_min_numeric",
+      "num_numeric_values",
+      "has_absurd_year",
+      "min_year",
+      "num_null_values",
+      "num_string_values",
+      "max_string_length",
+      "avg_string_length",
+      "num_columns",
+      "num_values",
+      "col_val_delta",
+      "num_money_cols",
+      "num_count_cols",
+      "num_date_cols",
+      "has_rating_col",
+      "has_age_col",
+      "table_fk_count",
+      "table_unique_count",
+      "table_col_count",
+      "num_unknown_cols",
+      "statement_index",
+      "sql_length",
+      "col_fill_ratio"
+    ]
+  },
+  "main_comparison": [
+    {
+      "model": "rule_baseline",
+      "pr_auc": 0.8888937476489088,
+      "p@100": 1.0,
+      "r@100": 0.0008377384413038561,
+      "precision": 0.980091021661869,
+      "recall": 0.5105596930526352,
+      "f1": 0.6713778972415616
+    },
+    {
+      "model": "z_score",
+      "pr_auc": 0.9354859721329496,
+      "p@100": 0.75,
+      "r@100": 0.000628303830977892,
+      "precision": 0.7937613043940844,
+      "recall": 1.0,
+      "f1": 0.8850244482915852
+    },
+    {
+      "model": "isolation_forest",
+      "pr_auc": 0.8941712370175787,
+      "p@100": 1.0,
+      "r@100": 0.0008377384413038561,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    {
+      "model": "local_outlier_factor",
+      "pr_auc": 0.970257350935188,
+      "p@100": 1.0,
+      "r@100": 0.0008377384413038561,
+      "precision": 0.9945597264319577,
+      "recall": 0.5360269416682724,
+      "f1": 0.6966097635326395
+    },
+    {
+      "model": "logistic_regression",
+      "pr_auc": 0.9978448463625904,
+      "p@100": 1.0,
+      "r@100": 0.0008377384413038561,
+      "precision": 0.9945123876661005,
+      "recall": 0.9762166056513836,
+      "f1": 0.9852795698015574
+    },
+    {
+      "model": "random_forest",
+      "pr_auc": 0.999703665902718,
+      "p@100": 1.0,
+      "r@100": 0.0008377384413038561,
+      "precision": 0.9966730678525706,
+      "recall": 0.991321029748092,
+      "f1": 0.9939898444751509
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "pr_auc": 0.9995930083627433,
+      "p@100": 1.0,
+      "r@100": 0.0008377384413038561,
+      "precision": 0.9977045638671348,
+      "recall": 0.9904078948470708,
+      "f1": 0.9940428394257247
+    },
+    {
+      "model": "xgboost",
+      "pr_auc": 0.9998300628946694,
+      "p@100": 1.0,
+      "r@100": 0.0008377384413038561,
+      "precision": 0.9975096961997627,
+      "recall": 0.993264582931917,
+      "f1": 0.9953826134407925
+    }
+  ],
+  "severity_breakdown": [
+    {
+      "severity": "obvious",
+      "n_corrupted": 39787,
+      "hgb_pr_auc": 0.998763995423797,
+      "iso_pr_auc": 0.7687168755628586
+    },
+    {
+      "severity": "medium",
+      "n_corrupted": 39795,
+      "hgb_pr_auc": 0.9988931971250313,
+      "iso_pr_auc": 0.750407486248341
+    },
+    {
+      "severity": "subtle",
+      "n_corrupted": 39787,
+      "hgb_pr_auc": 0.998669795759528,
+      "iso_pr_auc": 0.7256674201395152
+    }
+  ],
+  "type_holdout": [
+    {
+      "held_out_type": "negative_money",
+      "n_test_corrupted": 18558,
+      "hgb_pr_auc": 0.8725196921970904
+    },
+    {
+      "held_out_type": "negative_inventory",
+      "n_test_corrupted": 8130,
+      "hgb_pr_auc": 0.8829293877159192
+    },
+    {
+      "held_out_type": "impossible_age",
+      "n_test_corrupted": 75,
+      "hgb_pr_auc": 0.008076961294358895
+    },
+    {
+      "held_out_type": "out_of_bounds_rating",
+      "n_test_corrupted": 1241,
+      "hgb_pr_auc": 0.0979792322907273
+    },
+    {
+      "held_out_type": "anomalous_date",
+      "n_test_corrupted": 91365,
+      "hgb_pr_auc": 0.748736480114991
+    }
+  ],
+  "feature_ablation": [
+    {
+      "feature_set": "value only",
+      "n_features": 11,
+      "hgb_pr_auc": 0.999434944788785
+    },
+    {
+      "feature_set": "value + column",
+      "n_features": 19,
+      "hgb_pr_auc": 0.9998245717603595
+    },
+    {
+      "feature_set": "value + column + structural",
+      "n_features": 26,
+      "hgb_pr_auc": 0.9995930083627433
+    }
+  ],
+  "feature_importance": [
+    {
+      "feature": "min_year",
+      "importance": 0.5981371714588918
+    },
+    {
+      "feature": "log_min_numeric",
+      "importance": 0.08352900912422707
+    },
+    {
+      "feature": "has_absurd_year",
+      "importance": 0.06602048904634399
+    },
+    {
+      "feature": "has_negative_value",
+      "importance": 0.06521281284220956
+    },
+    {
+      "feature": "num_negative_values",
+      "importance": 0.0539640765939144
+    },
+    {
+      "feature": "max_string_length",
+      "importance": 0.03059211834686256
+    },
+    {
+      "feature": "num_string_values",
+      "importance": 0.01866181224276028
+    },
+    {
+      "feature": "num_money_cols",
+      "importance": 0.01593822488305907
+    },
+    {
+      "feature": "avg_string_length",
+      "importance": 0.011653104824418782
+    },
+    {
+      "feature": "log_max_numeric",
+      "importance": 0.008168408969291848
+    },
+    {
+      "feature": "num_count_cols",
+      "importance": 0.007633914130697871
+    },
+    {
+      "feature": "num_date_cols",
+      "importance": 0.007536805267794697
+    },
+    {
+      "feature": "sql_length",
+      "importance": 0.0051794198523739
+    },
+    {
+      "feature": "num_numeric_values",
+      "importance": 0.004978427740967429
+    },
+    {
+      "feature": "num_columns",
+      "importance": 0.004633812240107109
+    },
+    {
+      "feature": "num_values",
+      "importance": 0.004072191768804809
+    },
+    {
+      "feature": "table_col_count",
+      "importance": 0.0037806852421643057
+    },
+    {
+      "feature": "table_fk_count",
+      "importance": 0.003277078185246427
+    },
+    {
+      "feature": "statement_index",
+      "importance": 0.0020957415832220283
+    },
+    {
+      "feature": "has_rating_col",
+      "importance": 0.002076265595518443
+    },
+    {
+      "feature": "table_unique_count",
+      "importance": 0.0008639232033331312
+    },
+    {
+      "feature": "has_age_col",
+      "importance": 0.0006961126233647247
+    },
+    {
+      "feature": "num_null_values",
+      "importance": 0.0006557288640077933
+    },
+    {
+      "feature": "col_fill_ratio",
+      "importance": 0.0006369633788289442
+    },
+    {
+      "feature": "num_unknown_cols",
+      "importance": 5.701991588968723e-06
+    },
+    {
+      "feature": "col_val_delta",
+      "importance": 0.0
+    }
+  ]
+}

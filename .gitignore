@@ -19,7 +19,12 @@ data/.cache/
 analysis/results/insert_audit.jsonl
 analysis/results/static_checker_rows.jsonl
 analysis/results/official_reset.log
+analysis/results/tier2_dataset.parquet
+wandb/
 
 # OS / editor
 .DS_Store
 *.swp
+
+# API keys / secrets
+.env
