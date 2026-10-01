@@ -3,6 +3,8 @@
 **COSC 50303: Data Mining — Course Project, Fall 2026**
 Rahul Jha · Department of Computer Science, Texas Christian University
 
+📄 [Project Proposal](Project_Proposal.pdf)
+
 ---
 
 ## Project Overview
@@ -84,8 +86,10 @@ analysis/                   # All project scripts
     predictability_results.json
 data/                       # Dataset provenance (actual .jsonl files gitignored)
   README.md                 # HuggingFace dataset reference
+mcp-adapted-bench/          # MCP-adapted evaluation harness (BFCLv3, τ²-bench, MCP-Universe)
 awm/                        # AWM library (from upstream, minor bug fix applied)
 figures/                    # Plots and diagrams
+Project_Proposal.pdf        # Course project proposal
 ```
 
 ---
