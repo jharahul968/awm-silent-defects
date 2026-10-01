@@ -1,0 +1,11 @@
+{
+  "environment_count": 1000,
+  "statement_count": 129328,
+  "failure_count": 1374,
+  "failure_environment_count": 217,
+  "malformed_payload_count": 1,
+  "error_types": {
+    "IntegrityError": 1165,
+    "SQLError": 209
+  }
+}

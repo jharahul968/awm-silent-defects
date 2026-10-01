@@ -1,0 +1,8468 @@
+[
+  {
+    "scenario": "e_commerce_33",
+    "status": "clean",
+    "statement_count": 133,
+    "failed_count": 0,
+    "successful_count": 133,
+    "error_types": {}
+  },
+  {
+    "scenario": "content_platform_1",
+    "status": "clean",
+    "statement_count": 154,
+    "failed_count": 0,
+    "successful_count": 154,
+    "error_types": {}
+  },
+  {
+    "scenario": "code_hosting_2",
+    "status": "clean",
+    "statement_count": 175,
+    "failed_count": 0,
+    "successful_count": 175,
+    "error_types": {}
+  },
+  {
+    "scenario": "communication_messaging_1",
+    "status": "failed",
+    "statement_count": 139,
+    "failed_count": 1,
+    "successful_count": 138,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "social_media_1",
+    "status": "clean",
+    "statement_count": 99,
+    "failed_count": 0,
+    "successful_count": 99,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_networking_5",
+    "status": "clean",
+    "statement_count": 188,
+    "failed_count": 0,
+    "successful_count": 188,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_media_4",
+    "status": "clean",
+    "statement_count": 128,
+    "failed_count": 0,
+    "successful_count": 128,
+    "error_types": {}
+  },
+  {
+    "scenario": "media_streaming_1",
+    "status": "clean",
+    "statement_count": 218,
+    "failed_count": 0,
+    "successful_count": 218,
+    "error_types": {}
+  },
+  {
+    "scenario": "flight_booking_1",
+    "status": "failed",
+    "statement_count": 186,
+    "failed_count": 7,
+    "successful_count": 179,
+    "error_types": {
+      "SQLError": 7
+    }
+  },
+  {
+    "scenario": "social_networking_8",
+    "status": "clean",
+    "statement_count": 116,
+    "failed_count": 0,
+    "successful_count": 116,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_media_5",
+    "status": "clean",
+    "statement_count": 173,
+    "failed_count": 0,
+    "successful_count": 173,
+    "error_types": {}
+  },
+  {
+    "scenario": "productivity_assistant_1",
+    "status": "failed",
+    "statement_count": 165,
+    "failed_count": 1,
+    "successful_count": 164,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "e_commerce_15",
+    "status": "failed",
+    "statement_count": 124,
+    "failed_count": 1,
+    "successful_count": 123,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "ecommerce_1",
+    "status": "clean",
+    "statement_count": 156,
+    "failed_count": 0,
+    "successful_count": 156,
+    "error_types": {}
+  },
+  {
+    "scenario": "information_lookup_1",
+    "status": "clean",
+    "statement_count": 116,
+    "failed_count": 0,
+    "successful_count": 116,
+    "error_types": {}
+  },
+  {
+    "scenario": "document_management_3",
+    "status": "clean",
+    "statement_count": 152,
+    "failed_count": 0,
+    "successful_count": 152,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_11",
+    "status": "clean",
+    "statement_count": 154,
+    "failed_count": 0,
+    "successful_count": 154,
+    "error_types": {}
+  },
+  {
+    "scenario": "content_media_consumption_1",
+    "status": "clean",
+    "statement_count": 195,
+    "failed_count": 0,
+    "successful_count": 195,
+    "error_types": {}
+  },
+  {
+    "scenario": "live_streaming_1",
+    "status": "clean",
+    "statement_count": 203,
+    "failed_count": 0,
+    "successful_count": 203,
+    "error_types": {}
+  },
+  {
+    "scenario": "authentication_identity_management_1",
+    "status": "clean",
+    "statement_count": 150,
+    "failed_count": 0,
+    "successful_count": 150,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_media_2",
+    "status": "clean",
+    "statement_count": 230,
+    "failed_count": 0,
+    "successful_count": 230,
+    "error_types": {}
+  },
+  {
+    "scenario": "gaming_platform_1",
+    "status": "clean",
+    "statement_count": 149,
+    "failed_count": 0,
+    "successful_count": 149,
+    "error_types": {}
+  },
+  {
+    "scenario": "payments_1",
+    "status": "failed",
+    "statement_count": 72,
+    "failed_count": 6,
+    "successful_count": 66,
+    "error_types": {
+      "SQLError": 6
+    }
+  },
+  {
+    "scenario": "document_management_6",
+    "status": "failed",
+    "statement_count": 169,
+    "failed_count": 27,
+    "successful_count": 142,
+    "error_types": {
+      "IntegrityError": 27
+    }
+  },
+  {
+    "scenario": "e_commerce_marketplace_22",
+    "status": "failed",
+    "statement_count": 187,
+    "failed_count": 17,
+    "successful_count": 170,
+    "error_types": {
+      "IntegrityError": 17
+    }
+  },
+  {
+    "scenario": "banking_5",
+    "status": "failed",
+    "statement_count": 79,
+    "failed_count": 3,
+    "successful_count": 76,
+    "error_types": {
+      "IntegrityError": 3
+    }
+  },
+  {
+    "scenario": "e_commerce_20",
+    "status": "failed",
+    "statement_count": 188,
+    "failed_count": 43,
+    "successful_count": 145,
+    "error_types": {
+      "IntegrityError": 43
+    }
+  },
+  {
+    "scenario": "e_commerce_38",
+    "status": "clean",
+    "statement_count": 157,
+    "failed_count": 0,
+    "successful_count": 157,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_media_3",
+    "status": "clean",
+    "statement_count": 209,
+    "failed_count": 0,
+    "successful_count": 209,
+    "error_types": {}
+  },
+  {
+    "scenario": "real_time_chat_messaging_1",
+    "status": "failed",
+    "statement_count": 165,
+    "failed_count": 15,
+    "successful_count": 150,
+    "error_types": {
+      "IntegrityError": 15
+    }
+  },
+  {
+    "scenario": "job_search_and_recruiting_1",
+    "status": "clean",
+    "statement_count": 97,
+    "failed_count": 0,
+    "successful_count": 97,
+    "error_types": {}
+  },
+  {
+    "scenario": "news_portal_1",
+    "status": "clean",
+    "statement_count": 180,
+    "failed_count": 0,
+    "successful_count": 180,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_network_9",
+    "status": "clean",
+    "statement_count": 84,
+    "failed_count": 0,
+    "successful_count": 84,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_shipping_1",
+    "status": "clean",
+    "statement_count": 99,
+    "failed_count": 0,
+    "successful_count": 99,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_shipping_2",
+    "status": "failed",
+    "statement_count": 103,
+    "failed_count": 2,
+    "successful_count": 101,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "subscription_billing_1",
+    "status": "failed",
+    "statement_count": 174,
+    "failed_count": 32,
+    "successful_count": 142,
+    "error_types": {
+      "IntegrityError": 32
+    }
+  },
+  {
+    "scenario": "e_commerce_16",
+    "status": "clean",
+    "statement_count": 210,
+    "failed_count": 0,
+    "successful_count": 210,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_9",
+    "status": "clean",
+    "statement_count": 163,
+    "failed_count": 0,
+    "successful_count": 163,
+    "error_types": {}
+  },
+  {
+    "scenario": "local_search_1",
+    "status": "failed",
+    "statement_count": 191,
+    "failed_count": 4,
+    "successful_count": 187,
+    "error_types": {
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "learning_management_system_2",
+    "status": "clean",
+    "statement_count": 151,
+    "failed_count": 0,
+    "successful_count": 151,
+    "error_types": {}
+  },
+  {
+    "scenario": "banking_1",
+    "status": "clean",
+    "statement_count": 122,
+    "failed_count": 0,
+    "successful_count": 122,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_7",
+    "status": "failed",
+    "statement_count": 222,
+    "failed_count": 4,
+    "successful_count": 218,
+    "error_types": {
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "e_commerce_marketplace_25",
+    "status": "clean",
+    "statement_count": 124,
+    "failed_count": 0,
+    "successful_count": 124,
+    "error_types": {}
+  },
+  {
+    "scenario": "identity_and_access_management_1",
+    "status": "clean",
+    "statement_count": 93,
+    "failed_count": 0,
+    "successful_count": 93,
+    "error_types": {}
+  },
+  {
+    "scenario": "account_management_1",
+    "status": "clean",
+    "statement_count": 136,
+    "failed_count": 0,
+    "successful_count": 136,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_32",
+    "status": "clean",
+    "statement_count": 148,
+    "failed_count": 0,
+    "successful_count": 148,
+    "error_types": {}
+  },
+  {
+    "scenario": "banking_4",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_34",
+    "status": "clean",
+    "statement_count": 163,
+    "failed_count": 0,
+    "successful_count": 163,
+    "error_types": {}
+  },
+  {
+    "scenario": "stock_trading_3",
+    "status": "clean",
+    "statement_count": 136,
+    "failed_count": 0,
+    "successful_count": 136,
+    "error_types": {}
+  },
+  {
+    "scenario": "banking_3",
+    "status": "failed",
+    "statement_count": 86,
+    "failed_count": 1,
+    "successful_count": 85,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "search_browse_1",
+    "status": "clean",
+    "statement_count": 145,
+    "failed_count": 0,
+    "successful_count": 145,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_14",
+    "status": "clean",
+    "statement_count": 214,
+    "failed_count": 0,
+    "successful_count": 214,
+    "error_types": {}
+  },
+  {
+    "scenario": "content_library_1",
+    "status": "clean",
+    "statement_count": 429,
+    "failed_count": 0,
+    "successful_count": 429,
+    "error_types": {}
+  },
+  {
+    "scenario": "stock_trading_1",
+    "status": "clean",
+    "statement_count": 111,
+    "failed_count": 0,
+    "successful_count": 111,
+    "error_types": {}
+  },
+  {
+    "scenario": "developer_platform_1",
+    "status": "failed",
+    "statement_count": 122,
+    "failed_count": 2,
+    "successful_count": 120,
+    "error_types": {
+      "SQLError": 2
+    }
+  },
+  {
+    "scenario": "e_commerce_9",
+    "status": "failed",
+    "statement_count": 146,
+    "failed_count": 4,
+    "successful_count": 142,
+    "error_types": {
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "e_commerce_29",
+    "status": "clean",
+    "statement_count": 298,
+    "failed_count": 0,
+    "successful_count": 298,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_9",
+    "status": "clean",
+    "statement_count": 179,
+    "failed_count": 0,
+    "successful_count": 179,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_31",
+    "status": "clean",
+    "statement_count": 124,
+    "failed_count": 0,
+    "successful_count": 124,
+    "error_types": {}
+  },
+  {
+    "scenario": "team_messaging_1",
+    "status": "failed",
+    "statement_count": 92,
+    "failed_count": 2,
+    "successful_count": 90,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "digital_content_store_1",
+    "status": "clean",
+    "statement_count": 273,
+    "failed_count": 0,
+    "successful_count": 273,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_networking_2",
+    "status": "clean",
+    "statement_count": 200,
+    "failed_count": 0,
+    "successful_count": 200,
+    "error_types": {}
+  },
+  {
+    "scenario": "ride_hailing_1",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_marketplace_1",
+    "status": "failed",
+    "statement_count": 221,
+    "failed_count": 1,
+    "successful_count": 220,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "task_management_15",
+    "status": "clean",
+    "statement_count": 193,
+    "failed_count": 0,
+    "successful_count": 193,
+    "error_types": {}
+  },
+  {
+    "scenario": "payments_billing_1",
+    "status": "clean",
+    "statement_count": 106,
+    "failed_count": 0,
+    "successful_count": 106,
+    "error_types": {}
+  },
+  {
+    "scenario": "stock_trading_2",
+    "status": "clean",
+    "statement_count": 117,
+    "failed_count": 0,
+    "successful_count": 117,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_24",
+    "status": "failed",
+    "statement_count": 97,
+    "failed_count": 1,
+    "successful_count": 96,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "q_a_knowledge_base_1",
+    "status": "clean",
+    "statement_count": 168,
+    "failed_count": 0,
+    "successful_count": 168,
+    "error_types": {}
+  },
+  {
+    "scenario": "code_hosting_1",
+    "status": "clean",
+    "statement_count": 164,
+    "failed_count": 0,
+    "successful_count": 164,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_1",
+    "status": "failed",
+    "statement_count": 174,
+    "failed_count": 8,
+    "successful_count": 166,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 7
+    }
+  },
+  {
+    "scenario": "accounting_2",
+    "status": "clean",
+    "statement_count": 185,
+    "failed_count": 0,
+    "successful_count": 185,
+    "error_types": {}
+  },
+  {
+    "scenario": "project_management_10",
+    "status": "failed",
+    "statement_count": 158,
+    "failed_count": 8,
+    "successful_count": 150,
+    "error_types": {
+      "SQLError": 6,
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "calendar_scheduling_3",
+    "status": "failed",
+    "statement_count": 75,
+    "failed_count": 1,
+    "successful_count": 74,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "e_commerce_marketplace_20",
+    "status": "clean",
+    "statement_count": 162,
+    "failed_count": 0,
+    "successful_count": 162,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_5",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "subscription_membership_management_1",
+    "status": "clean",
+    "statement_count": 104,
+    "failed_count": 0,
+    "successful_count": 104,
+    "error_types": {}
+  },
+  {
+    "scenario": "travel_booking_1",
+    "status": "clean",
+    "statement_count": 191,
+    "failed_count": 0,
+    "successful_count": 191,
+    "error_types": {}
+  },
+  {
+    "scenario": "ride_hailing_2",
+    "status": "failed",
+    "statement_count": 83,
+    "failed_count": 38,
+    "successful_count": 45,
+    "error_types": {
+      "SQLError": 5,
+      "IntegrityError": 33
+    }
+  },
+  {
+    "scenario": "payments_2",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "project_management_7",
+    "status": "clean",
+    "statement_count": 137,
+    "failed_count": 0,
+    "successful_count": 137,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_10",
+    "status": "clean",
+    "statement_count": 92,
+    "failed_count": 0,
+    "successful_count": 92,
+    "error_types": {}
+  },
+  {
+    "scenario": "communication_messaging_2",
+    "status": "failed",
+    "statement_count": 71,
+    "failed_count": 3,
+    "successful_count": 68,
+    "error_types": {
+      "SQLError": 2,
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "user_accounts_and_identity_1",
+    "status": "clean",
+    "statement_count": 97,
+    "failed_count": 0,
+    "successful_count": 97,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_backend_1",
+    "status": "clean",
+    "statement_count": 162,
+    "failed_count": 0,
+    "successful_count": 162,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_21",
+    "status": "clean",
+    "statement_count": 71,
+    "failed_count": 0,
+    "successful_count": 71,
+    "error_types": {}
+  },
+  {
+    "scenario": "it_service_management_2",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_8",
+    "status": "clean",
+    "statement_count": 113,
+    "failed_count": 0,
+    "successful_count": 113,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_management_1",
+    "status": "clean",
+    "statement_count": 91,
+    "failed_count": 0,
+    "successful_count": 91,
+    "error_types": {}
+  },
+  {
+    "scenario": "ticketing_system_1",
+    "status": "clean",
+    "statement_count": 125,
+    "failed_count": 0,
+    "successful_count": 125,
+    "error_types": {}
+  },
+  {
+    "scenario": "survey_forms_platform_2",
+    "status": "clean",
+    "statement_count": 135,
+    "failed_count": 0,
+    "successful_count": 135,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_15",
+    "status": "clean",
+    "statement_count": 148,
+    "failed_count": 0,
+    "successful_count": 148,
+    "error_types": {}
+  },
+  {
+    "scenario": "health_fitness_tracking_1",
+    "status": "clean",
+    "statement_count": 270,
+    "failed_count": 0,
+    "successful_count": 270,
+    "error_types": {}
+  },
+  {
+    "scenario": "fitness_tracking_4",
+    "status": "failed",
+    "statement_count": 116,
+    "failed_count": 1,
+    "successful_count": 115,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "social_network_1",
+    "status": "clean",
+    "statement_count": 152,
+    "failed_count": 0,
+    "successful_count": 152,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_dating_4",
+    "status": "clean",
+    "statement_count": 110,
+    "failed_count": 0,
+    "successful_count": 110,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_3",
+    "status": "clean",
+    "statement_count": 156,
+    "failed_count": 0,
+    "successful_count": 156,
+    "error_types": {}
+  },
+  {
+    "scenario": "dating_1",
+    "status": "malformed_sample_payload",
+    "statement_count": 0,
+    "failed_count": 0,
+    "successful_count": 0,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_network_8",
+    "status": "clean",
+    "statement_count": 125,
+    "failed_count": 0,
+    "successful_count": 125,
+    "error_types": {}
+  },
+  {
+    "scenario": "fundraising_donations_3",
+    "status": "failed",
+    "statement_count": 97,
+    "failed_count": 9,
+    "successful_count": 88,
+    "error_types": {
+      "IntegrityError": 9
+    }
+  },
+  {
+    "scenario": "marketplace_1",
+    "status": "clean",
+    "statement_count": 133,
+    "failed_count": 0,
+    "successful_count": 133,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_18",
+    "status": "failed",
+    "statement_count": 137,
+    "failed_count": 12,
+    "successful_count": 125,
+    "error_types": {
+      "IntegrityError": 10,
+      "SQLError": 2
+    }
+  },
+  {
+    "scenario": "task_management_6",
+    "status": "failed",
+    "statement_count": 224,
+    "failed_count": 1,
+    "successful_count": 223,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "crm_9",
+    "status": "clean",
+    "statement_count": 129,
+    "failed_count": 0,
+    "successful_count": 129,
+    "error_types": {}
+  },
+  {
+    "scenario": "volunteer_management_2",
+    "status": "clean",
+    "statement_count": 167,
+    "failed_count": 0,
+    "successful_count": 167,
+    "error_types": {}
+  },
+  {
+    "scenario": "healthcare_telehealth_1",
+    "status": "failed",
+    "statement_count": 195,
+    "failed_count": 1,
+    "successful_count": 194,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "healthcare_patient_portal_4",
+    "status": "clean",
+    "statement_count": 87,
+    "failed_count": 0,
+    "successful_count": 87,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_ordering_2",
+    "status": "failed",
+    "statement_count": 100,
+    "failed_count": 3,
+    "successful_count": 97,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "search_and_discovery_1",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "crowdfunding_platform_1",
+    "status": "failed",
+    "statement_count": 80,
+    "failed_count": 3,
+    "successful_count": 77,
+    "error_types": {
+      "IntegrityError": 3
+    }
+  },
+  {
+    "scenario": "donation_payments_platform_1",
+    "status": "clean",
+    "statement_count": 301,
+    "failed_count": 0,
+    "successful_count": 301,
+    "error_types": {}
+  },
+  {
+    "scenario": "healthcare_patient_portal_3",
+    "status": "failed",
+    "statement_count": 161,
+    "failed_count": 10,
+    "successful_count": 151,
+    "error_types": {
+      "IntegrityError": 10
+    }
+  },
+  {
+    "scenario": "b2b_1",
+    "status": "clean",
+    "statement_count": 182,
+    "failed_count": 0,
+    "successful_count": 182,
+    "error_types": {}
+  },
+  {
+    "scenario": "asset_management_5",
+    "status": "clean",
+    "statement_count": 130,
+    "failed_count": 0,
+    "successful_count": 130,
+    "error_types": {}
+  },
+  {
+    "scenario": "inventory_management_2",
+    "status": "clean",
+    "statement_count": 109,
+    "failed_count": 0,
+    "successful_count": 109,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_delivery_management_1",
+    "status": "clean",
+    "statement_count": 141,
+    "failed_count": 0,
+    "successful_count": 141,
+    "error_types": {}
+  },
+  {
+    "scenario": "fleet_management_5",
+    "status": "failed",
+    "statement_count": 140,
+    "failed_count": 4,
+    "successful_count": 136,
+    "error_types": {
+      "SQLError": 4
+    }
+  },
+  {
+    "scenario": "education_2",
+    "status": "clean",
+    "statement_count": 106,
+    "failed_count": 0,
+    "successful_count": 106,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_platform_3",
+    "status": "clean",
+    "statement_count": 82,
+    "failed_count": 0,
+    "successful_count": 82,
+    "error_types": {}
+  },
+  {
+    "scenario": "learning_management_system_1",
+    "status": "clean",
+    "statement_count": 109,
+    "failed_count": 0,
+    "successful_count": 109,
+    "error_types": {}
+  },
+  {
+    "scenario": "practice_management_1",
+    "status": "clean",
+    "statement_count": 104,
+    "failed_count": 0,
+    "successful_count": 104,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_7",
+    "status": "clean",
+    "statement_count": 98,
+    "failed_count": 0,
+    "successful_count": 98,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_22",
+    "status": "failed",
+    "statement_count": 192,
+    "failed_count": 1,
+    "successful_count": 191,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "ecommerce_operations_1",
+    "status": "clean",
+    "statement_count": 132,
+    "failed_count": 0,
+    "successful_count": 132,
+    "error_types": {}
+  },
+  {
+    "scenario": "document_management_2",
+    "status": "clean",
+    "statement_count": 130,
+    "failed_count": 0,
+    "successful_count": 130,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_marketplace_2",
+    "status": "clean",
+    "statement_count": 164,
+    "failed_count": 0,
+    "successful_count": 164,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_22",
+    "status": "clean",
+    "statement_count": 108,
+    "failed_count": 0,
+    "successful_count": 108,
+    "error_types": {}
+  },
+  {
+    "scenario": "appointment_scheduling_1",
+    "status": "clean",
+    "statement_count": 118,
+    "failed_count": 0,
+    "successful_count": 118,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_11",
+    "status": "clean",
+    "statement_count": 100,
+    "failed_count": 0,
+    "successful_count": 100,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_networking_6",
+    "status": "clean",
+    "statement_count": 109,
+    "failed_count": 0,
+    "successful_count": 109,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_workflow_management_1",
+    "status": "clean",
+    "statement_count": 162,
+    "failed_count": 0,
+    "successful_count": 162,
+    "error_types": {}
+  },
+  {
+    "scenario": "form_builder_4",
+    "status": "clean",
+    "statement_count": 165,
+    "failed_count": 0,
+    "successful_count": 165,
+    "error_types": {}
+  },
+  {
+    "scenario": "application_management_1",
+    "status": "clean",
+    "statement_count": 173,
+    "failed_count": 0,
+    "successful_count": 173,
+    "error_types": {}
+  },
+  {
+    "scenario": "survey_and_feedback_management_2",
+    "status": "clean",
+    "statement_count": 133,
+    "failed_count": 0,
+    "successful_count": 133,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_17",
+    "status": "failed",
+    "statement_count": 148,
+    "failed_count": 4,
+    "successful_count": 144,
+    "error_types": {
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "customer_support_3",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_order_management_1",
+    "status": "clean",
+    "statement_count": 139,
+    "failed_count": 0,
+    "successful_count": 139,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_12",
+    "status": "clean",
+    "statement_count": 132,
+    "failed_count": 0,
+    "successful_count": 132,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_payroll_management_4",
+    "status": "failed",
+    "statement_count": 151,
+    "failed_count": 15,
+    "successful_count": 136,
+    "error_types": {
+      "IntegrityError": 10,
+      "SQLError": 5
+    }
+  },
+  {
+    "scenario": "billing_invoicing_1",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "asset_management_6",
+    "status": "clean",
+    "statement_count": 99,
+    "failed_count": 0,
+    "successful_count": 99,
+    "error_types": {}
+  },
+  {
+    "scenario": "field_service_management_1",
+    "status": "clean",
+    "statement_count": 117,
+    "failed_count": 0,
+    "successful_count": 117,
+    "error_types": {}
+  },
+  {
+    "scenario": "notes_knowledge_management_1",
+    "status": "clean",
+    "statement_count": 192,
+    "failed_count": 0,
+    "successful_count": 192,
+    "error_types": {}
+  },
+  {
+    "scenario": "document_management_5",
+    "status": "failed",
+    "statement_count": 108,
+    "failed_count": 3,
+    "successful_count": 105,
+    "error_types": {
+      "SQLError": 3
+    }
+  },
+  {
+    "scenario": "practice_management_2",
+    "status": "failed",
+    "statement_count": 112,
+    "failed_count": 6,
+    "successful_count": 106,
+    "error_types": {
+      "IntegrityError": 6
+    }
+  },
+  {
+    "scenario": "crm_record_management_1",
+    "status": "clean",
+    "statement_count": 104,
+    "failed_count": 0,
+    "successful_count": 104,
+    "error_types": {}
+  },
+  {
+    "scenario": "bookmarking_1",
+    "status": "clean",
+    "statement_count": 126,
+    "failed_count": 0,
+    "successful_count": 126,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_finance_management_1",
+    "status": "failed",
+    "statement_count": 76,
+    "failed_count": 2,
+    "successful_count": 74,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "banking_finance_3",
+    "status": "clean",
+    "statement_count": 119,
+    "failed_count": 0,
+    "successful_count": 119,
+    "error_types": {}
+  },
+  {
+    "scenario": "point_of_sale_1",
+    "status": "clean",
+    "statement_count": 146,
+    "failed_count": 0,
+    "successful_count": 146,
+    "error_types": {}
+  },
+  {
+    "scenario": "restaurant_management_2",
+    "status": "clean",
+    "statement_count": 169,
+    "failed_count": 0,
+    "successful_count": 169,
+    "error_types": {}
+  },
+  {
+    "scenario": "point_of_sale_3",
+    "status": "clean",
+    "statement_count": 186,
+    "failed_count": 0,
+    "successful_count": 186,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_ordering_3",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_6",
+    "status": "failed",
+    "statement_count": 102,
+    "failed_count": 1,
+    "successful_count": 101,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "task_management_16",
+    "status": "clean",
+    "statement_count": 218,
+    "failed_count": 0,
+    "successful_count": 218,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_automation_13",
+    "status": "clean",
+    "statement_count": 174,
+    "failed_count": 0,
+    "successful_count": 174,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_control_4",
+    "status": "clean",
+    "statement_count": 172,
+    "failed_count": 0,
+    "successful_count": 172,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_control_5",
+    "status": "clean",
+    "statement_count": 110,
+    "failed_count": 0,
+    "successful_count": 110,
+    "error_types": {}
+  },
+  {
+    "scenario": "operations_management_11",
+    "status": "clean",
+    "statement_count": 136,
+    "failed_count": 0,
+    "successful_count": 136,
+    "error_types": {}
+  },
+  {
+    "scenario": "team_messaging_2",
+    "status": "clean",
+    "statement_count": 72,
+    "failed_count": 0,
+    "successful_count": 72,
+    "error_types": {}
+  },
+  {
+    "scenario": "ticketing_helpdesk_system_1",
+    "status": "clean",
+    "statement_count": 140,
+    "failed_count": 0,
+    "successful_count": 140,
+    "error_types": {}
+  },
+  {
+    "scenario": "customer_support_helpdesk_1",
+    "status": "clean",
+    "statement_count": 128,
+    "failed_count": 0,
+    "successful_count": 128,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_management_3",
+    "status": "failed",
+    "statement_count": 124,
+    "failed_count": 9,
+    "successful_count": 115,
+    "error_types": {
+      "IntegrityError": 9
+    }
+  },
+  {
+    "scenario": "fleet_management_9",
+    "status": "clean",
+    "statement_count": 93,
+    "failed_count": 0,
+    "successful_count": 93,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_and_delivery_management_3",
+    "status": "clean",
+    "statement_count": 111,
+    "failed_count": 0,
+    "successful_count": 111,
+    "error_types": {}
+  },
+  {
+    "scenario": "healthcare_ehr_1",
+    "status": "clean",
+    "statement_count": 159,
+    "failed_count": 0,
+    "successful_count": 159,
+    "error_types": {}
+  },
+  {
+    "scenario": "telehealth_3",
+    "status": "clean",
+    "statement_count": 74,
+    "failed_count": 0,
+    "successful_count": 74,
+    "error_types": {}
+  },
+  {
+    "scenario": "healthcare_patient_portal_6",
+    "status": "failed",
+    "statement_count": 114,
+    "failed_count": 1,
+    "successful_count": 113,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "enterprise_software_1",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_management_8",
+    "status": "failed",
+    "statement_count": 180,
+    "failed_count": 6,
+    "successful_count": 174,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 5
+    }
+  },
+  {
+    "scenario": "logistics_and_shipment_tracking_2",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "telehealth_virtual_care_1",
+    "status": "clean",
+    "statement_count": 98,
+    "failed_count": 0,
+    "successful_count": 98,
+    "error_types": {}
+  },
+  {
+    "scenario": "healthcare_emr_2",
+    "status": "clean",
+    "statement_count": 69,
+    "failed_count": 0,
+    "successful_count": 69,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_customer_success_1",
+    "status": "clean",
+    "statement_count": 195,
+    "failed_count": 0,
+    "successful_count": 195,
+    "error_types": {}
+  },
+  {
+    "scenario": "applications_and_registrations_1",
+    "status": "clean",
+    "statement_count": 130,
+    "failed_count": 0,
+    "successful_count": 130,
+    "error_types": {}
+  },
+  {
+    "scenario": "healthcare_2",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "forms_and_surveys_1",
+    "status": "failed",
+    "statement_count": 150,
+    "failed_count": 1,
+    "successful_count": 149,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "survey_feedback_platform_1",
+    "status": "clean",
+    "statement_count": 201,
+    "failed_count": 0,
+    "successful_count": 201,
+    "error_types": {}
+  },
+  {
+    "scenario": "grants_management_1",
+    "status": "clean",
+    "statement_count": 120,
+    "failed_count": 0,
+    "successful_count": 120,
+    "error_types": {}
+  },
+  {
+    "scenario": "donation_fundraising_platform_1",
+    "status": "clean",
+    "statement_count": 79,
+    "failed_count": 0,
+    "successful_count": 79,
+    "error_types": {}
+  },
+  {
+    "scenario": "government_services_1",
+    "status": "failed",
+    "statement_count": 91,
+    "failed_count": 4,
+    "successful_count": 87,
+    "error_types": {
+      "SQLError": 4
+    }
+  },
+  {
+    "scenario": "survey_forms_platform_1",
+    "status": "failed",
+    "statement_count": 211,
+    "failed_count": 1,
+    "successful_count": 210,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "payments_donations_1",
+    "status": "clean",
+    "statement_count": 97,
+    "failed_count": 0,
+    "successful_count": 97,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_payments_1",
+    "status": "clean",
+    "statement_count": 77,
+    "failed_count": 0,
+    "successful_count": 77,
+    "error_types": {}
+  },
+  {
+    "scenario": "fundraising_donations_4",
+    "status": "clean",
+    "statement_count": 129,
+    "failed_count": 0,
+    "successful_count": 129,
+    "error_types": {}
+  },
+  {
+    "scenario": "warehouse_management_1",
+    "status": "failed",
+    "statement_count": 157,
+    "failed_count": 7,
+    "successful_count": 150,
+    "error_types": {
+      "IntegrityError": 7
+    }
+  },
+  {
+    "scenario": "inventory_management_5",
+    "status": "failed",
+    "statement_count": 117,
+    "failed_count": 1,
+    "successful_count": 116,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "asset_management_2",
+    "status": "clean",
+    "statement_count": 100,
+    "failed_count": 0,
+    "successful_count": 100,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_13",
+    "status": "failed",
+    "statement_count": 144,
+    "failed_count": 2,
+    "successful_count": 142,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "subscription_management_10",
+    "status": "clean",
+    "statement_count": 142,
+    "failed_count": 0,
+    "successful_count": 142,
+    "error_types": {}
+  },
+  {
+    "scenario": "community_forum_3",
+    "status": "clean",
+    "statement_count": 163,
+    "failed_count": 0,
+    "successful_count": 163,
+    "error_types": {}
+  },
+  {
+    "scenario": "forum_1",
+    "status": "failed",
+    "statement_count": 151,
+    "failed_count": 1,
+    "successful_count": 150,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "hr_applicant_tracking_1",
+    "status": "clean",
+    "statement_count": 155,
+    "failed_count": 0,
+    "successful_count": 155,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_employee_engagement_1",
+    "status": "clean",
+    "statement_count": 148,
+    "failed_count": 0,
+    "successful_count": 148,
+    "error_types": {}
+  },
+  {
+    "scenario": "crowdfunding_platform_2",
+    "status": "failed",
+    "statement_count": 80,
+    "failed_count": 2,
+    "successful_count": 78,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "social_network_11",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "q_a_forum_1",
+    "status": "failed",
+    "statement_count": 152,
+    "failed_count": 38,
+    "successful_count": 114,
+    "error_types": {
+      "SQLError": 3,
+      "IntegrityError": 35
+    }
+  },
+  {
+    "scenario": "social_networking_3",
+    "status": "clean",
+    "statement_count": 145,
+    "failed_count": 0,
+    "successful_count": 145,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_7",
+    "status": "failed",
+    "statement_count": 102,
+    "failed_count": 3,
+    "successful_count": 99,
+    "error_types": {
+      "IntegrityError": 3
+    }
+  },
+  {
+    "scenario": "learning_management_system_lms_1",
+    "status": "clean",
+    "statement_count": 160,
+    "failed_count": 0,
+    "successful_count": 160,
+    "error_types": {}
+  },
+  {
+    "scenario": "donation_management_5",
+    "status": "clean",
+    "statement_count": 106,
+    "failed_count": 0,
+    "successful_count": 106,
+    "error_types": {}
+  },
+  {
+    "scenario": "inventory_management_3",
+    "status": "clean",
+    "statement_count": 162,
+    "failed_count": 0,
+    "successful_count": 162,
+    "error_types": {}
+  },
+  {
+    "scenario": "event_scheduling_1",
+    "status": "clean",
+    "statement_count": 193,
+    "failed_count": 0,
+    "successful_count": 193,
+    "error_types": {}
+  },
+  {
+    "scenario": "donation_fundraising_management_2",
+    "status": "clean",
+    "statement_count": 56,
+    "failed_count": 0,
+    "successful_count": 56,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_2",
+    "status": "failed",
+    "statement_count": 234,
+    "failed_count": 2,
+    "successful_count": 232,
+    "error_types": {
+      "SQLError": 2
+    }
+  },
+  {
+    "scenario": "iot_smart_home_industrial_1",
+    "status": "failed",
+    "statement_count": 185,
+    "failed_count": 1,
+    "successful_count": 184,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "personal_productivity_1",
+    "status": "clean",
+    "statement_count": 274,
+    "failed_count": 0,
+    "successful_count": 274,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_customer_management_1",
+    "status": "clean",
+    "statement_count": 200,
+    "failed_count": 0,
+    "successful_count": 200,
+    "error_types": {}
+  },
+  {
+    "scenario": "health_fitness_tracking_3",
+    "status": "clean",
+    "statement_count": 237,
+    "failed_count": 0,
+    "successful_count": 237,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_employee_management_1",
+    "status": "clean",
+    "statement_count": 206,
+    "failed_count": 0,
+    "successful_count": 206,
+    "error_types": {}
+  },
+  {
+    "scenario": "banking_fintech_3",
+    "status": "clean",
+    "statement_count": 67,
+    "failed_count": 0,
+    "successful_count": 67,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_device_management_2",
+    "status": "clean",
+    "statement_count": 140,
+    "failed_count": 0,
+    "successful_count": 140,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_3",
+    "status": "failed",
+    "statement_count": 114,
+    "failed_count": 4,
+    "successful_count": 110,
+    "error_types": {
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "e_commerce_operations_1",
+    "status": "failed",
+    "statement_count": 149,
+    "failed_count": 2,
+    "successful_count": 147,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "finance_accounting_1",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "education_classroom_management_1",
+    "status": "clean",
+    "statement_count": 152,
+    "failed_count": 0,
+    "successful_count": 152,
+    "error_types": {}
+  },
+  {
+    "scenario": "reviews_and_ratings_1",
+    "status": "clean",
+    "statement_count": 93,
+    "failed_count": 0,
+    "successful_count": 93,
+    "error_types": {}
+  },
+  {
+    "scenario": "user_profile_management_2",
+    "status": "clean",
+    "statement_count": 95,
+    "failed_count": 0,
+    "successful_count": 95,
+    "error_types": {}
+  },
+  {
+    "scenario": "event_management_4",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_12",
+    "status": "clean",
+    "statement_count": 80,
+    "failed_count": 0,
+    "successful_count": 80,
+    "error_types": {}
+  },
+  {
+    "scenario": "job_board_and_recruiting_1",
+    "status": "clean",
+    "statement_count": 106,
+    "failed_count": 0,
+    "successful_count": 106,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_5",
+    "status": "clean",
+    "statement_count": 138,
+    "failed_count": 0,
+    "successful_count": 138,
+    "error_types": {}
+  },
+  {
+    "scenario": "hris_human_resources_information_system_2",
+    "status": "clean",
+    "statement_count": 154,
+    "failed_count": 0,
+    "successful_count": 154,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_8",
+    "status": "failed",
+    "statement_count": 92,
+    "failed_count": 3,
+    "successful_count": 89,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "e_commerce_marketplace_7",
+    "status": "clean",
+    "statement_count": 119,
+    "failed_count": 0,
+    "successful_count": 119,
+    "error_types": {}
+  },
+  {
+    "scenario": "job_board_10",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "team_messaging_5",
+    "status": "failed",
+    "statement_count": 91,
+    "failed_count": 1,
+    "successful_count": 90,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "customer_support_6",
+    "status": "clean",
+    "statement_count": 151,
+    "failed_count": 0,
+    "successful_count": 151,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_scheduling_3",
+    "status": "failed",
+    "statement_count": 111,
+    "failed_count": 1,
+    "successful_count": 110,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "booking_management_3",
+    "status": "clean",
+    "statement_count": 161,
+    "failed_count": 0,
+    "successful_count": 161,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_3",
+    "status": "clean",
+    "statement_count": 173,
+    "failed_count": 0,
+    "successful_count": 173,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_appointments_4",
+    "status": "clean",
+    "statement_count": 219,
+    "failed_count": 0,
+    "successful_count": 219,
+    "error_types": {}
+  },
+  {
+    "scenario": "membership_management_2",
+    "status": "clean",
+    "statement_count": 91,
+    "failed_count": 0,
+    "successful_count": 91,
+    "error_types": {}
+  },
+  {
+    "scenario": "fitness_tracking_2",
+    "status": "clean",
+    "statement_count": 143,
+    "failed_count": 0,
+    "successful_count": 143,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_appointments_1",
+    "status": "clean",
+    "statement_count": 143,
+    "failed_count": 0,
+    "successful_count": 143,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_26",
+    "status": "clean",
+    "statement_count": 126,
+    "failed_count": 0,
+    "successful_count": 126,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_17",
+    "status": "clean",
+    "statement_count": 93,
+    "failed_count": 0,
+    "successful_count": 93,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_21",
+    "status": "clean",
+    "statement_count": 75,
+    "failed_count": 0,
+    "successful_count": 75,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_scheduling_9",
+    "status": "failed",
+    "statement_count": 168,
+    "failed_count": 2,
+    "successful_count": 166,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "e_commerce_26",
+    "status": "clean",
+    "statement_count": 113,
+    "failed_count": 0,
+    "successful_count": 113,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_25",
+    "status": "failed",
+    "statement_count": 163,
+    "failed_count": 1,
+    "successful_count": 162,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "booking_reservations_29",
+    "status": "clean",
+    "statement_count": 97,
+    "failed_count": 0,
+    "successful_count": 97,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_10",
+    "status": "clean",
+    "statement_count": 218,
+    "failed_count": 0,
+    "successful_count": 218,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_4",
+    "status": "clean",
+    "statement_count": 212,
+    "failed_count": 0,
+    "successful_count": 212,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_scheduling_6",
+    "status": "clean",
+    "statement_count": 129,
+    "failed_count": 0,
+    "successful_count": 129,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_ecommerce_marketplace_1",
+    "status": "clean",
+    "statement_count": 92,
+    "failed_count": 0,
+    "successful_count": 92,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_26",
+    "status": "failed",
+    "statement_count": 100,
+    "failed_count": 1,
+    "successful_count": 99,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "project_management_11",
+    "status": "clean",
+    "statement_count": 104,
+    "failed_count": 0,
+    "successful_count": 104,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_automation_8",
+    "status": "clean",
+    "statement_count": 114,
+    "failed_count": 0,
+    "successful_count": 114,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_reservations_11",
+    "status": "failed",
+    "statement_count": 150,
+    "failed_count": 2,
+    "successful_count": 148,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "booking_and_reservations_6",
+    "status": "clean",
+    "statement_count": 186,
+    "failed_count": 0,
+    "successful_count": 186,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_27",
+    "status": "failed",
+    "statement_count": 124,
+    "failed_count": 1,
+    "successful_count": 123,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "b2b_ecommerce_1",
+    "status": "clean",
+    "statement_count": 147,
+    "failed_count": 0,
+    "successful_count": 147,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_4",
+    "status": "clean",
+    "statement_count": 57,
+    "failed_count": 0,
+    "successful_count": 57,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_6",
+    "status": "clean",
+    "statement_count": 136,
+    "failed_count": 0,
+    "successful_count": 136,
+    "error_types": {}
+  },
+  {
+    "scenario": "project_management_3",
+    "status": "clean",
+    "statement_count": 124,
+    "failed_count": 0,
+    "successful_count": 124,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_automation_2",
+    "status": "failed",
+    "statement_count": 137,
+    "failed_count": 11,
+    "successful_count": 126,
+    "error_types": {
+      "SQLError": 7,
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "logistics_management_5",
+    "status": "clean",
+    "statement_count": 127,
+    "failed_count": 0,
+    "successful_count": 127,
+    "error_types": {}
+  },
+  {
+    "scenario": "fleet_management_4",
+    "status": "clean",
+    "statement_count": 126,
+    "failed_count": 0,
+    "successful_count": 126,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_3",
+    "status": "clean",
+    "statement_count": 140,
+    "failed_count": 0,
+    "successful_count": 140,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_commerce_2",
+    "status": "clean",
+    "statement_count": 173,
+    "failed_count": 0,
+    "successful_count": 173,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_automation_3",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "collaboration_1",
+    "status": "clean",
+    "statement_count": 118,
+    "failed_count": 0,
+    "successful_count": 118,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_saas_5",
+    "status": "clean",
+    "statement_count": 118,
+    "failed_count": 0,
+    "successful_count": 118,
+    "error_types": {}
+  },
+  {
+    "scenario": "fleet_management_3",
+    "status": "clean",
+    "statement_count": 198,
+    "failed_count": 0,
+    "successful_count": 198,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_and_delivery_management_2",
+    "status": "clean",
+    "statement_count": 121,
+    "failed_count": 0,
+    "successful_count": 121,
+    "error_types": {}
+  },
+  {
+    "scenario": "feedback_management_1",
+    "status": "clean",
+    "statement_count": 128,
+    "failed_count": 0,
+    "successful_count": 128,
+    "error_types": {}
+  },
+  {
+    "scenario": "application_management_3",
+    "status": "clean",
+    "statement_count": 145,
+    "failed_count": 0,
+    "successful_count": 145,
+    "error_types": {}
+  },
+  {
+    "scenario": "event_management_6",
+    "status": "clean",
+    "statement_count": 70,
+    "failed_count": 0,
+    "successful_count": 70,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_6",
+    "status": "clean",
+    "statement_count": 143,
+    "failed_count": 0,
+    "successful_count": 143,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_audience_management_1",
+    "status": "clean",
+    "statement_count": 111,
+    "failed_count": 0,
+    "successful_count": 111,
+    "error_types": {}
+  },
+  {
+    "scenario": "developer_tools_1",
+    "status": "clean",
+    "statement_count": 211,
+    "failed_count": 0,
+    "successful_count": 211,
+    "error_types": {}
+  },
+  {
+    "scenario": "incident_management_1",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "finance_accounting_2",
+    "status": "clean",
+    "statement_count": 109,
+    "failed_count": 0,
+    "successful_count": 109,
+    "error_types": {}
+  },
+  {
+    "scenario": "education_learning_management_4",
+    "status": "clean",
+    "statement_count": 224,
+    "failed_count": 0,
+    "successful_count": 224,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_task_management_1",
+    "status": "clean",
+    "statement_count": 129,
+    "failed_count": 0,
+    "successful_count": 129,
+    "error_types": {}
+  },
+  {
+    "scenario": "event_management_9",
+    "status": "clean",
+    "statement_count": 113,
+    "failed_count": 0,
+    "successful_count": 113,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_8",
+    "status": "clean",
+    "statement_count": 149,
+    "failed_count": 0,
+    "successful_count": 149,
+    "error_types": {}
+  },
+  {
+    "scenario": "crowdfunding_fundraising_1",
+    "status": "clean",
+    "statement_count": 84,
+    "failed_count": 0,
+    "successful_count": 84,
+    "error_types": {}
+  },
+  {
+    "scenario": "ticketing_and_access_management_1",
+    "status": "clean",
+    "statement_count": 79,
+    "failed_count": 0,
+    "successful_count": 79,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_23",
+    "status": "clean",
+    "statement_count": 142,
+    "failed_count": 0,
+    "successful_count": 142,
+    "error_types": {}
+  },
+  {
+    "scenario": "volunteer_management_1",
+    "status": "clean",
+    "statement_count": 127,
+    "failed_count": 0,
+    "successful_count": 127,
+    "error_types": {}
+  },
+  {
+    "scenario": "donation_fundraising_management_1",
+    "status": "clean",
+    "statement_count": 105,
+    "failed_count": 0,
+    "successful_count": 105,
+    "error_types": {}
+  },
+  {
+    "scenario": "gaming_1",
+    "status": "clean",
+    "statement_count": 182,
+    "failed_count": 0,
+    "successful_count": 182,
+    "error_types": {}
+  },
+  {
+    "scenario": "gaming_platform_3",
+    "status": "clean",
+    "statement_count": 155,
+    "failed_count": 0,
+    "successful_count": 155,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_community_1",
+    "status": "clean",
+    "statement_count": 184,
+    "failed_count": 0,
+    "successful_count": 184,
+    "error_types": {}
+  },
+  {
+    "scenario": "professional_networking_7",
+    "status": "clean",
+    "statement_count": 166,
+    "failed_count": 0,
+    "successful_count": 166,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_dating_3",
+    "status": "clean",
+    "statement_count": 208,
+    "failed_count": 0,
+    "successful_count": 208,
+    "error_types": {}
+  },
+  {
+    "scenario": "tutoring_education_marketplace_1",
+    "status": "clean",
+    "statement_count": 86,
+    "failed_count": 0,
+    "successful_count": 86,
+    "error_types": {}
+  },
+  {
+    "scenario": "tournament_management_1",
+    "status": "failed",
+    "statement_count": 128,
+    "failed_count": 3,
+    "successful_count": 125,
+    "error_types": {
+      "IntegrityError": 3
+    }
+  },
+  {
+    "scenario": "social_network_12",
+    "status": "failed",
+    "statement_count": 136,
+    "failed_count": 1,
+    "successful_count": 135,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "subscription_management_7",
+    "status": "clean",
+    "statement_count": 88,
+    "failed_count": 0,
+    "successful_count": 88,
+    "error_types": {}
+  },
+  {
+    "scenario": "learning_management_system_5",
+    "status": "clean",
+    "statement_count": 95,
+    "failed_count": 0,
+    "successful_count": 95,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_networking_1",
+    "status": "clean",
+    "statement_count": 132,
+    "failed_count": 0,
+    "successful_count": 132,
+    "error_types": {}
+  },
+  {
+    "scenario": "professional_networking_9",
+    "status": "failed",
+    "statement_count": 148,
+    "failed_count": 1,
+    "successful_count": 147,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "forum_discussion_board_1",
+    "status": "failed",
+    "statement_count": 151,
+    "failed_count": 1,
+    "successful_count": 150,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "learning_management_system_3",
+    "status": "clean",
+    "statement_count": 248,
+    "failed_count": 0,
+    "successful_count": 248,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_appointments_2",
+    "status": "clean",
+    "statement_count": 82,
+    "failed_count": 0,
+    "successful_count": 82,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_ordering_4",
+    "status": "failed",
+    "statement_count": 180,
+    "failed_count": 1,
+    "successful_count": 179,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "operations_management_8",
+    "status": "failed",
+    "statement_count": 164,
+    "failed_count": 1,
+    "successful_count": 163,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "booking_and_scheduling_1",
+    "status": "clean",
+    "statement_count": 188,
+    "failed_count": 0,
+    "successful_count": 188,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_matching_1",
+    "status": "clean",
+    "statement_count": 114,
+    "failed_count": 0,
+    "successful_count": 114,
+    "error_types": {}
+  },
+  {
+    "scenario": "messaging_chat_1",
+    "status": "failed",
+    "statement_count": 216,
+    "failed_count": 1,
+    "successful_count": 215,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "booking_appointments_1",
+    "status": "clean",
+    "statement_count": 64,
+    "failed_count": 0,
+    "successful_count": 64,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_1",
+    "status": "clean",
+    "statement_count": 192,
+    "failed_count": 0,
+    "successful_count": 192,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_management_2",
+    "status": "clean",
+    "statement_count": 180,
+    "failed_count": 0,
+    "successful_count": 180,
+    "error_types": {}
+  },
+  {
+    "scenario": "learning_management_system_6",
+    "status": "failed",
+    "statement_count": 151,
+    "failed_count": 12,
+    "successful_count": 139,
+    "error_types": {
+      "IntegrityError": 12
+    }
+  },
+  {
+    "scenario": "booking_reservations_27",
+    "status": "clean",
+    "statement_count": 105,
+    "failed_count": 0,
+    "successful_count": 105,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_scheduling_5",
+    "status": "failed",
+    "statement_count": 111,
+    "failed_count": 1,
+    "successful_count": 110,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "booking_reservations_23",
+    "status": "clean",
+    "statement_count": 111,
+    "failed_count": 0,
+    "successful_count": 111,
+    "error_types": {}
+  },
+  {
+    "scenario": "team_messaging_3",
+    "status": "failed",
+    "statement_count": 118,
+    "failed_count": 1,
+    "successful_count": 117,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "customer_support_7",
+    "status": "clean",
+    "statement_count": 132,
+    "failed_count": 0,
+    "successful_count": 132,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_15",
+    "status": "clean",
+    "statement_count": 211,
+    "failed_count": 0,
+    "successful_count": 211,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_2",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "queue_management_1",
+    "status": "clean",
+    "statement_count": 115,
+    "failed_count": 0,
+    "successful_count": 115,
+    "error_types": {}
+  },
+  {
+    "scenario": "bookmark_manager_1",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_family_coordination_1",
+    "status": "clean",
+    "statement_count": 124,
+    "failed_count": 0,
+    "successful_count": 124,
+    "error_types": {}
+  },
+  {
+    "scenario": "it_service_management_1",
+    "status": "clean",
+    "statement_count": 80,
+    "failed_count": 0,
+    "successful_count": 80,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_platform_6",
+    "status": "clean",
+    "statement_count": 169,
+    "failed_count": 0,
+    "successful_count": 169,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_20",
+    "status": "failed",
+    "statement_count": 197,
+    "failed_count": 4,
+    "successful_count": 193,
+    "error_types": {
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "personal_organization_1",
+    "status": "clean",
+    "statement_count": 158,
+    "failed_count": 0,
+    "successful_count": 158,
+    "error_types": {}
+  },
+  {
+    "scenario": "bookmark_manager_2",
+    "status": "clean",
+    "statement_count": 98,
+    "failed_count": 0,
+    "successful_count": 98,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_scheduling_9",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_1",
+    "status": "clean",
+    "statement_count": 70,
+    "failed_count": 0,
+    "successful_count": 70,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_2",
+    "status": "clean",
+    "statement_count": 133,
+    "failed_count": 0,
+    "successful_count": 133,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_library_management_1",
+    "status": "clean",
+    "statement_count": 182,
+    "failed_count": 0,
+    "successful_count": 182,
+    "error_types": {}
+  },
+  {
+    "scenario": "productivity_1",
+    "status": "clean",
+    "statement_count": 191,
+    "failed_count": 0,
+    "successful_count": 191,
+    "error_types": {}
+  },
+  {
+    "scenario": "wishlist_management_1",
+    "status": "clean",
+    "statement_count": 161,
+    "failed_count": 0,
+    "successful_count": 161,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_lead_management_2",
+    "status": "failed",
+    "statement_count": 50,
+    "failed_count": 1,
+    "successful_count": 49,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "booking_and_scheduling_10",
+    "status": "clean",
+    "statement_count": 120,
+    "failed_count": 0,
+    "successful_count": 120,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_28",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_friends_presence_management_1",
+    "status": "failed",
+    "statement_count": 159,
+    "failed_count": 1,
+    "successful_count": 158,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "crm_15",
+    "status": "clean",
+    "statement_count": 89,
+    "failed_count": 0,
+    "successful_count": 89,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_scheduling_13",
+    "status": "clean",
+    "statement_count": 104,
+    "failed_count": 0,
+    "successful_count": 104,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_5",
+    "status": "clean",
+    "statement_count": 102,
+    "failed_count": 0,
+    "successful_count": 102,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_11",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_13",
+    "status": "clean",
+    "statement_count": 118,
+    "failed_count": 0,
+    "successful_count": 118,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_4",
+    "status": "clean",
+    "statement_count": 154,
+    "failed_count": 0,
+    "successful_count": 154,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_marketplace_3",
+    "status": "clean",
+    "statement_count": 142,
+    "failed_count": 0,
+    "successful_count": 142,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_system_1",
+    "status": "clean",
+    "statement_count": 194,
+    "failed_count": 0,
+    "successful_count": 194,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_payroll_system_1",
+    "status": "failed",
+    "statement_count": 187,
+    "failed_count": 1,
+    "successful_count": 186,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "personal_knowledge_management_1",
+    "status": "clean",
+    "statement_count": 138,
+    "failed_count": 0,
+    "successful_count": 138,
+    "error_types": {}
+  },
+  {
+    "scenario": "job_board_4",
+    "status": "clean",
+    "statement_count": 202,
+    "failed_count": 0,
+    "successful_count": 202,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_6",
+    "status": "clean",
+    "statement_count": 133,
+    "failed_count": 0,
+    "successful_count": 133,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_2",
+    "status": "failed",
+    "statement_count": 183,
+    "failed_count": 1,
+    "successful_count": 182,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "wishlist_management_3",
+    "status": "clean",
+    "statement_count": 92,
+    "failed_count": 0,
+    "successful_count": 92,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_ats_applicant_tracking_system_1",
+    "status": "clean",
+    "statement_count": 169,
+    "failed_count": 0,
+    "successful_count": 169,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_payroll_management_5",
+    "status": "clean",
+    "statement_count": 135,
+    "failed_count": 0,
+    "successful_count": 135,
+    "error_types": {}
+  },
+  {
+    "scenario": "content_bookmark_management_1",
+    "status": "clean",
+    "statement_count": 62,
+    "failed_count": 0,
+    "successful_count": 62,
+    "error_types": {}
+  },
+  {
+    "scenario": "inventory_management_6",
+    "status": "clean",
+    "statement_count": 85,
+    "failed_count": 0,
+    "successful_count": 85,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_scheduling_2",
+    "status": "clean",
+    "statement_count": 78,
+    "failed_count": 0,
+    "successful_count": 78,
+    "error_types": {}
+  },
+  {
+    "scenario": "inventory_management_11",
+    "status": "clean",
+    "statement_count": 154,
+    "failed_count": 0,
+    "successful_count": 154,
+    "error_types": {}
+  },
+  {
+    "scenario": "asset_management_7",
+    "status": "clean",
+    "statement_count": 99,
+    "failed_count": 0,
+    "successful_count": 99,
+    "error_types": {}
+  },
+  {
+    "scenario": "accounting_finance_2",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "ticketing_system_4",
+    "status": "clean",
+    "statement_count": 174,
+    "failed_count": 0,
+    "successful_count": 174,
+    "error_types": {}
+  },
+  {
+    "scenario": "community_forum_1",
+    "status": "clean",
+    "statement_count": 122,
+    "failed_count": 0,
+    "successful_count": 122,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_19",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "event_management_10",
+    "status": "clean",
+    "statement_count": 74,
+    "failed_count": 0,
+    "successful_count": 74,
+    "error_types": {}
+  },
+  {
+    "scenario": "dating_matchmaking_1",
+    "status": "clean",
+    "statement_count": 145,
+    "failed_count": 0,
+    "successful_count": 145,
+    "error_types": {}
+  },
+  {
+    "scenario": "team_messaging_6",
+    "status": "clean",
+    "statement_count": 153,
+    "failed_count": 0,
+    "successful_count": 153,
+    "error_types": {}
+  },
+  {
+    "scenario": "customer_support_4",
+    "status": "clean",
+    "statement_count": 183,
+    "failed_count": 0,
+    "successful_count": 183,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_network_7",
+    "status": "clean",
+    "statement_count": 97,
+    "failed_count": 0,
+    "successful_count": 97,
+    "error_types": {}
+  },
+  {
+    "scenario": "forums_discussion_boards_1",
+    "status": "clean",
+    "statement_count": 136,
+    "failed_count": 0,
+    "successful_count": 136,
+    "error_types": {}
+  },
+  {
+    "scenario": "professional_networking_11",
+    "status": "clean",
+    "statement_count": 165,
+    "failed_count": 0,
+    "successful_count": 165,
+    "error_types": {}
+  },
+  {
+    "scenario": "dating_relationships_2",
+    "status": "clean",
+    "statement_count": 108,
+    "failed_count": 0,
+    "successful_count": 108,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_finance_8",
+    "status": "clean",
+    "statement_count": 82,
+    "failed_count": 0,
+    "successful_count": 82,
+    "error_types": {}
+  },
+  {
+    "scenario": "portfolio_management_2",
+    "status": "clean",
+    "statement_count": 122,
+    "failed_count": 0,
+    "successful_count": 122,
+    "error_types": {}
+  },
+  {
+    "scenario": "payments_3",
+    "status": "clean",
+    "statement_count": 107,
+    "failed_count": 0,
+    "successful_count": 107,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_5",
+    "status": "failed",
+    "statement_count": 104,
+    "failed_count": 4,
+    "successful_count": 100,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 3
+    }
+  },
+  {
+    "scenario": "ticketing_2",
+    "status": "failed",
+    "statement_count": 193,
+    "failed_count": 1,
+    "successful_count": 192,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "travel_booking_2",
+    "status": "clean",
+    "statement_count": 216,
+    "failed_count": 0,
+    "successful_count": 216,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_4",
+    "status": "clean",
+    "statement_count": 72,
+    "failed_count": 0,
+    "successful_count": 72,
+    "error_types": {}
+  },
+  {
+    "scenario": "subscription_management_3",
+    "status": "clean",
+    "statement_count": 156,
+    "failed_count": 0,
+    "successful_count": 156,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_11",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_1",
+    "status": "clean",
+    "statement_count": 128,
+    "failed_count": 0,
+    "successful_count": 128,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_19",
+    "status": "clean",
+    "statement_count": 152,
+    "failed_count": 0,
+    "successful_count": 152,
+    "error_types": {}
+  },
+  {
+    "scenario": "tournament_management_2",
+    "status": "clean",
+    "statement_count": 94,
+    "failed_count": 0,
+    "successful_count": 94,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_finance_3",
+    "status": "clean",
+    "statement_count": 90,
+    "failed_count": 0,
+    "successful_count": 90,
+    "error_types": {}
+  },
+  {
+    "scenario": "operations_management_6",
+    "status": "failed",
+    "statement_count": 124,
+    "failed_count": 3,
+    "successful_count": 121,
+    "error_types": {
+      "SQLError": 3
+    }
+  },
+  {
+    "scenario": "it_asset_management_1",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_9",
+    "status": "failed",
+    "statement_count": 171,
+    "failed_count": 7,
+    "successful_count": 164,
+    "error_types": {
+      "SQLError": 7
+    }
+  },
+  {
+    "scenario": "ordering_payments_1",
+    "status": "clean",
+    "statement_count": 109,
+    "failed_count": 0,
+    "successful_count": 109,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_control_8",
+    "status": "clean",
+    "statement_count": 75,
+    "failed_count": 0,
+    "successful_count": 75,
+    "error_types": {}
+  },
+  {
+    "scenario": "order_management_5",
+    "status": "clean",
+    "statement_count": 172,
+    "failed_count": 0,
+    "successful_count": 172,
+    "error_types": {}
+  },
+  {
+    "scenario": "project_management_2",
+    "status": "clean",
+    "statement_count": 84,
+    "failed_count": 0,
+    "successful_count": 84,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_reservations_12",
+    "status": "clean",
+    "statement_count": 133,
+    "failed_count": 0,
+    "successful_count": 133,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_10",
+    "status": "clean",
+    "statement_count": 156,
+    "failed_count": 0,
+    "successful_count": 156,
+    "error_types": {}
+  },
+  {
+    "scenario": "collaboration_3",
+    "status": "clean",
+    "statement_count": 198,
+    "failed_count": 0,
+    "successful_count": 198,
+    "error_types": {}
+  },
+  {
+    "scenario": "restaurant_operations_1",
+    "status": "clean",
+    "statement_count": 119,
+    "failed_count": 0,
+    "successful_count": 119,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_12",
+    "status": "clean",
+    "statement_count": 223,
+    "failed_count": 0,
+    "successful_count": 223,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_task_management_2",
+    "status": "clean",
+    "statement_count": 147,
+    "failed_count": 0,
+    "successful_count": 147,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_scheduling_4",
+    "status": "clean",
+    "statement_count": 126,
+    "failed_count": 0,
+    "successful_count": 126,
+    "error_types": {}
+  },
+  {
+    "scenario": "practice_management_6",
+    "status": "clean",
+    "statement_count": 95,
+    "failed_count": 0,
+    "successful_count": 95,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_25",
+    "status": "clean",
+    "statement_count": 116,
+    "failed_count": 0,
+    "successful_count": 116,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_11",
+    "status": "clean",
+    "statement_count": 136,
+    "failed_count": 0,
+    "successful_count": 136,
+    "error_types": {}
+  },
+  {
+    "scenario": "restaurant_ops_1",
+    "status": "clean",
+    "statement_count": 152,
+    "failed_count": 0,
+    "successful_count": 152,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_saas_7",
+    "status": "clean",
+    "statement_count": 163,
+    "failed_count": 0,
+    "successful_count": 163,
+    "error_types": {}
+  },
+  {
+    "scenario": "operations_management_9",
+    "status": "clean",
+    "statement_count": 136,
+    "failed_count": 0,
+    "successful_count": 136,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_management_1",
+    "status": "clean",
+    "statement_count": 140,
+    "failed_count": 0,
+    "successful_count": 140,
+    "error_types": {}
+  },
+  {
+    "scenario": "clinic_management_1",
+    "status": "clean",
+    "statement_count": 127,
+    "failed_count": 0,
+    "successful_count": 127,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_15",
+    "status": "clean",
+    "statement_count": 27,
+    "failed_count": 0,
+    "successful_count": 27,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_37",
+    "status": "clean",
+    "statement_count": 145,
+    "failed_count": 0,
+    "successful_count": 145,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_19",
+    "status": "clean",
+    "statement_count": 63,
+    "failed_count": 0,
+    "successful_count": 63,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_marketplace_4",
+    "status": "failed",
+    "statement_count": 56,
+    "failed_count": 1,
+    "successful_count": 55,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "clinic_management_2",
+    "status": "clean",
+    "statement_count": 105,
+    "failed_count": 0,
+    "successful_count": 105,
+    "error_types": {}
+  },
+  {
+    "scenario": "professional_networking_5",
+    "status": "clean",
+    "statement_count": 204,
+    "failed_count": 0,
+    "successful_count": 204,
+    "error_types": {}
+  },
+  {
+    "scenario": "dating_matchmaking_3",
+    "status": "clean",
+    "statement_count": 89,
+    "failed_count": 0,
+    "successful_count": 89,
+    "error_types": {}
+  },
+  {
+    "scenario": "banking_2",
+    "status": "clean",
+    "statement_count": 67,
+    "failed_count": 0,
+    "successful_count": 67,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_finance_6",
+    "status": "clean",
+    "statement_count": 87,
+    "failed_count": 0,
+    "successful_count": 87,
+    "error_types": {}
+  },
+  {
+    "scenario": "portfolio_management_4",
+    "status": "clean",
+    "statement_count": 104,
+    "failed_count": 0,
+    "successful_count": 104,
+    "error_types": {}
+  },
+  {
+    "scenario": "payments_fintech_2",
+    "status": "clean",
+    "statement_count": 121,
+    "failed_count": 0,
+    "successful_count": 121,
+    "error_types": {}
+  },
+  {
+    "scenario": "community_social_platform_1",
+    "status": "failed",
+    "statement_count": 115,
+    "failed_count": 5,
+    "successful_count": 110,
+    "error_types": {
+      "IntegrityError": 5
+    }
+  },
+  {
+    "scenario": "professional_networking_4",
+    "status": "clean",
+    "statement_count": 117,
+    "failed_count": 0,
+    "successful_count": 117,
+    "error_types": {}
+  },
+  {
+    "scenario": "portfolio_management_1",
+    "status": "failed",
+    "statement_count": 117,
+    "failed_count": 2,
+    "successful_count": 115,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "finance_and_investing_1",
+    "status": "clean",
+    "statement_count": 92,
+    "failed_count": 0,
+    "successful_count": 92,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_payments_3",
+    "status": "clean",
+    "statement_count": 70,
+    "failed_count": 0,
+    "successful_count": 70,
+    "error_types": {}
+  },
+  {
+    "scenario": "calendar_scheduling_2",
+    "status": "failed",
+    "statement_count": 195,
+    "failed_count": 20,
+    "successful_count": 175,
+    "error_types": {
+      "IntegrityError": 20
+    }
+  },
+  {
+    "scenario": "booking_reservations_22",
+    "status": "clean",
+    "statement_count": 119,
+    "failed_count": 0,
+    "successful_count": 119,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_scheduling_16",
+    "status": "clean",
+    "statement_count": 104,
+    "failed_count": 0,
+    "successful_count": 104,
+    "error_types": {}
+  },
+  {
+    "scenario": "banking_fintech_1",
+    "status": "clean",
+    "statement_count": 116,
+    "failed_count": 0,
+    "successful_count": 116,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_finance_7",
+    "status": "failed",
+    "statement_count": 116,
+    "failed_count": 8,
+    "successful_count": 108,
+    "error_types": {
+      "SQLError": 2,
+      "IntegrityError": 6
+    }
+  },
+  {
+    "scenario": "finance_banking_1",
+    "status": "clean",
+    "statement_count": 120,
+    "failed_count": 0,
+    "successful_count": 120,
+    "error_types": {}
+  },
+  {
+    "scenario": "billing_payments_4",
+    "status": "clean",
+    "statement_count": 91,
+    "failed_count": 0,
+    "successful_count": 91,
+    "error_types": {}
+  },
+  {
+    "scenario": "event_management_3",
+    "status": "clean",
+    "statement_count": 94,
+    "failed_count": 0,
+    "successful_count": 94,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_7",
+    "status": "clean",
+    "statement_count": 100,
+    "failed_count": 0,
+    "successful_count": 100,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_4",
+    "status": "clean",
+    "statement_count": 56,
+    "failed_count": 0,
+    "successful_count": 56,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_scheduling_7",
+    "status": "clean",
+    "statement_count": 296,
+    "failed_count": 0,
+    "successful_count": 296,
+    "error_types": {}
+  },
+  {
+    "scenario": "inventory_management_1",
+    "status": "failed",
+    "statement_count": 112,
+    "failed_count": 4,
+    "successful_count": 108,
+    "error_types": {
+      "SQLError": 4
+    }
+  },
+  {
+    "scenario": "booking_and_scheduling_8",
+    "status": "clean",
+    "statement_count": 140,
+    "failed_count": 0,
+    "successful_count": 140,
+    "error_types": {}
+  },
+  {
+    "scenario": "event_management_1",
+    "status": "failed",
+    "statement_count": 275,
+    "failed_count": 2,
+    "successful_count": 273,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "booking_reservations_30",
+    "status": "clean",
+    "statement_count": 73,
+    "failed_count": 0,
+    "successful_count": 73,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_lead_management_1",
+    "status": "clean",
+    "statement_count": 47,
+    "failed_count": 0,
+    "successful_count": 47,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_scheduling_1",
+    "status": "clean",
+    "statement_count": 108,
+    "failed_count": 0,
+    "successful_count": 108,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_marketplace_1",
+    "status": "clean",
+    "statement_count": 109,
+    "failed_count": 0,
+    "successful_count": 109,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_2",
+    "status": "clean",
+    "statement_count": 170,
+    "failed_count": 0,
+    "successful_count": 170,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_2",
+    "status": "clean",
+    "statement_count": 103,
+    "failed_count": 0,
+    "successful_count": 103,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_14",
+    "status": "failed",
+    "statement_count": 140,
+    "failed_count": 7,
+    "successful_count": 133,
+    "error_types": {
+      "IntegrityError": 7
+    }
+  },
+  {
+    "scenario": "marketplace_10",
+    "status": "clean",
+    "statement_count": 125,
+    "failed_count": 0,
+    "successful_count": 125,
+    "error_types": {}
+  },
+  {
+    "scenario": "inventory_management_9",
+    "status": "failed",
+    "statement_count": 70,
+    "failed_count": 2,
+    "successful_count": 68,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "e_commerce_17",
+    "status": "clean",
+    "statement_count": 135,
+    "failed_count": 0,
+    "successful_count": 135,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_dispatch_1",
+    "status": "failed",
+    "statement_count": 106,
+    "failed_count": 5,
+    "successful_count": 101,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "logistics_management_6",
+    "status": "failed",
+    "statement_count": 94,
+    "failed_count": 1,
+    "successful_count": 93,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "booking_reservation_marketplace_1",
+    "status": "failed",
+    "statement_count": 86,
+    "failed_count": 1,
+    "successful_count": 85,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "e_commerce_ordering_1",
+    "status": "clean",
+    "statement_count": 122,
+    "failed_count": 0,
+    "successful_count": 122,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_4",
+    "status": "clean",
+    "statement_count": 104,
+    "failed_count": 0,
+    "successful_count": 104,
+    "error_types": {}
+  },
+  {
+    "scenario": "order_management_2",
+    "status": "clean",
+    "statement_count": 114,
+    "failed_count": 0,
+    "successful_count": 114,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_and_delivery_tracking_2",
+    "status": "clean",
+    "statement_count": 83,
+    "failed_count": 0,
+    "successful_count": 83,
+    "error_types": {}
+  },
+  {
+    "scenario": "grants_management_2",
+    "status": "clean",
+    "statement_count": 141,
+    "failed_count": 0,
+    "successful_count": 141,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_and_delivery_management_4",
+    "status": "clean",
+    "statement_count": 115,
+    "failed_count": 0,
+    "successful_count": 115,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_matching_platform_1",
+    "status": "clean",
+    "statement_count": 106,
+    "failed_count": 0,
+    "successful_count": 106,
+    "error_types": {}
+  },
+  {
+    "scenario": "fundraising_donations_2",
+    "status": "clean",
+    "statement_count": 82,
+    "failed_count": 0,
+    "successful_count": 82,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_management_2",
+    "status": "clean",
+    "statement_count": 128,
+    "failed_count": 0,
+    "successful_count": 128,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_management_9",
+    "status": "clean",
+    "statement_count": 124,
+    "failed_count": 0,
+    "successful_count": 124,
+    "error_types": {}
+  },
+  {
+    "scenario": "ats_applicant_tracking_system_2",
+    "status": "clean",
+    "statement_count": 108,
+    "failed_count": 0,
+    "successful_count": 108,
+    "error_types": {}
+  },
+  {
+    "scenario": "fleet_management_8",
+    "status": "clean",
+    "statement_count": 82,
+    "failed_count": 0,
+    "successful_count": 82,
+    "error_types": {}
+  },
+  {
+    "scenario": "job_board_7",
+    "status": "clean",
+    "statement_count": 117,
+    "failed_count": 0,
+    "successful_count": 117,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_relationship_management_2",
+    "status": "clean",
+    "statement_count": 73,
+    "failed_count": 0,
+    "successful_count": 73,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_payroll_management_1",
+    "status": "failed",
+    "statement_count": 103,
+    "failed_count": 12,
+    "successful_count": 91,
+    "error_types": {
+      "IntegrityError": 12
+    }
+  },
+  {
+    "scenario": "learning_management_system_7",
+    "status": "clean",
+    "statement_count": 99,
+    "failed_count": 0,
+    "successful_count": 99,
+    "error_types": {}
+  },
+  {
+    "scenario": "job_board_5",
+    "status": "failed",
+    "statement_count": 153,
+    "failed_count": 6,
+    "successful_count": 147,
+    "error_types": {
+      "IntegrityError": 6
+    }
+  },
+  {
+    "scenario": "ats_applicant_tracking_system_4",
+    "status": "clean",
+    "statement_count": 222,
+    "failed_count": 0,
+    "successful_count": 222,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_workforce_management_1",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "education_lms_1",
+    "status": "clean",
+    "statement_count": 98,
+    "failed_count": 0,
+    "successful_count": 98,
+    "error_types": {}
+  },
+  {
+    "scenario": "education_lms_2",
+    "status": "clean",
+    "statement_count": 94,
+    "failed_count": 0,
+    "successful_count": 94,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_scheduling_5",
+    "status": "failed",
+    "statement_count": 56,
+    "failed_count": 4,
+    "successful_count": 52,
+    "error_types": {
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "e_commerce_18",
+    "status": "failed",
+    "statement_count": 185,
+    "failed_count": 10,
+    "successful_count": 175,
+    "error_types": {
+      "SQLError": 10
+    }
+  },
+  {
+    "scenario": "e_commerce_3",
+    "status": "clean",
+    "statement_count": 152,
+    "failed_count": 0,
+    "successful_count": 152,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_27",
+    "status": "failed",
+    "statement_count": 97,
+    "failed_count": 1,
+    "successful_count": 96,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "marketplace_3",
+    "status": "failed",
+    "statement_count": 82,
+    "failed_count": 1,
+    "successful_count": 81,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "learning_management_system_4",
+    "status": "failed",
+    "statement_count": 178,
+    "failed_count": 1,
+    "successful_count": 177,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "e_commerce_marketplace_9",
+    "status": "clean",
+    "statement_count": 114,
+    "failed_count": 0,
+    "successful_count": 114,
+    "error_types": {}
+  },
+  {
+    "scenario": "health_fitness_tracking_4",
+    "status": "clean",
+    "statement_count": 147,
+    "failed_count": 0,
+    "successful_count": 147,
+    "error_types": {}
+  },
+  {
+    "scenario": "fitness_tracking_3",
+    "status": "failed",
+    "statement_count": 169,
+    "failed_count": 5,
+    "successful_count": 164,
+    "error_types": {
+      "IntegrityError": 5
+    }
+  },
+  {
+    "scenario": "education_3",
+    "status": "clean",
+    "statement_count": 98,
+    "failed_count": 0,
+    "successful_count": 98,
+    "error_types": {}
+  },
+  {
+    "scenario": "ecommerce_marketplace_1",
+    "status": "clean",
+    "statement_count": 124,
+    "failed_count": 0,
+    "successful_count": 124,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_scheduling_17",
+    "status": "clean",
+    "statement_count": 98,
+    "failed_count": 0,
+    "successful_count": 98,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_24",
+    "status": "clean",
+    "statement_count": 131,
+    "failed_count": 0,
+    "successful_count": 131,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_marketplace_3",
+    "status": "clean",
+    "statement_count": 106,
+    "failed_count": 0,
+    "successful_count": 106,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_18",
+    "status": "clean",
+    "statement_count": 99,
+    "failed_count": 0,
+    "successful_count": 99,
+    "error_types": {}
+  },
+  {
+    "scenario": "fitness_tracking_5",
+    "status": "failed",
+    "statement_count": 210,
+    "failed_count": 2,
+    "successful_count": 208,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "booking_and_reservations_8",
+    "status": "failed",
+    "statement_count": 185,
+    "failed_count": 11,
+    "successful_count": 174,
+    "error_types": {
+      "IntegrityError": 11
+    }
+  },
+  {
+    "scenario": "event_management_2",
+    "status": "clean",
+    "statement_count": 81,
+    "failed_count": 0,
+    "successful_count": 81,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_control_6",
+    "status": "failed",
+    "statement_count": 161,
+    "failed_count": 2,
+    "successful_count": 159,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "iot_smart_device_management_1",
+    "status": "clean",
+    "statement_count": 99,
+    "failed_count": 0,
+    "successful_count": 99,
+    "error_types": {}
+  },
+  {
+    "scenario": "form_builder_2",
+    "status": "clean",
+    "statement_count": 140,
+    "failed_count": 0,
+    "successful_count": 140,
+    "error_types": {}
+  },
+  {
+    "scenario": "application_management_4",
+    "status": "clean",
+    "statement_count": 121,
+    "failed_count": 0,
+    "successful_count": 121,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_5",
+    "status": "failed",
+    "statement_count": 138,
+    "failed_count": 4,
+    "successful_count": 134,
+    "error_types": {
+      "SQLError": 4
+    }
+  },
+  {
+    "scenario": "workflow_automation_9",
+    "status": "clean",
+    "statement_count": 256,
+    "failed_count": 0,
+    "successful_count": 256,
+    "error_types": {}
+  },
+  {
+    "scenario": "team_collaboration_2",
+    "status": "clean",
+    "statement_count": 102,
+    "failed_count": 0,
+    "successful_count": 102,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_device_management_1",
+    "status": "failed",
+    "statement_count": 76,
+    "failed_count": 3,
+    "successful_count": 73,
+    "error_types": {
+      "IntegrityError": 3
+    }
+  },
+  {
+    "scenario": "feedback_management_2",
+    "status": "clean",
+    "statement_count": 105,
+    "failed_count": 0,
+    "successful_count": 105,
+    "error_types": {}
+  },
+  {
+    "scenario": "survey_and_forms_2",
+    "status": "clean",
+    "statement_count": 132,
+    "failed_count": 0,
+    "successful_count": 132,
+    "error_types": {}
+  },
+  {
+    "scenario": "product_feedback_management_1",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "education_admin_1",
+    "status": "clean",
+    "statement_count": 74,
+    "failed_count": 0,
+    "successful_count": 74,
+    "error_types": {}
+  },
+  {
+    "scenario": "document_management_8",
+    "status": "failed",
+    "statement_count": 159,
+    "failed_count": 4,
+    "successful_count": 155,
+    "error_types": {
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "task_management_18",
+    "status": "clean",
+    "statement_count": 88,
+    "failed_count": 0,
+    "successful_count": 88,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_automation_7",
+    "status": "failed",
+    "statement_count": 103,
+    "failed_count": 19,
+    "successful_count": 84,
+    "error_types": {
+      "IntegrityError": 19
+    }
+  },
+  {
+    "scenario": "document_workflow_1",
+    "status": "clean",
+    "statement_count": 117,
+    "failed_count": 0,
+    "successful_count": 117,
+    "error_types": {}
+  },
+  {
+    "scenario": "utilities_management_1",
+    "status": "clean",
+    "statement_count": 67,
+    "failed_count": 0,
+    "successful_count": 67,
+    "error_types": {}
+  },
+  {
+    "scenario": "practice_management_5",
+    "status": "clean",
+    "statement_count": 164,
+    "failed_count": 0,
+    "successful_count": 164,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_saas_4",
+    "status": "clean",
+    "statement_count": 93,
+    "failed_count": 0,
+    "successful_count": 93,
+    "error_types": {}
+  },
+  {
+    "scenario": "insurance_1",
+    "status": "clean",
+    "statement_count": 125,
+    "failed_count": 0,
+    "successful_count": 125,
+    "error_types": {}
+  },
+  {
+    "scenario": "ticketing_1",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "billing_payments_3",
+    "status": "clean",
+    "statement_count": 99,
+    "failed_count": 0,
+    "successful_count": 99,
+    "error_types": {}
+  },
+  {
+    "scenario": "project_management_1",
+    "status": "failed",
+    "statement_count": 113,
+    "failed_count": 3,
+    "successful_count": 110,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "accounting_finance_management_1",
+    "status": "clean",
+    "statement_count": 88,
+    "failed_count": 0,
+    "successful_count": 88,
+    "error_types": {}
+  },
+  {
+    "scenario": "healthcare_emr_3",
+    "status": "clean",
+    "statement_count": 99,
+    "failed_count": 0,
+    "successful_count": 99,
+    "error_types": {}
+  },
+  {
+    "scenario": "fleet_management_6",
+    "status": "clean",
+    "statement_count": 88,
+    "failed_count": 0,
+    "successful_count": 88,
+    "error_types": {}
+  },
+  {
+    "scenario": "case_management_1",
+    "status": "clean",
+    "statement_count": 107,
+    "failed_count": 0,
+    "successful_count": 107,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_employee_benefits_administration_1",
+    "status": "clean",
+    "statement_count": 102,
+    "failed_count": 0,
+    "successful_count": 102,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_11",
+    "status": "clean",
+    "statement_count": 134,
+    "failed_count": 0,
+    "successful_count": 134,
+    "error_types": {}
+  },
+  {
+    "scenario": "form_builder_5",
+    "status": "clean",
+    "statement_count": 153,
+    "failed_count": 0,
+    "successful_count": 153,
+    "error_types": {}
+  },
+  {
+    "scenario": "appointment_booking_1",
+    "status": "clean",
+    "statement_count": 73,
+    "failed_count": 0,
+    "successful_count": 73,
+    "error_types": {}
+  },
+  {
+    "scenario": "billing_payments_5",
+    "status": "clean",
+    "statement_count": 104,
+    "failed_count": 0,
+    "successful_count": 104,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_finance_1",
+    "status": "failed",
+    "statement_count": 154,
+    "failed_count": 2,
+    "successful_count": 152,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "crm_deal_management_1",
+    "status": "clean",
+    "statement_count": 147,
+    "failed_count": 0,
+    "successful_count": 147,
+    "error_types": {}
+  },
+  {
+    "scenario": "banking_fintech_2",
+    "status": "clean",
+    "statement_count": 111,
+    "failed_count": 0,
+    "successful_count": 111,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_payments_1",
+    "status": "clean",
+    "statement_count": 133,
+    "failed_count": 0,
+    "successful_count": 133,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_1",
+    "status": "failed",
+    "statement_count": 161,
+    "failed_count": 1,
+    "successful_count": 160,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "e_commerce_marketplace_17",
+    "status": "clean",
+    "statement_count": 90,
+    "failed_count": 0,
+    "successful_count": 90,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_2",
+    "status": "clean",
+    "statement_count": 113,
+    "failed_count": 0,
+    "successful_count": 113,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_bookmarking_1",
+    "status": "clean",
+    "statement_count": 147,
+    "failed_count": 0,
+    "successful_count": 147,
+    "error_types": {}
+  },
+  {
+    "scenario": "wishlist_management_5",
+    "status": "clean",
+    "statement_count": 89,
+    "failed_count": 0,
+    "successful_count": 89,
+    "error_types": {}
+  },
+  {
+    "scenario": "team_scheduling_1",
+    "status": "clean",
+    "statement_count": 66,
+    "failed_count": 0,
+    "successful_count": 66,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_reservations_10",
+    "status": "clean",
+    "statement_count": 103,
+    "failed_count": 0,
+    "successful_count": 103,
+    "error_types": {}
+  },
+  {
+    "scenario": "community_forum_2",
+    "status": "clean",
+    "statement_count": 134,
+    "failed_count": 0,
+    "successful_count": 134,
+    "error_types": {}
+  },
+  {
+    "scenario": "dating_4",
+    "status": "failed",
+    "statement_count": 149,
+    "failed_count": 6,
+    "successful_count": 143,
+    "error_types": {
+      "IntegrityError": 6
+    }
+  },
+  {
+    "scenario": "workforce_scheduling_1",
+    "status": "failed",
+    "statement_count": 133,
+    "failed_count": 11,
+    "successful_count": 122,
+    "error_types": {
+      "SQLError": 11
+    }
+  },
+  {
+    "scenario": "social_network_3",
+    "status": "clean",
+    "statement_count": 110,
+    "failed_count": 0,
+    "successful_count": 110,
+    "error_types": {}
+  },
+  {
+    "scenario": "q_a_forum_2",
+    "status": "failed",
+    "statement_count": 153,
+    "failed_count": 6,
+    "successful_count": 147,
+    "error_types": {
+      "IntegrityError": 6
+    }
+  },
+  {
+    "scenario": "professional_networking_10",
+    "status": "failed",
+    "statement_count": 162,
+    "failed_count": 13,
+    "successful_count": 149,
+    "error_types": {
+      "IntegrityError": 13
+    }
+  },
+  {
+    "scenario": "task_management_4",
+    "status": "clean",
+    "statement_count": 125,
+    "failed_count": 0,
+    "successful_count": 125,
+    "error_types": {}
+  },
+  {
+    "scenario": "document_management_4",
+    "status": "clean",
+    "statement_count": 100,
+    "failed_count": 0,
+    "successful_count": 100,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_automation_1",
+    "status": "failed",
+    "statement_count": 59,
+    "failed_count": 2,
+    "successful_count": 57,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "social_network_4",
+    "status": "clean",
+    "statement_count": 86,
+    "failed_count": 0,
+    "successful_count": 86,
+    "error_types": {}
+  },
+  {
+    "scenario": "discussion_forum_1",
+    "status": "clean",
+    "statement_count": 167,
+    "failed_count": 0,
+    "successful_count": 167,
+    "error_types": {}
+  },
+  {
+    "scenario": "team_collaboration_1",
+    "status": "clean",
+    "statement_count": 103,
+    "failed_count": 0,
+    "successful_count": 103,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_marketplace_2",
+    "status": "clean",
+    "statement_count": 120,
+    "failed_count": 0,
+    "successful_count": 120,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_1",
+    "status": "clean",
+    "statement_count": 117,
+    "failed_count": 0,
+    "successful_count": 117,
+    "error_types": {}
+  },
+  {
+    "scenario": "collaboration_2",
+    "status": "clean",
+    "statement_count": 121,
+    "failed_count": 0,
+    "successful_count": 121,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_automation_4",
+    "status": "failed",
+    "statement_count": 94,
+    "failed_count": 8,
+    "successful_count": 86,
+    "error_types": {
+      "SQLError": 8
+    }
+  },
+  {
+    "scenario": "booking_and_scheduling_12",
+    "status": "failed",
+    "statement_count": 194,
+    "failed_count": 4,
+    "successful_count": 190,
+    "error_types": {
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "b2b_commerce_1",
+    "status": "clean",
+    "statement_count": 135,
+    "failed_count": 0,
+    "successful_count": 135,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_reservations_3",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "ordering_and_fulfillment_1",
+    "status": "clean",
+    "statement_count": 196,
+    "failed_count": 0,
+    "successful_count": 196,
+    "error_types": {}
+  },
+  {
+    "scenario": "operations_management_3",
+    "status": "clean",
+    "statement_count": 128,
+    "failed_count": 0,
+    "successful_count": 128,
+    "error_types": {}
+  },
+  {
+    "scenario": "point_of_sale_2",
+    "status": "clean",
+    "statement_count": 186,
+    "failed_count": 0,
+    "successful_count": 186,
+    "error_types": {}
+  },
+  {
+    "scenario": "database_spreadsheet_1",
+    "status": "clean",
+    "statement_count": 260,
+    "failed_count": 0,
+    "successful_count": 260,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_12",
+    "status": "clean",
+    "statement_count": 214,
+    "failed_count": 0,
+    "successful_count": 214,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_marketplace_6",
+    "status": "clean",
+    "statement_count": 68,
+    "failed_count": 0,
+    "successful_count": 68,
+    "error_types": {}
+  },
+  {
+    "scenario": "project_management_6",
+    "status": "clean",
+    "statement_count": 156,
+    "failed_count": 0,
+    "successful_count": 156,
+    "error_types": {}
+  },
+  {
+    "scenario": "patient_portal_2",
+    "status": "clean",
+    "statement_count": 86,
+    "failed_count": 0,
+    "successful_count": 86,
+    "error_types": {}
+  },
+  {
+    "scenario": "healthcare_emr_1",
+    "status": "clean",
+    "statement_count": 102,
+    "failed_count": 0,
+    "successful_count": 102,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_14",
+    "status": "failed",
+    "statement_count": 92,
+    "failed_count": 4,
+    "successful_count": 88,
+    "error_types": {
+      "SQLError": 4
+    }
+  },
+  {
+    "scenario": "telehealth_healthcare_management_1",
+    "status": "clean",
+    "statement_count": 110,
+    "failed_count": 0,
+    "successful_count": 110,
+    "error_types": {}
+  },
+  {
+    "scenario": "patient_portal_3",
+    "status": "failed",
+    "statement_count": 110,
+    "failed_count": 9,
+    "successful_count": 101,
+    "error_types": {
+      "IntegrityError": 9
+    }
+  },
+  {
+    "scenario": "healthcare_management_1",
+    "status": "clean",
+    "statement_count": 82,
+    "failed_count": 0,
+    "successful_count": 82,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_3",
+    "status": "clean",
+    "statement_count": 164,
+    "failed_count": 0,
+    "successful_count": 164,
+    "error_types": {}
+  },
+  {
+    "scenario": "hris_employee_management_1",
+    "status": "clean",
+    "statement_count": 139,
+    "failed_count": 0,
+    "successful_count": 139,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_client_management_1",
+    "status": "clean",
+    "statement_count": 116,
+    "failed_count": 0,
+    "successful_count": 116,
+    "error_types": {}
+  },
+  {
+    "scenario": "scheduling_and_attendance_management_1",
+    "status": "clean",
+    "statement_count": 139,
+    "failed_count": 0,
+    "successful_count": 139,
+    "error_types": {}
+  },
+  {
+    "scenario": "ats_applicant_tracking_1",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_management_2",
+    "status": "clean",
+    "statement_count": 124,
+    "failed_count": 0,
+    "successful_count": 124,
+    "error_types": {}
+  },
+  {
+    "scenario": "job_board_2",
+    "status": "clean",
+    "statement_count": 128,
+    "failed_count": 0,
+    "successful_count": 128,
+    "error_types": {}
+  },
+  {
+    "scenario": "ats_applicant_tracking_system_1",
+    "status": "clean",
+    "statement_count": 239,
+    "failed_count": 0,
+    "successful_count": 239,
+    "error_types": {}
+  },
+  {
+    "scenario": "media_catalog_1",
+    "status": "failed",
+    "statement_count": 229,
+    "failed_count": 6,
+    "successful_count": 223,
+    "error_types": {
+      "IntegrityError": 6
+    }
+  },
+  {
+    "scenario": "e_commerce_marketplace_3",
+    "status": "clean",
+    "statement_count": 131,
+    "failed_count": 0,
+    "successful_count": 131,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_dating_5",
+    "status": "failed",
+    "statement_count": 230,
+    "failed_count": 13,
+    "successful_count": 217,
+    "error_types": {
+      "IntegrityError": 13
+    }
+  },
+  {
+    "scenario": "user_profile_management_1",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "content_creator_management_2",
+    "status": "clean",
+    "statement_count": 77,
+    "failed_count": 0,
+    "successful_count": 77,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_10",
+    "status": "clean",
+    "statement_count": 63,
+    "failed_count": 0,
+    "successful_count": 63,
+    "error_types": {}
+  },
+  {
+    "scenario": "discussion_forum_3",
+    "status": "clean",
+    "statement_count": 117,
+    "failed_count": 0,
+    "successful_count": 117,
+    "error_types": {}
+  },
+  {
+    "scenario": "loyalty_and_rewards_2",
+    "status": "clean",
+    "statement_count": 78,
+    "failed_count": 0,
+    "successful_count": 78,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_digital_marketplace_1",
+    "status": "clean",
+    "statement_count": 145,
+    "failed_count": 0,
+    "successful_count": 145,
+    "error_types": {}
+  },
+  {
+    "scenario": "subscription_management_11",
+    "status": "failed",
+    "statement_count": 81,
+    "failed_count": 1,
+    "successful_count": 80,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "b2b_operations_management_1",
+    "status": "failed",
+    "statement_count": 154,
+    "failed_count": 1,
+    "successful_count": 153,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "education_learning_management_1",
+    "status": "clean",
+    "statement_count": 116,
+    "failed_count": 0,
+    "successful_count": 116,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_infrastructure_management_1",
+    "status": "clean",
+    "statement_count": 105,
+    "failed_count": 0,
+    "successful_count": 105,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_2",
+    "status": "clean",
+    "statement_count": 91,
+    "failed_count": 0,
+    "successful_count": 91,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_16",
+    "status": "failed",
+    "statement_count": 88,
+    "failed_count": 4,
+    "successful_count": 84,
+    "error_types": {
+      "SQLError": 4
+    }
+  },
+  {
+    "scenario": "e_commerce_4",
+    "status": "clean",
+    "statement_count": 205,
+    "failed_count": 0,
+    "successful_count": 205,
+    "error_types": {}
+  },
+  {
+    "scenario": "operations_management_10",
+    "status": "failed",
+    "statement_count": 144,
+    "failed_count": 1,
+    "successful_count": 143,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "iot_smart_home_building_automation_1",
+    "status": "failed",
+    "statement_count": 122,
+    "failed_count": 1,
+    "successful_count": 121,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "booking_reservations_14",
+    "status": "failed",
+    "statement_count": 109,
+    "failed_count": 3,
+    "successful_count": 106,
+    "error_types": {
+      "IntegrityError": 2,
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "local_services_marketplace_1",
+    "status": "failed",
+    "statement_count": 94,
+    "failed_count": 4,
+    "successful_count": 90,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 3
+    }
+  },
+  {
+    "scenario": "order_management_3",
+    "status": "clean",
+    "statement_count": 156,
+    "failed_count": 0,
+    "successful_count": 156,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_30",
+    "status": "clean",
+    "statement_count": 214,
+    "failed_count": 0,
+    "successful_count": 214,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_control_7",
+    "status": "clean",
+    "statement_count": 142,
+    "failed_count": 0,
+    "successful_count": 142,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_15",
+    "status": "clean",
+    "statement_count": 85,
+    "failed_count": 0,
+    "successful_count": 85,
+    "error_types": {}
+  },
+  {
+    "scenario": "content_scheduling_1",
+    "status": "clean",
+    "statement_count": 93,
+    "failed_count": 0,
+    "successful_count": 93,
+    "error_types": {}
+  },
+  {
+    "scenario": "gaming_progression_system_1",
+    "status": "clean",
+    "statement_count": 115,
+    "failed_count": 0,
+    "successful_count": 115,
+    "error_types": {}
+  },
+  {
+    "scenario": "tournament_management_7",
+    "status": "failed",
+    "statement_count": 193,
+    "failed_count": 1,
+    "successful_count": 192,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "ecommerce_marketplace_3",
+    "status": "clean",
+    "statement_count": 134,
+    "failed_count": 0,
+    "successful_count": 134,
+    "error_types": {}
+  },
+  {
+    "scenario": "banking_6",
+    "status": "clean",
+    "statement_count": 78,
+    "failed_count": 0,
+    "successful_count": 78,
+    "error_types": {}
+  },
+  {
+    "scenario": "finance_portfolio_tracking_1",
+    "status": "failed",
+    "statement_count": 243,
+    "failed_count": 1,
+    "successful_count": 242,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "payments_4",
+    "status": "clean",
+    "statement_count": 74,
+    "failed_count": 0,
+    "successful_count": 74,
+    "error_types": {}
+  },
+  {
+    "scenario": "tournament_management_4",
+    "status": "clean",
+    "statement_count": 191,
+    "failed_count": 0,
+    "successful_count": 191,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_finance_4",
+    "status": "clean",
+    "statement_count": 100,
+    "failed_count": 0,
+    "successful_count": 100,
+    "error_types": {}
+  },
+  {
+    "scenario": "banking_finance_1",
+    "status": "clean",
+    "statement_count": 81,
+    "failed_count": 0,
+    "successful_count": 81,
+    "error_types": {}
+  },
+  {
+    "scenario": "subscription_management_4",
+    "status": "clean",
+    "statement_count": 199,
+    "failed_count": 0,
+    "successful_count": 199,
+    "error_types": {}
+  },
+  {
+    "scenario": "healthcare_patient_portal_2",
+    "status": "clean",
+    "statement_count": 65,
+    "failed_count": 0,
+    "successful_count": 65,
+    "error_types": {}
+  },
+  {
+    "scenario": "telehealth_4",
+    "status": "clean",
+    "statement_count": 59,
+    "failed_count": 0,
+    "successful_count": 59,
+    "error_types": {}
+  },
+  {
+    "scenario": "healthcare_pharmacy_management_1",
+    "status": "failed",
+    "statement_count": 87,
+    "failed_count": 1,
+    "successful_count": 86,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "hospital_information_system_1",
+    "status": "clean",
+    "statement_count": 175,
+    "failed_count": 0,
+    "successful_count": 175,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_platform_1",
+    "status": "clean",
+    "statement_count": 98,
+    "failed_count": 0,
+    "successful_count": 98,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_payroll_management_2",
+    "status": "failed",
+    "statement_count": 175,
+    "failed_count": 3,
+    "successful_count": 172,
+    "error_types": {
+      "IntegrityError": 3
+    }
+  },
+  {
+    "scenario": "booking_and_reservations_5",
+    "status": "clean",
+    "statement_count": 125,
+    "failed_count": 0,
+    "successful_count": 125,
+    "error_types": {}
+  },
+  {
+    "scenario": "billing_and_invoicing_1",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_8",
+    "status": "clean",
+    "statement_count": 103,
+    "failed_count": 0,
+    "successful_count": 103,
+    "error_types": {}
+  },
+  {
+    "scenario": "scheduling_2",
+    "status": "clean",
+    "statement_count": 117,
+    "failed_count": 0,
+    "successful_count": 117,
+    "error_types": {}
+  },
+  {
+    "scenario": "insurance_claims_management_1",
+    "status": "clean",
+    "statement_count": 87,
+    "failed_count": 0,
+    "successful_count": 87,
+    "error_types": {}
+  },
+  {
+    "scenario": "form_builder_1",
+    "status": "clean",
+    "statement_count": 149,
+    "failed_count": 0,
+    "successful_count": 149,
+    "error_types": {}
+  },
+  {
+    "scenario": "manufacturing_execution_system_1",
+    "status": "clean",
+    "statement_count": 114,
+    "failed_count": 0,
+    "successful_count": 114,
+    "error_types": {}
+  },
+  {
+    "scenario": "contract_lifecycle_management_1",
+    "status": "clean",
+    "statement_count": 70,
+    "failed_count": 0,
+    "successful_count": 70,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_recruiting_1",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "scheduling_3",
+    "status": "clean",
+    "statement_count": 79,
+    "failed_count": 0,
+    "successful_count": 79,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_constituent_management_1",
+    "status": "clean",
+    "statement_count": 79,
+    "failed_count": 0,
+    "successful_count": 79,
+    "error_types": {}
+  },
+  {
+    "scenario": "enterprise_saas_1",
+    "status": "clean",
+    "statement_count": 69,
+    "failed_count": 0,
+    "successful_count": 69,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_shopping_utilities_1",
+    "status": "clean",
+    "statement_count": 56,
+    "failed_count": 0,
+    "successful_count": 56,
+    "error_types": {}
+  },
+  {
+    "scenario": "job_board_3",
+    "status": "clean",
+    "statement_count": 102,
+    "failed_count": 0,
+    "successful_count": 102,
+    "error_types": {}
+  },
+  {
+    "scenario": "fundraising_donations_1",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "donation_management_1",
+    "status": "clean",
+    "statement_count": 75,
+    "failed_count": 0,
+    "successful_count": 75,
+    "error_types": {}
+  },
+  {
+    "scenario": "peer_to_peer_payments_1",
+    "status": "clean",
+    "statement_count": 78,
+    "failed_count": 0,
+    "successful_count": 78,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_curation_1",
+    "status": "clean",
+    "statement_count": 116,
+    "failed_count": 0,
+    "successful_count": 116,
+    "error_types": {}
+  },
+  {
+    "scenario": "appointment_booking_2",
+    "status": "clean",
+    "statement_count": 93,
+    "failed_count": 0,
+    "successful_count": 93,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_platform_5",
+    "status": "clean",
+    "statement_count": 53,
+    "failed_count": 0,
+    "successful_count": 53,
+    "error_types": {}
+  },
+  {
+    "scenario": "ecommerce_2",
+    "status": "clean",
+    "statement_count": 84,
+    "failed_count": 0,
+    "successful_count": 84,
+    "error_types": {}
+  },
+  {
+    "scenario": "donation_management_3",
+    "status": "clean",
+    "statement_count": 78,
+    "failed_count": 0,
+    "successful_count": 78,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_6",
+    "status": "failed",
+    "statement_count": 124,
+    "failed_count": 9,
+    "successful_count": 115,
+    "error_types": {
+      "IntegrityError": 9
+    }
+  },
+  {
+    "scenario": "booking_and_scheduling_2",
+    "status": "clean",
+    "statement_count": 77,
+    "failed_count": 0,
+    "successful_count": 77,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_28",
+    "status": "failed",
+    "statement_count": 101,
+    "failed_count": 1,
+    "successful_count": 100,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "personal_finance_2",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "finance_trading_1",
+    "status": "failed",
+    "statement_count": 94,
+    "failed_count": 2,
+    "successful_count": 92,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "invoicing_1",
+    "status": "clean",
+    "statement_count": 57,
+    "failed_count": 0,
+    "successful_count": 57,
+    "error_types": {}
+  },
+  {
+    "scenario": "compliance_management_2",
+    "status": "clean",
+    "statement_count": 113,
+    "failed_count": 0,
+    "successful_count": 113,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_relationship_management_1",
+    "status": "clean",
+    "statement_count": 129,
+    "failed_count": 0,
+    "successful_count": 129,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_automation_10",
+    "status": "clean",
+    "statement_count": 137,
+    "failed_count": 0,
+    "successful_count": 137,
+    "error_types": {}
+  },
+  {
+    "scenario": "gaming_matchmaking_1",
+    "status": "clean",
+    "statement_count": 159,
+    "failed_count": 0,
+    "successful_count": 159,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_watch_party_coordination_1",
+    "status": "clean",
+    "statement_count": 105,
+    "failed_count": 0,
+    "successful_count": 105,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_21",
+    "status": "failed",
+    "statement_count": 148,
+    "failed_count": 5,
+    "successful_count": 143,
+    "error_types": {
+      "IntegrityError": 5
+    }
+  },
+  {
+    "scenario": "forums_discussion_1",
+    "status": "clean",
+    "statement_count": 217,
+    "failed_count": 0,
+    "successful_count": 217,
+    "error_types": {}
+  },
+  {
+    "scenario": "professional_networking_12",
+    "status": "clean",
+    "statement_count": 151,
+    "failed_count": 0,
+    "successful_count": 151,
+    "error_types": {}
+  },
+  {
+    "scenario": "dating_relationships_1",
+    "status": "clean",
+    "statement_count": 154,
+    "failed_count": 0,
+    "successful_count": 154,
+    "error_types": {}
+  },
+  {
+    "scenario": "forums_discussion_boards_2",
+    "status": "clean",
+    "statement_count": 136,
+    "failed_count": 0,
+    "successful_count": 136,
+    "error_types": {}
+  },
+  {
+    "scenario": "professional_networking_8",
+    "status": "clean",
+    "statement_count": 100,
+    "failed_count": 0,
+    "successful_count": 100,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_networking_4",
+    "status": "clean",
+    "statement_count": 158,
+    "failed_count": 0,
+    "successful_count": 158,
+    "error_types": {}
+  },
+  {
+    "scenario": "media_collection_tracker_1",
+    "status": "clean",
+    "statement_count": 81,
+    "failed_count": 0,
+    "successful_count": 81,
+    "error_types": {}
+  },
+  {
+    "scenario": "visual_bookmarking_1",
+    "status": "clean",
+    "statement_count": 192,
+    "failed_count": 0,
+    "successful_count": 192,
+    "error_types": {}
+  },
+  {
+    "scenario": "gaming_matchmaking_2",
+    "status": "clean",
+    "statement_count": 182,
+    "failed_count": 0,
+    "successful_count": 182,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_7",
+    "status": "clean",
+    "statement_count": 143,
+    "failed_count": 0,
+    "successful_count": 143,
+    "error_types": {}
+  },
+  {
+    "scenario": "workforce_management_1",
+    "status": "failed",
+    "statement_count": 115,
+    "failed_count": 2,
+    "successful_count": 113,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "education_training_management_1",
+    "status": "clean",
+    "statement_count": 143,
+    "failed_count": 0,
+    "successful_count": 143,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_device_management_1",
+    "status": "failed",
+    "statement_count": 108,
+    "failed_count": 1,
+    "successful_count": 107,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "practice_management_3",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "project_management_8",
+    "status": "failed",
+    "statement_count": 193,
+    "failed_count": 1,
+    "successful_count": 192,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "banking_finance_2",
+    "status": "clean",
+    "statement_count": 166,
+    "failed_count": 0,
+    "successful_count": 166,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_device_management_4",
+    "status": "clean",
+    "statement_count": 127,
+    "failed_count": 0,
+    "successful_count": 127,
+    "error_types": {}
+  },
+  {
+    "scenario": "learning_management_system_9",
+    "status": "clean",
+    "statement_count": 196,
+    "failed_count": 0,
+    "successful_count": 196,
+    "error_types": {}
+  },
+  {
+    "scenario": "survey_and_form_engine_1",
+    "status": "clean",
+    "statement_count": 108,
+    "failed_count": 0,
+    "successful_count": 108,
+    "error_types": {}
+  },
+  {
+    "scenario": "ats_hr_management_1",
+    "status": "clean",
+    "statement_count": 170,
+    "failed_count": 0,
+    "successful_count": 170,
+    "error_types": {}
+  },
+  {
+    "scenario": "form_builder_6",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_procurement_1",
+    "status": "clean",
+    "statement_count": 94,
+    "failed_count": 0,
+    "successful_count": 94,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_appointments_3",
+    "status": "clean",
+    "statement_count": 98,
+    "failed_count": 0,
+    "successful_count": 98,
+    "error_types": {}
+  },
+  {
+    "scenario": "operations_management_12",
+    "status": "clean",
+    "statement_count": 77,
+    "failed_count": 0,
+    "successful_count": 77,
+    "error_types": {}
+  },
+  {
+    "scenario": "fundraising_donations_5",
+    "status": "clean",
+    "statement_count": 77,
+    "failed_count": 0,
+    "successful_count": 77,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_7",
+    "status": "clean",
+    "statement_count": 114,
+    "failed_count": 0,
+    "successful_count": 114,
+    "error_types": {}
+  },
+  {
+    "scenario": "event_management_5",
+    "status": "failed",
+    "statement_count": 36,
+    "failed_count": 1,
+    "successful_count": 35,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "booking_reservations_12",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "discussion_forum_5",
+    "status": "clean",
+    "statement_count": 114,
+    "failed_count": 0,
+    "successful_count": 114,
+    "error_types": {}
+  },
+  {
+    "scenario": "dating_2",
+    "status": "clean",
+    "statement_count": 109,
+    "failed_count": 0,
+    "successful_count": 109,
+    "error_types": {}
+  },
+  {
+    "scenario": "professional_networking_1",
+    "status": "failed",
+    "statement_count": 229,
+    "failed_count": 15,
+    "successful_count": 214,
+    "error_types": {
+      "IntegrityError": 15
+    }
+  },
+  {
+    "scenario": "event_management_8",
+    "status": "clean",
+    "statement_count": 207,
+    "failed_count": 0,
+    "successful_count": 207,
+    "error_types": {}
+  },
+  {
+    "scenario": "donation_management_2",
+    "status": "clean",
+    "statement_count": 114,
+    "failed_count": 0,
+    "successful_count": 114,
+    "error_types": {}
+  },
+  {
+    "scenario": "workforce_management_2",
+    "status": "clean",
+    "statement_count": 99,
+    "failed_count": 0,
+    "successful_count": 99,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_8",
+    "status": "clean",
+    "statement_count": 92,
+    "failed_count": 0,
+    "successful_count": 92,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_platform_4",
+    "status": "clean",
+    "statement_count": 78,
+    "failed_count": 0,
+    "successful_count": 78,
+    "error_types": {}
+  },
+  {
+    "scenario": "discussion_forum_6",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "professional_networking_6",
+    "status": "clean",
+    "statement_count": 130,
+    "failed_count": 0,
+    "successful_count": 130,
+    "error_types": {}
+  },
+  {
+    "scenario": "dating_matching_1",
+    "status": "clean",
+    "statement_count": 175,
+    "failed_count": 0,
+    "successful_count": 175,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_management_1",
+    "status": "failed",
+    "statement_count": 133,
+    "failed_count": 1,
+    "successful_count": 132,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "iot_device_management_3",
+    "status": "clean",
+    "statement_count": 91,
+    "failed_count": 0,
+    "successful_count": 91,
+    "error_types": {}
+  },
+  {
+    "scenario": "community_platform_1",
+    "status": "clean",
+    "statement_count": 129,
+    "failed_count": 0,
+    "successful_count": 129,
+    "error_types": {}
+  },
+  {
+    "scenario": "discussion_forum_4",
+    "status": "clean",
+    "statement_count": 194,
+    "failed_count": 0,
+    "successful_count": 194,
+    "error_types": {}
+  },
+  {
+    "scenario": "professional_networking_13",
+    "status": "failed",
+    "statement_count": 139,
+    "failed_count": 7,
+    "successful_count": 132,
+    "error_types": {
+      "IntegrityError": 7
+    }
+  },
+  {
+    "scenario": "dating_3",
+    "status": "clean",
+    "statement_count": 149,
+    "failed_count": 0,
+    "successful_count": 149,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_dating_2",
+    "status": "clean",
+    "statement_count": 208,
+    "failed_count": 0,
+    "successful_count": 208,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_control_1",
+    "status": "clean",
+    "statement_count": 142,
+    "failed_count": 0,
+    "successful_count": 142,
+    "error_types": {}
+  },
+  {
+    "scenario": "restaurant_management_1",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "food_ordering_2",
+    "status": "clean",
+    "statement_count": 159,
+    "failed_count": 0,
+    "successful_count": 159,
+    "error_types": {}
+  },
+  {
+    "scenario": "order_management_4",
+    "status": "clean",
+    "statement_count": 128,
+    "failed_count": 0,
+    "successful_count": 128,
+    "error_types": {}
+  },
+  {
+    "scenario": "inventory_management_4",
+    "status": "failed",
+    "statement_count": 77,
+    "failed_count": 1,
+    "successful_count": 76,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "food_ordering_1",
+    "status": "clean",
+    "statement_count": 80,
+    "failed_count": 0,
+    "successful_count": 80,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_control_2",
+    "status": "clean",
+    "statement_count": 119,
+    "failed_count": 0,
+    "successful_count": 119,
+    "error_types": {}
+  },
+  {
+    "scenario": "operations_management_1",
+    "status": "clean",
+    "statement_count": 133,
+    "failed_count": 0,
+    "successful_count": 133,
+    "error_types": {}
+  },
+  {
+    "scenario": "bookmarking_4",
+    "status": "clean",
+    "statement_count": 124,
+    "failed_count": 0,
+    "successful_count": 124,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_reservations_9",
+    "status": "clean",
+    "statement_count": 146,
+    "failed_count": 0,
+    "successful_count": 146,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_device_management_2",
+    "status": "clean",
+    "statement_count": 99,
+    "failed_count": 0,
+    "successful_count": 99,
+    "error_types": {}
+  },
+  {
+    "scenario": "ordering_and_payments_1",
+    "status": "clean",
+    "statement_count": 177,
+    "failed_count": 0,
+    "successful_count": 177,
+    "error_types": {}
+  },
+  {
+    "scenario": "content_authoring_1",
+    "status": "failed",
+    "statement_count": 172,
+    "failed_count": 17,
+    "successful_count": 155,
+    "error_types": {
+      "IntegrityError": 17
+    }
+  },
+  {
+    "scenario": "operations_management_2",
+    "status": "clean",
+    "statement_count": 338,
+    "failed_count": 0,
+    "successful_count": 338,
+    "error_types": {}
+  },
+  {
+    "scenario": "list_management_1",
+    "status": "failed",
+    "statement_count": 108,
+    "failed_count": 1,
+    "successful_count": 107,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "bookmarking_3",
+    "status": "clean",
+    "statement_count": 146,
+    "failed_count": 0,
+    "successful_count": 146,
+    "error_types": {}
+  },
+  {
+    "scenario": "analytics_dashboard_3",
+    "status": "failed",
+    "statement_count": 141,
+    "failed_count": 7,
+    "successful_count": 134,
+    "error_types": {
+      "IntegrityError": 6,
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "application_management_2",
+    "status": "clean",
+    "statement_count": 130,
+    "failed_count": 0,
+    "successful_count": 130,
+    "error_types": {}
+  },
+  {
+    "scenario": "food_delivery_and_ordering_1",
+    "status": "clean",
+    "statement_count": 209,
+    "failed_count": 0,
+    "successful_count": 209,
+    "error_types": {}
+  },
+  {
+    "scenario": "membership_management_4",
+    "status": "clean",
+    "statement_count": 74,
+    "failed_count": 0,
+    "successful_count": 74,
+    "error_types": {}
+  },
+  {
+    "scenario": "digital_subscriptions_1",
+    "status": "clean",
+    "statement_count": 66,
+    "failed_count": 0,
+    "successful_count": 66,
+    "error_types": {}
+  },
+  {
+    "scenario": "job_board_6",
+    "status": "clean",
+    "statement_count": 64,
+    "failed_count": 0,
+    "successful_count": 64,
+    "error_types": {}
+  },
+  {
+    "scenario": "discussion_forum_7",
+    "status": "clean",
+    "statement_count": 79,
+    "failed_count": 0,
+    "successful_count": 79,
+    "error_types": {}
+  },
+  {
+    "scenario": "recruiting_platform_1",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_payroll_management_3",
+    "status": "failed",
+    "statement_count": 167,
+    "failed_count": 1,
+    "successful_count": 166,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "survey_and_feedback_management_1",
+    "status": "clean",
+    "statement_count": 143,
+    "failed_count": 0,
+    "successful_count": 143,
+    "error_types": {}
+  },
+  {
+    "scenario": "professional_networking_3",
+    "status": "failed",
+    "statement_count": 136,
+    "failed_count": 1,
+    "successful_count": 135,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "social_community_platform_1",
+    "status": "clean",
+    "statement_count": 111,
+    "failed_count": 0,
+    "successful_count": 111,
+    "error_types": {}
+  },
+  {
+    "scenario": "analytics_dashboard_1",
+    "status": "clean",
+    "statement_count": 320,
+    "failed_count": 0,
+    "successful_count": 320,
+    "error_types": {}
+  },
+  {
+    "scenario": "application_registration_management_1",
+    "status": "failed",
+    "statement_count": 135,
+    "failed_count": 4,
+    "successful_count": 131,
+    "error_types": {
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "rental_marketplace_1",
+    "status": "clean",
+    "statement_count": 75,
+    "failed_count": 0,
+    "successful_count": 75,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_10",
+    "status": "failed",
+    "statement_count": 126,
+    "failed_count": 5,
+    "successful_count": 121,
+    "error_types": {
+      "SQLError": 3,
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "property_management_14",
+    "status": "clean",
+    "statement_count": 110,
+    "failed_count": 0,
+    "successful_count": 110,
+    "error_types": {}
+  },
+  {
+    "scenario": "survey_and_forms_management_1",
+    "status": "clean",
+    "statement_count": 209,
+    "failed_count": 0,
+    "successful_count": 209,
+    "error_types": {}
+  },
+  {
+    "scenario": "application_admissions_management_1",
+    "status": "clean",
+    "statement_count": 66,
+    "failed_count": 0,
+    "successful_count": 66,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_20",
+    "status": "clean",
+    "statement_count": 58,
+    "failed_count": 0,
+    "successful_count": 58,
+    "error_types": {}
+  },
+  {
+    "scenario": "grant_management_1",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_3",
+    "status": "failed",
+    "statement_count": 116,
+    "failed_count": 1,
+    "successful_count": 115,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "task_management_19",
+    "status": "clean",
+    "statement_count": 140,
+    "failed_count": 0,
+    "successful_count": 140,
+    "error_types": {}
+  },
+  {
+    "scenario": "donation_management_4",
+    "status": "clean",
+    "statement_count": 80,
+    "failed_count": 0,
+    "successful_count": 80,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservation_management_1",
+    "status": "clean",
+    "statement_count": 153,
+    "failed_count": 0,
+    "successful_count": 153,
+    "error_types": {}
+  },
+  {
+    "scenario": "forms_and_workflow_management_1",
+    "status": "clean",
+    "statement_count": 94,
+    "failed_count": 0,
+    "successful_count": 94,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_2",
+    "status": "clean",
+    "statement_count": 162,
+    "failed_count": 0,
+    "successful_count": 162,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_13",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_2",
+    "status": "clean",
+    "statement_count": 113,
+    "failed_count": 0,
+    "successful_count": 113,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_12",
+    "status": "clean",
+    "statement_count": 143,
+    "failed_count": 0,
+    "successful_count": 143,
+    "error_types": {}
+  },
+  {
+    "scenario": "crowdfunding_fundraising_2",
+    "status": "clean",
+    "statement_count": 62,
+    "failed_count": 0,
+    "successful_count": 62,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_19",
+    "status": "failed",
+    "statement_count": 128,
+    "failed_count": 5,
+    "successful_count": 123,
+    "error_types": {
+      "IntegrityError": 5
+    }
+  },
+  {
+    "scenario": "tournament_management_5",
+    "status": "failed",
+    "statement_count": 104,
+    "failed_count": 10,
+    "successful_count": 94,
+    "error_types": {
+      "IntegrityError": 10
+    }
+  },
+  {
+    "scenario": "subscription_management_8",
+    "status": "clean",
+    "statement_count": 104,
+    "failed_count": 0,
+    "successful_count": 104,
+    "error_types": {}
+  },
+  {
+    "scenario": "accounting_1",
+    "status": "clean",
+    "statement_count": 121,
+    "failed_count": 0,
+    "successful_count": 121,
+    "error_types": {}
+  },
+  {
+    "scenario": "order_management_1",
+    "status": "failed",
+    "statement_count": 174,
+    "failed_count": 3,
+    "successful_count": 171,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "membership_management_3",
+    "status": "failed",
+    "statement_count": 107,
+    "failed_count": 2,
+    "successful_count": 105,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "ticketing_system_3",
+    "status": "clean",
+    "statement_count": 116,
+    "failed_count": 0,
+    "successful_count": 116,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_scheduling_4",
+    "status": "clean",
+    "statement_count": 84,
+    "failed_count": 0,
+    "successful_count": 84,
+    "error_types": {}
+  },
+  {
+    "scenario": "tournament_management_6",
+    "status": "clean",
+    "statement_count": 130,
+    "failed_count": 0,
+    "successful_count": 130,
+    "error_types": {}
+  },
+  {
+    "scenario": "document_management_1",
+    "status": "clean",
+    "statement_count": 100,
+    "failed_count": 0,
+    "successful_count": 100,
+    "error_types": {}
+  },
+  {
+    "scenario": "policy_and_document_management_1",
+    "status": "clean",
+    "statement_count": 106,
+    "failed_count": 0,
+    "successful_count": 106,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_automation_5",
+    "status": "failed",
+    "statement_count": 116,
+    "failed_count": 63,
+    "successful_count": 53,
+    "error_types": {
+      "IntegrityError": 63
+    }
+  },
+  {
+    "scenario": "product_feedback_1",
+    "status": "clean",
+    "statement_count": 132,
+    "failed_count": 0,
+    "successful_count": 132,
+    "error_types": {}
+  },
+  {
+    "scenario": "event_management_7",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_13",
+    "status": "clean",
+    "statement_count": 90,
+    "failed_count": 0,
+    "successful_count": 90,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_saas_6",
+    "status": "failed",
+    "statement_count": 82,
+    "failed_count": 2,
+    "successful_count": 80,
+    "error_types": {
+      "SQLError": 2
+    }
+  },
+  {
+    "scenario": "document_management_7",
+    "status": "clean",
+    "statement_count": 153,
+    "failed_count": 0,
+    "successful_count": 153,
+    "error_types": {}
+  },
+  {
+    "scenario": "forms_intake_management_1",
+    "status": "failed",
+    "statement_count": 126,
+    "failed_count": 12,
+    "successful_count": 114,
+    "error_types": {
+      "SQLError": 12
+    }
+  },
+  {
+    "scenario": "telehealth_1",
+    "status": "clean",
+    "statement_count": 77,
+    "failed_count": 0,
+    "successful_count": 77,
+    "error_types": {}
+  },
+  {
+    "scenario": "patient_portal_1",
+    "status": "failed",
+    "statement_count": 84,
+    "failed_count": 1,
+    "successful_count": 83,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "compliance_management_3",
+    "status": "clean",
+    "statement_count": 338,
+    "failed_count": 0,
+    "successful_count": 338,
+    "error_types": {}
+  },
+  {
+    "scenario": "registration_management_1",
+    "status": "clean",
+    "statement_count": 84,
+    "failed_count": 0,
+    "successful_count": 84,
+    "error_types": {}
+  },
+  {
+    "scenario": "forms_and_survey_platform_1",
+    "status": "clean",
+    "statement_count": 170,
+    "failed_count": 0,
+    "successful_count": 170,
+    "error_types": {}
+  },
+  {
+    "scenario": "form_workflow_and_submission_1",
+    "status": "clean",
+    "statement_count": 90,
+    "failed_count": 0,
+    "successful_count": 90,
+    "error_types": {}
+  },
+  {
+    "scenario": "inventory_management_12",
+    "status": "clean",
+    "statement_count": 80,
+    "failed_count": 0,
+    "successful_count": 80,
+    "error_types": {}
+  },
+  {
+    "scenario": "inventory_management_14",
+    "status": "clean",
+    "statement_count": 94,
+    "failed_count": 0,
+    "successful_count": 94,
+    "error_types": {}
+  },
+  {
+    "scenario": "asset_management_4",
+    "status": "failed",
+    "statement_count": 82,
+    "failed_count": 2,
+    "successful_count": 80,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "hris_human_resources_information_system_1",
+    "status": "clean",
+    "statement_count": 159,
+    "failed_count": 0,
+    "successful_count": 159,
+    "error_types": {}
+  },
+  {
+    "scenario": "fleet_management_2",
+    "status": "clean",
+    "statement_count": 76,
+    "failed_count": 0,
+    "successful_count": 76,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_scheduling_15",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "inventory_management_8",
+    "status": "clean",
+    "statement_count": 192,
+    "failed_count": 0,
+    "successful_count": 192,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_scheduling_14",
+    "status": "clean",
+    "statement_count": 265,
+    "failed_count": 0,
+    "successful_count": 265,
+    "error_types": {}
+  },
+  {
+    "scenario": "subscription_billing_2",
+    "status": "clean",
+    "statement_count": 84,
+    "failed_count": 0,
+    "successful_count": 84,
+    "error_types": {}
+  },
+  {
+    "scenario": "appointment_scheduling_2",
+    "status": "clean",
+    "statement_count": 86,
+    "failed_count": 0,
+    "successful_count": 86,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_metering_1",
+    "status": "clean",
+    "statement_count": 87,
+    "failed_count": 0,
+    "successful_count": 87,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_management_1",
+    "status": "clean",
+    "statement_count": 126,
+    "failed_count": 0,
+    "successful_count": 126,
+    "error_types": {}
+  },
+  {
+    "scenario": "fleet_management_1",
+    "status": "clean",
+    "statement_count": 103,
+    "failed_count": 0,
+    "successful_count": 103,
+    "error_types": {}
+  },
+  {
+    "scenario": "vendor_management_1",
+    "status": "failed",
+    "statement_count": 137,
+    "failed_count": 43,
+    "successful_count": 94,
+    "error_types": {
+      "IntegrityError": 43
+    }
+  },
+  {
+    "scenario": "crm_deal_pipeline_management_1",
+    "status": "clean",
+    "statement_count": 85,
+    "failed_count": 0,
+    "successful_count": 85,
+    "error_types": {}
+  },
+  {
+    "scenario": "rental_management_1",
+    "status": "clean",
+    "statement_count": 69,
+    "failed_count": 0,
+    "successful_count": 69,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_workflow_line_of_business_app_1",
+    "status": "clean",
+    "statement_count": 72,
+    "failed_count": 0,
+    "successful_count": 72,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_and_shipment_tracking_1",
+    "status": "clean",
+    "statement_count": 84,
+    "failed_count": 0,
+    "successful_count": 84,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_and_delivery_management_1",
+    "status": "clean",
+    "statement_count": 112,
+    "failed_count": 0,
+    "successful_count": 112,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_reservations_2",
+    "status": "clean",
+    "statement_count": 103,
+    "failed_count": 0,
+    "successful_count": 103,
+    "error_types": {}
+  },
+  {
+    "scenario": "operations_management_7",
+    "status": "clean",
+    "statement_count": 120,
+    "failed_count": 0,
+    "successful_count": 120,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_9",
+    "status": "clean",
+    "statement_count": 83,
+    "failed_count": 0,
+    "successful_count": 83,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_management_10",
+    "status": "clean",
+    "statement_count": 134,
+    "failed_count": 0,
+    "successful_count": 134,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_transportation_management_1",
+    "status": "clean",
+    "statement_count": 171,
+    "failed_count": 0,
+    "successful_count": 171,
+    "error_types": {}
+  },
+  {
+    "scenario": "fleet_management_7",
+    "status": "clean",
+    "statement_count": 132,
+    "failed_count": 0,
+    "successful_count": 132,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_1",
+    "status": "clean",
+    "statement_count": 80,
+    "failed_count": 0,
+    "successful_count": 80,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_ordering_5",
+    "status": "clean",
+    "statement_count": 175,
+    "failed_count": 0,
+    "successful_count": 175,
+    "error_types": {}
+  },
+  {
+    "scenario": "operations_management_4",
+    "status": "clean",
+    "statement_count": 188,
+    "failed_count": 0,
+    "successful_count": 188,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_18",
+    "status": "failed",
+    "statement_count": 167,
+    "failed_count": 10,
+    "successful_count": 157,
+    "error_types": {
+      "IntegrityError": 10
+    }
+  },
+  {
+    "scenario": "restaurant_management_3",
+    "status": "clean",
+    "statement_count": 232,
+    "failed_count": 0,
+    "successful_count": 232,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_applicant_tracking_1",
+    "status": "clean",
+    "statement_count": 174,
+    "failed_count": 0,
+    "successful_count": 174,
+    "error_types": {}
+  },
+  {
+    "scenario": "content_creator_management_1",
+    "status": "clean",
+    "statement_count": 97,
+    "failed_count": 0,
+    "successful_count": 97,
+    "error_types": {}
+  },
+  {
+    "scenario": "ats_hr_management_2",
+    "status": "clean",
+    "statement_count": 187,
+    "failed_count": 0,
+    "successful_count": 187,
+    "error_types": {}
+  },
+  {
+    "scenario": "hr_payroll_1",
+    "status": "clean",
+    "statement_count": 108,
+    "failed_count": 0,
+    "successful_count": 108,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_scheduling_7",
+    "status": "clean",
+    "statement_count": 154,
+    "failed_count": 0,
+    "successful_count": 154,
+    "error_types": {}
+  },
+  {
+    "scenario": "clinic_management_3",
+    "status": "clean",
+    "statement_count": 136,
+    "failed_count": 0,
+    "successful_count": 136,
+    "error_types": {}
+  },
+  {
+    "scenario": "two_sided_marketplace_1",
+    "status": "clean",
+    "statement_count": 105,
+    "failed_count": 0,
+    "successful_count": 105,
+    "error_types": {}
+  },
+  {
+    "scenario": "stock_trading_and_brokerage_1",
+    "status": "clean",
+    "statement_count": 159,
+    "failed_count": 0,
+    "successful_count": 159,
+    "error_types": {}
+  },
+  {
+    "scenario": "finance_crypto_trading_1",
+    "status": "failed",
+    "statement_count": 101,
+    "failed_count": 1,
+    "successful_count": 100,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "payments_fintech_3",
+    "status": "clean",
+    "statement_count": 69,
+    "failed_count": 0,
+    "successful_count": 69,
+    "error_types": {}
+  },
+  {
+    "scenario": "team_messaging_4",
+    "status": "failed",
+    "statement_count": 109,
+    "failed_count": 7,
+    "successful_count": 102,
+    "error_types": {
+      "IntegrityError": 7
+    }
+  },
+  {
+    "scenario": "customer_support_5",
+    "status": "clean",
+    "statement_count": 91,
+    "failed_count": 0,
+    "successful_count": 91,
+    "error_types": {}
+  },
+  {
+    "scenario": "trading_brokerage_1",
+    "status": "clean",
+    "statement_count": 157,
+    "failed_count": 0,
+    "successful_count": 157,
+    "error_types": {}
+  },
+  {
+    "scenario": "finance_treasury_management_1",
+    "status": "failed",
+    "statement_count": 148,
+    "failed_count": 1,
+    "successful_count": 147,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "b2b_payments_2",
+    "status": "clean",
+    "statement_count": 93,
+    "failed_count": 0,
+    "successful_count": 93,
+    "error_types": {}
+  },
+  {
+    "scenario": "customer_support_8",
+    "status": "clean",
+    "statement_count": 108,
+    "failed_count": 0,
+    "successful_count": 108,
+    "error_types": {}
+  },
+  {
+    "scenario": "ticketing_system_2",
+    "status": "clean",
+    "statement_count": 159,
+    "failed_count": 0,
+    "successful_count": 159,
+    "error_types": {}
+  },
+  {
+    "scenario": "document_workflow_automation_1",
+    "status": "clean",
+    "statement_count": 160,
+    "failed_count": 0,
+    "successful_count": 160,
+    "error_types": {}
+  },
+  {
+    "scenario": "customer_support_2",
+    "status": "clean",
+    "statement_count": 122,
+    "failed_count": 0,
+    "successful_count": 122,
+    "error_types": {}
+  },
+  {
+    "scenario": "it_service_management_itsm_1",
+    "status": "clean",
+    "statement_count": 120,
+    "failed_count": 0,
+    "successful_count": 120,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_saas_1",
+    "status": "clean",
+    "statement_count": 69,
+    "failed_count": 0,
+    "successful_count": 69,
+    "error_types": {}
+  },
+  {
+    "scenario": "event_management_11",
+    "status": "clean",
+    "statement_count": 121,
+    "failed_count": 0,
+    "successful_count": 121,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_finance_5",
+    "status": "failed",
+    "statement_count": 90,
+    "failed_count": 2,
+    "successful_count": 88,
+    "error_types": {
+      "IntegrityError": 1,
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "project_management_4",
+    "status": "clean",
+    "statement_count": 99,
+    "failed_count": 0,
+    "successful_count": 99,
+    "error_types": {}
+  },
+  {
+    "scenario": "mentorship_management_1",
+    "status": "clean",
+    "statement_count": 132,
+    "failed_count": 0,
+    "successful_count": 132,
+    "error_types": {}
+  },
+  {
+    "scenario": "insurance_policy_administration_1",
+    "status": "clean",
+    "statement_count": 59,
+    "failed_count": 0,
+    "successful_count": 59,
+    "error_types": {}
+  },
+  {
+    "scenario": "billing_and_invoicing_3",
+    "status": "clean",
+    "statement_count": 146,
+    "failed_count": 0,
+    "successful_count": 146,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_11",
+    "status": "clean",
+    "statement_count": 77,
+    "failed_count": 0,
+    "successful_count": 77,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_reservations_1",
+    "status": "clean",
+    "statement_count": 212,
+    "failed_count": 0,
+    "successful_count": 212,
+    "error_types": {}
+  },
+  {
+    "scenario": "resource_booking_2",
+    "status": "clean",
+    "statement_count": 72,
+    "failed_count": 0,
+    "successful_count": 72,
+    "error_types": {}
+  },
+  {
+    "scenario": "inventory_management_7",
+    "status": "clean",
+    "statement_count": 109,
+    "failed_count": 0,
+    "successful_count": 109,
+    "error_types": {}
+  },
+  {
+    "scenario": "asset_management_3",
+    "status": "clean",
+    "statement_count": 80,
+    "failed_count": 0,
+    "successful_count": 80,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_14",
+    "status": "failed",
+    "statement_count": 86,
+    "failed_count": 4,
+    "successful_count": 82,
+    "error_types": {
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "matchmaking_1",
+    "status": "failed",
+    "statement_count": 131,
+    "failed_count": 12,
+    "successful_count": 119,
+    "error_types": {
+      "IntegrityError": 12
+    }
+  },
+  {
+    "scenario": "subscription_management_6",
+    "status": "clean",
+    "statement_count": 158,
+    "failed_count": 0,
+    "successful_count": 158,
+    "error_types": {}
+  },
+  {
+    "scenario": "enterprise_admin_portal_1",
+    "status": "clean",
+    "statement_count": 138,
+    "failed_count": 0,
+    "successful_count": 138,
+    "error_types": {}
+  },
+  {
+    "scenario": "fitness_and_wellness_tracking_1",
+    "status": "clean",
+    "statement_count": 239,
+    "failed_count": 0,
+    "successful_count": 239,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_automation_12",
+    "status": "failed",
+    "statement_count": 115,
+    "failed_count": 3,
+    "successful_count": 112,
+    "error_types": {
+      "SQLError": 3
+    }
+  },
+  {
+    "scenario": "compliance_management_1",
+    "status": "clean",
+    "statement_count": 120,
+    "failed_count": 0,
+    "successful_count": 120,
+    "error_types": {}
+  },
+  {
+    "scenario": "health_fitness_tracking_2",
+    "status": "failed",
+    "statement_count": 190,
+    "failed_count": 1,
+    "successful_count": 189,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "membership_management_5",
+    "status": "clean",
+    "statement_count": 59,
+    "failed_count": 0,
+    "successful_count": 59,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_scheduling_3",
+    "status": "failed",
+    "statement_count": 143,
+    "failed_count": 12,
+    "successful_count": 131,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 11
+    }
+  },
+  {
+    "scenario": "personal_finance_9",
+    "status": "clean",
+    "statement_count": 70,
+    "failed_count": 0,
+    "successful_count": 70,
+    "error_types": {}
+  },
+  {
+    "scenario": "learning_management_1",
+    "status": "clean",
+    "statement_count": 83,
+    "failed_count": 0,
+    "successful_count": 83,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_saas_3",
+    "status": "clean",
+    "statement_count": 61,
+    "failed_count": 0,
+    "successful_count": 61,
+    "error_types": {}
+  },
+  {
+    "scenario": "billing_payments_1",
+    "status": "clean",
+    "statement_count": 138,
+    "failed_count": 0,
+    "successful_count": 138,
+    "error_types": {}
+  },
+  {
+    "scenario": "membership_management_1",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_32",
+    "status": "clean",
+    "statement_count": 76,
+    "failed_count": 0,
+    "successful_count": 76,
+    "error_types": {}
+  },
+  {
+    "scenario": "practice_management_7",
+    "status": "clean",
+    "statement_count": 86,
+    "failed_count": 0,
+    "successful_count": 86,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_21",
+    "status": "clean",
+    "statement_count": 136,
+    "failed_count": 0,
+    "successful_count": 136,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_4",
+    "status": "clean",
+    "statement_count": 109,
+    "failed_count": 0,
+    "successful_count": 109,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_scheduling_6",
+    "status": "clean",
+    "statement_count": 108,
+    "failed_count": 0,
+    "successful_count": 108,
+    "error_types": {}
+  },
+  {
+    "scenario": "telehealth_2",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_marketplace_5",
+    "status": "clean",
+    "statement_count": 100,
+    "failed_count": 0,
+    "successful_count": 100,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_management_2",
+    "status": "clean",
+    "statement_count": 118,
+    "failed_count": 0,
+    "successful_count": 118,
+    "error_types": {}
+  },
+  {
+    "scenario": "healthcare_pharmacy_1",
+    "status": "failed",
+    "statement_count": 54,
+    "failed_count": 2,
+    "successful_count": 52,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "analytics_dashboard_4",
+    "status": "clean",
+    "statement_count": 165,
+    "failed_count": 0,
+    "successful_count": 165,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_scheduling_11",
+    "status": "clean",
+    "statement_count": 120,
+    "failed_count": 0,
+    "successful_count": 120,
+    "error_types": {}
+  },
+  {
+    "scenario": "survey_and_forms_3",
+    "status": "clean",
+    "statement_count": 100,
+    "failed_count": 0,
+    "successful_count": 100,
+    "error_types": {}
+  },
+  {
+    "scenario": "billing_and_payments_1",
+    "status": "clean",
+    "statement_count": 149,
+    "failed_count": 0,
+    "successful_count": 149,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_13",
+    "status": "failed",
+    "statement_count": 221,
+    "failed_count": 12,
+    "successful_count": 209,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 11
+    }
+  },
+  {
+    "scenario": "booking_scheduling_8",
+    "status": "clean",
+    "statement_count": 111,
+    "failed_count": 0,
+    "successful_count": 111,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_13",
+    "status": "clean",
+    "statement_count": 143,
+    "failed_count": 0,
+    "successful_count": 143,
+    "error_types": {}
+  },
+  {
+    "scenario": "analytics_dashboard_2",
+    "status": "clean",
+    "statement_count": 67,
+    "failed_count": 0,
+    "successful_count": 67,
+    "error_types": {}
+  },
+  {
+    "scenario": "property_management_13",
+    "status": "clean",
+    "statement_count": 79,
+    "failed_count": 0,
+    "successful_count": 79,
+    "error_types": {}
+  },
+  {
+    "scenario": "education_learning_management_3",
+    "status": "clean",
+    "statement_count": 127,
+    "failed_count": 0,
+    "successful_count": 127,
+    "error_types": {}
+  },
+  {
+    "scenario": "customer_support_1",
+    "status": "clean",
+    "statement_count": 127,
+    "failed_count": 0,
+    "successful_count": 127,
+    "error_types": {}
+  },
+  {
+    "scenario": "billing_payments_2",
+    "status": "clean",
+    "statement_count": 132,
+    "failed_count": 0,
+    "successful_count": 132,
+    "error_types": {}
+  },
+  {
+    "scenario": "erp_production_management_1",
+    "status": "clean",
+    "statement_count": 197,
+    "failed_count": 0,
+    "successful_count": 197,
+    "error_types": {}
+  },
+  {
+    "scenario": "inventory_management_13",
+    "status": "clean",
+    "statement_count": 131,
+    "failed_count": 0,
+    "successful_count": 131,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_saas_2",
+    "status": "failed",
+    "statement_count": 48,
+    "failed_count": 1,
+    "successful_count": 47,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "project_management_5",
+    "status": "clean",
+    "statement_count": 109,
+    "failed_count": 0,
+    "successful_count": 109,
+    "error_types": {}
+  },
+  {
+    "scenario": "scheduling_1",
+    "status": "clean",
+    "statement_count": 67,
+    "failed_count": 0,
+    "successful_count": 67,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_management_1",
+    "status": "clean",
+    "statement_count": 89,
+    "failed_count": 0,
+    "successful_count": 89,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_telemetry_management_1",
+    "status": "clean",
+    "statement_count": 111,
+    "failed_count": 0,
+    "successful_count": 111,
+    "error_types": {}
+  },
+  {
+    "scenario": "content_curation_1",
+    "status": "clean",
+    "statement_count": 133,
+    "failed_count": 0,
+    "successful_count": 133,
+    "error_types": {}
+  },
+  {
+    "scenario": "wishlist_management_4",
+    "status": "clean",
+    "statement_count": 68,
+    "failed_count": 0,
+    "successful_count": 68,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_16",
+    "status": "clean",
+    "statement_count": 116,
+    "failed_count": 0,
+    "successful_count": 116,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_6",
+    "status": "failed",
+    "statement_count": 130,
+    "failed_count": 8,
+    "successful_count": 122,
+    "error_types": {
+      "IntegrityError": 8
+    }
+  },
+  {
+    "scenario": "subscription_management_1",
+    "status": "clean",
+    "statement_count": 96,
+    "failed_count": 0,
+    "successful_count": 96,
+    "error_types": {}
+  },
+  {
+    "scenario": "loyalty_and_rewards_1",
+    "status": "clean",
+    "statement_count": 114,
+    "failed_count": 0,
+    "successful_count": 114,
+    "error_types": {}
+  },
+  {
+    "scenario": "digital_content_library_1",
+    "status": "failed",
+    "statement_count": 136,
+    "failed_count": 8,
+    "successful_count": 128,
+    "error_types": {
+      "SQLError": 1,
+      "IntegrityError": 7
+    }
+  },
+  {
+    "scenario": "document_contract_management_1",
+    "status": "clean",
+    "statement_count": 134,
+    "failed_count": 0,
+    "successful_count": 134,
+    "error_types": {}
+  },
+  {
+    "scenario": "billing_and_payments_2",
+    "status": "clean",
+    "statement_count": 94,
+    "failed_count": 0,
+    "successful_count": 94,
+    "error_types": {}
+  },
+  {
+    "scenario": "insurance_claims_management_2",
+    "status": "clean",
+    "statement_count": 95,
+    "failed_count": 0,
+    "successful_count": 95,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_1",
+    "status": "clean",
+    "statement_count": 173,
+    "failed_count": 0,
+    "successful_count": 173,
+    "error_types": {}
+  },
+  {
+    "scenario": "subscription_management_2",
+    "status": "clean",
+    "statement_count": 94,
+    "failed_count": 0,
+    "successful_count": 94,
+    "error_types": {}
+  },
+  {
+    "scenario": "lms_learning_management_system_1",
+    "status": "clean",
+    "statement_count": 331,
+    "failed_count": 0,
+    "successful_count": 331,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_and_delivery_tracking_1",
+    "status": "clean",
+    "statement_count": 77,
+    "failed_count": 0,
+    "successful_count": 77,
+    "error_types": {}
+  },
+  {
+    "scenario": "application_portal_1",
+    "status": "clean",
+    "statement_count": 61,
+    "failed_count": 0,
+    "successful_count": 61,
+    "error_types": {}
+  },
+  {
+    "scenario": "donations_fundraising_1",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "ats_applicant_tracking_system_3",
+    "status": "failed",
+    "statement_count": 241,
+    "failed_count": 4,
+    "successful_count": 237,
+    "error_types": {
+      "IntegrityError": 4
+    }
+  },
+  {
+    "scenario": "job_board_8",
+    "status": "clean",
+    "statement_count": 59,
+    "failed_count": 0,
+    "successful_count": 59,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_automation_6",
+    "status": "failed",
+    "statement_count": 107,
+    "failed_count": 92,
+    "successful_count": 15,
+    "error_types": {
+      "IntegrityError": 92
+    }
+  },
+  {
+    "scenario": "news_and_media_1",
+    "status": "clean",
+    "statement_count": 193,
+    "failed_count": 0,
+    "successful_count": 193,
+    "error_types": {}
+  },
+  {
+    "scenario": "short_form_video_platform_1",
+    "status": "clean",
+    "statement_count": 262,
+    "failed_count": 0,
+    "successful_count": 262,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_31",
+    "status": "failed",
+    "statement_count": 125,
+    "failed_count": 1,
+    "successful_count": 124,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "user_management_1",
+    "status": "failed",
+    "statement_count": 139,
+    "failed_count": 2,
+    "successful_count": 137,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "content_catalog_directory_1",
+    "status": "failed",
+    "statement_count": 199,
+    "failed_count": 10,
+    "successful_count": 189,
+    "error_types": {
+      "SQLError": 2,
+      "IntegrityError": 8
+    }
+  },
+  {
+    "scenario": "online_banking_1",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "authentication_and_identity_management_1",
+    "status": "clean",
+    "statement_count": 145,
+    "failed_count": 0,
+    "successful_count": 145,
+    "error_types": {}
+  },
+  {
+    "scenario": "content_creation_and_management_1",
+    "status": "clean",
+    "statement_count": 155,
+    "failed_count": 0,
+    "successful_count": 155,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_5",
+    "status": "clean",
+    "statement_count": 164,
+    "failed_count": 0,
+    "successful_count": 164,
+    "error_types": {}
+  },
+  {
+    "scenario": "media_streaming_2",
+    "status": "clean",
+    "statement_count": 141,
+    "failed_count": 0,
+    "successful_count": 141,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_23",
+    "status": "failed",
+    "statement_count": 200,
+    "failed_count": 1,
+    "successful_count": 199,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "subscription_saas_2",
+    "status": "clean",
+    "statement_count": 196,
+    "failed_count": 0,
+    "successful_count": 196,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_36",
+    "status": "clean",
+    "statement_count": 162,
+    "failed_count": 0,
+    "successful_count": 162,
+    "error_types": {}
+  },
+  {
+    "scenario": "rental_marketplace_2",
+    "status": "clean",
+    "statement_count": 123,
+    "failed_count": 0,
+    "successful_count": 123,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_platform_2",
+    "status": "failed",
+    "statement_count": 165,
+    "failed_count": 11,
+    "successful_count": 154,
+    "error_types": {
+      "IntegrityError": 11
+    }
+  },
+  {
+    "scenario": "logistics_management_7",
+    "status": "failed",
+    "statement_count": 120,
+    "failed_count": 39,
+    "successful_count": 81,
+    "error_types": {
+      "IntegrityError": 39
+    }
+  },
+  {
+    "scenario": "communications_messaging_platform_1",
+    "status": "clean",
+    "statement_count": 74,
+    "failed_count": 0,
+    "successful_count": 74,
+    "error_types": {}
+  },
+  {
+    "scenario": "dating_matchmaking_2",
+    "status": "failed",
+    "statement_count": 233,
+    "failed_count": 1,
+    "successful_count": 232,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "accounting_finance_1",
+    "status": "clean",
+    "statement_count": 104,
+    "failed_count": 0,
+    "successful_count": 104,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_14",
+    "status": "clean",
+    "statement_count": 97,
+    "failed_count": 0,
+    "successful_count": 97,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_information_management_1",
+    "status": "clean",
+    "statement_count": 83,
+    "failed_count": 0,
+    "successful_count": 83,
+    "error_types": {}
+  },
+  {
+    "scenario": "form_builder_8",
+    "status": "clean",
+    "statement_count": 151,
+    "failed_count": 0,
+    "successful_count": 151,
+    "error_types": {}
+  },
+  {
+    "scenario": "healthcare_patient_portal_1",
+    "status": "failed",
+    "statement_count": 135,
+    "failed_count": 2,
+    "successful_count": 133,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "volunteer_management_3",
+    "status": "clean",
+    "statement_count": 119,
+    "failed_count": 0,
+    "successful_count": 119,
+    "error_types": {}
+  },
+  {
+    "scenario": "survey_and_forms_1",
+    "status": "clean",
+    "statement_count": 147,
+    "failed_count": 0,
+    "successful_count": 147,
+    "error_types": {}
+  },
+  {
+    "scenario": "payments_fintech_1",
+    "status": "failed",
+    "statement_count": 118,
+    "failed_count": 2,
+    "successful_count": 116,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "fitness_tracking_1",
+    "status": "clean",
+    "statement_count": 182,
+    "failed_count": 0,
+    "successful_count": 182,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_appointments_2",
+    "status": "failed",
+    "statement_count": 141,
+    "failed_count": 12,
+    "successful_count": 129,
+    "error_types": {
+      "SQLError": 4,
+      "IntegrityError": 8
+    }
+  },
+  {
+    "scenario": "peer_to_peer_marketplace_1",
+    "status": "clean",
+    "statement_count": 121,
+    "failed_count": 0,
+    "successful_count": 121,
+    "error_types": {}
+  },
+  {
+    "scenario": "ecommerce_marketplace_2",
+    "status": "clean",
+    "statement_count": 97,
+    "failed_count": 0,
+    "successful_count": 97,
+    "error_types": {}
+  },
+  {
+    "scenario": "form_builder_7",
+    "status": "failed",
+    "statement_count": 160,
+    "failed_count": 1,
+    "successful_count": 159,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "crm_5",
+    "status": "failed",
+    "statement_count": 113,
+    "failed_count": 1,
+    "successful_count": 112,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "gaming_lobby_and_matchmaking_1",
+    "status": "failed",
+    "statement_count": 324,
+    "failed_count": 10,
+    "successful_count": 314,
+    "error_types": {
+      "IntegrityError": 10
+    }
+  },
+  {
+    "scenario": "booking_scheduling_10",
+    "status": "failed",
+    "statement_count": 93,
+    "failed_count": 1,
+    "successful_count": 92,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "learning_management_system_8",
+    "status": "clean",
+    "statement_count": 238,
+    "failed_count": 0,
+    "successful_count": 238,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_network_6",
+    "status": "clean",
+    "statement_count": 175,
+    "failed_count": 0,
+    "successful_count": 175,
+    "error_types": {}
+  },
+  {
+    "scenario": "gaming_platform_2",
+    "status": "clean",
+    "statement_count": 109,
+    "failed_count": 0,
+    "successful_count": 109,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_10",
+    "status": "clean",
+    "statement_count": 101,
+    "failed_count": 0,
+    "successful_count": 101,
+    "error_types": {}
+  },
+  {
+    "scenario": "b2b_marketplace_4",
+    "status": "clean",
+    "statement_count": 182,
+    "failed_count": 0,
+    "successful_count": 182,
+    "error_types": {}
+  },
+  {
+    "scenario": "media_tracking_1",
+    "status": "clean",
+    "statement_count": 127,
+    "failed_count": 0,
+    "successful_count": 127,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_1",
+    "status": "clean",
+    "statement_count": 120,
+    "failed_count": 0,
+    "successful_count": 120,
+    "error_types": {}
+  },
+  {
+    "scenario": "subscription_saas_1",
+    "status": "clean",
+    "statement_count": 136,
+    "failed_count": 0,
+    "successful_count": 136,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_marketplace_24",
+    "status": "clean",
+    "statement_count": 92,
+    "failed_count": 0,
+    "successful_count": 92,
+    "error_types": {}
+  },
+  {
+    "scenario": "job_board_1",
+    "status": "clean",
+    "statement_count": 120,
+    "failed_count": 0,
+    "successful_count": 120,
+    "error_types": {}
+  },
+  {
+    "scenario": "messaging_communications_1",
+    "status": "failed",
+    "statement_count": 89,
+    "failed_count": 2,
+    "successful_count": 87,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "ticketing_helpdesk_1",
+    "status": "clean",
+    "statement_count": 75,
+    "failed_count": 0,
+    "successful_count": 75,
+    "error_types": {}
+  },
+  {
+    "scenario": "it_service_management_3",
+    "status": "clean",
+    "statement_count": 78,
+    "failed_count": 0,
+    "successful_count": 78,
+    "error_types": {}
+  },
+  {
+    "scenario": "appointment_booking_3",
+    "status": "clean",
+    "statement_count": 174,
+    "failed_count": 0,
+    "successful_count": 174,
+    "error_types": {}
+  },
+  {
+    "scenario": "iot_smart_home_control_3",
+    "status": "clean",
+    "statement_count": 134,
+    "failed_count": 0,
+    "successful_count": 134,
+    "error_types": {}
+  },
+  {
+    "scenario": "business_planning_1",
+    "status": "failed",
+    "statement_count": 166,
+    "failed_count": 6,
+    "successful_count": 160,
+    "error_types": {
+      "SQLError": 6
+    }
+  },
+  {
+    "scenario": "dating_5",
+    "status": "failed",
+    "statement_count": 82,
+    "failed_count": 1,
+    "successful_count": 81,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "transportation_logistics_1",
+    "status": "clean",
+    "statement_count": 51,
+    "failed_count": 0,
+    "successful_count": 51,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_management_4",
+    "status": "clean",
+    "statement_count": 95,
+    "failed_count": 0,
+    "successful_count": 95,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_8",
+    "status": "failed",
+    "statement_count": 115,
+    "failed_count": 5,
+    "successful_count": 110,
+    "error_types": {
+      "IntegrityError": 5
+    }
+  },
+  {
+    "scenario": "personal_productivity_2",
+    "status": "clean",
+    "statement_count": 240,
+    "failed_count": 0,
+    "successful_count": 240,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_35",
+    "status": "clean",
+    "statement_count": 64,
+    "failed_count": 0,
+    "successful_count": 64,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_28",
+    "status": "clean",
+    "statement_count": 115,
+    "failed_count": 0,
+    "successful_count": 115,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_marketplace_7",
+    "status": "clean",
+    "statement_count": 119,
+    "failed_count": 0,
+    "successful_count": 119,
+    "error_types": {}
+  },
+  {
+    "scenario": "tournament_management_3",
+    "status": "failed",
+    "statement_count": 152,
+    "failed_count": 2,
+    "successful_count": 150,
+    "error_types": {
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "inventory_management_10",
+    "status": "failed",
+    "statement_count": 70,
+    "failed_count": 1,
+    "successful_count": 69,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "event_management_12",
+    "status": "clean",
+    "statement_count": 111,
+    "failed_count": 0,
+    "successful_count": 111,
+    "error_types": {}
+  },
+  {
+    "scenario": "workflow_automation_11",
+    "status": "clean",
+    "statement_count": 92,
+    "failed_count": 0,
+    "successful_count": 92,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_network_10",
+    "status": "clean",
+    "statement_count": 118,
+    "failed_count": 0,
+    "successful_count": 118,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_network_2",
+    "status": "clean",
+    "statement_count": 100,
+    "failed_count": 0,
+    "successful_count": 100,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_reservations_7",
+    "status": "clean",
+    "statement_count": 86,
+    "failed_count": 0,
+    "successful_count": 86,
+    "error_types": {}
+  },
+  {
+    "scenario": "gaming_2",
+    "status": "clean",
+    "statement_count": 111,
+    "failed_count": 0,
+    "successful_count": 111,
+    "error_types": {}
+  },
+  {
+    "scenario": "portfolio_management_3",
+    "status": "clean",
+    "statement_count": 92,
+    "failed_count": 0,
+    "successful_count": 92,
+    "error_types": {}
+  },
+  {
+    "scenario": "learning_management_2",
+    "status": "clean",
+    "statement_count": 198,
+    "failed_count": 0,
+    "successful_count": 198,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_reservations_21",
+    "status": "failed",
+    "statement_count": 148,
+    "failed_count": 2,
+    "successful_count": 146,
+    "error_types": {
+      "SQLError": 2
+    }
+  },
+  {
+    "scenario": "two_sided_marketplace_2",
+    "status": "clean",
+    "statement_count": 113,
+    "failed_count": 0,
+    "successful_count": 113,
+    "error_types": {}
+  },
+  {
+    "scenario": "crm_12",
+    "status": "clean",
+    "statement_count": 100,
+    "failed_count": 0,
+    "successful_count": 100,
+    "error_types": {}
+  },
+  {
+    "scenario": "collaborative_bookmarking_1",
+    "status": "clean",
+    "statement_count": 135,
+    "failed_count": 0,
+    "successful_count": 135,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_17",
+    "status": "clean",
+    "statement_count": 102,
+    "failed_count": 0,
+    "successful_count": 102,
+    "error_types": {}
+  },
+  {
+    "scenario": "donation_platform_1",
+    "status": "clean",
+    "statement_count": 85,
+    "failed_count": 0,
+    "successful_count": 85,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_health_records_1",
+    "status": "failed",
+    "statement_count": 110,
+    "failed_count": 2,
+    "successful_count": 108,
+    "error_types": {
+      "IntegrityError": 1,
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "personal_information_manager_1",
+    "status": "clean",
+    "statement_count": 219,
+    "failed_count": 0,
+    "successful_count": 219,
+    "error_types": {}
+  },
+  {
+    "scenario": "wishlist_management_2",
+    "status": "clean",
+    "statement_count": 76,
+    "failed_count": 0,
+    "successful_count": 76,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_dating_1",
+    "status": "clean",
+    "statement_count": 134,
+    "failed_count": 0,
+    "successful_count": 134,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_platform_1",
+    "status": "clean",
+    "statement_count": 81,
+    "failed_count": 0,
+    "successful_count": 81,
+    "error_types": {}
+  },
+  {
+    "scenario": "collection_management_1",
+    "status": "clean",
+    "statement_count": 130,
+    "failed_count": 0,
+    "successful_count": 130,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_networking_7",
+    "status": "clean",
+    "statement_count": 93,
+    "failed_count": 0,
+    "successful_count": 93,
+    "error_types": {}
+  },
+  {
+    "scenario": "bookmarking_2",
+    "status": "clean",
+    "statement_count": 149,
+    "failed_count": 0,
+    "successful_count": 149,
+    "error_types": {}
+  },
+  {
+    "scenario": "project_management_9",
+    "status": "clean",
+    "statement_count": 86,
+    "failed_count": 0,
+    "successful_count": 86,
+    "error_types": {}
+  },
+  {
+    "scenario": "billing_and_invoicing_2",
+    "status": "clean",
+    "statement_count": 117,
+    "failed_count": 0,
+    "successful_count": 117,
+    "error_types": {}
+  },
+  {
+    "scenario": "social_network_5",
+    "status": "failed",
+    "statement_count": 97,
+    "failed_count": 1,
+    "successful_count": 96,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "professional_networking_2",
+    "status": "clean",
+    "statement_count": 127,
+    "failed_count": 0,
+    "successful_count": 127,
+    "error_types": {}
+  },
+  {
+    "scenario": "loyalty_rewards_1",
+    "status": "clean",
+    "statement_count": 97,
+    "failed_count": 0,
+    "successful_count": 97,
+    "error_types": {}
+  },
+  {
+    "scenario": "job_board_9",
+    "status": "clean",
+    "statement_count": 72,
+    "failed_count": 0,
+    "successful_count": 72,
+    "error_types": {}
+  },
+  {
+    "scenario": "professional_network_1",
+    "status": "clean",
+    "statement_count": 134,
+    "failed_count": 0,
+    "successful_count": 134,
+    "error_types": {}
+  },
+  {
+    "scenario": "marketplace_16",
+    "status": "clean",
+    "statement_count": 117,
+    "failed_count": 0,
+    "successful_count": 117,
+    "error_types": {}
+  },
+  {
+    "scenario": "form_builder_3",
+    "status": "failed",
+    "statement_count": 91,
+    "failed_count": 4,
+    "successful_count": 87,
+    "error_types": {
+      "SQLError": 2,
+      "IntegrityError": 2
+    }
+  },
+  {
+    "scenario": "healthcare_patient_portal_5",
+    "status": "failed",
+    "statement_count": 138,
+    "failed_count": 1,
+    "successful_count": 137,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "logistics_management_12",
+    "status": "clean",
+    "statement_count": 130,
+    "failed_count": 0,
+    "successful_count": 130,
+    "error_types": {}
+  },
+  {
+    "scenario": "operations_management_5",
+    "status": "failed",
+    "statement_count": 235,
+    "failed_count": 1,
+    "successful_count": 234,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "competitive_gaming_1",
+    "status": "clean",
+    "statement_count": 106,
+    "failed_count": 0,
+    "successful_count": 106,
+    "error_types": {}
+  },
+  {
+    "scenario": "workforce_management_3",
+    "status": "clean",
+    "statement_count": 127,
+    "failed_count": 0,
+    "successful_count": 127,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_health_records_management_1",
+    "status": "clean",
+    "statement_count": 108,
+    "failed_count": 0,
+    "successful_count": 108,
+    "error_types": {}
+  },
+  {
+    "scenario": "document_workflow_management_1",
+    "status": "clean",
+    "statement_count": 145,
+    "failed_count": 0,
+    "successful_count": 145,
+    "error_types": {}
+  },
+  {
+    "scenario": "calendar_scheduling_1",
+    "status": "clean",
+    "statement_count": 92,
+    "failed_count": 0,
+    "successful_count": 92,
+    "error_types": {}
+  },
+  {
+    "scenario": "booking_and_reservations_4",
+    "status": "clean",
+    "statement_count": 134,
+    "failed_count": 0,
+    "successful_count": 134,
+    "error_types": {}
+  },
+  {
+    "scenario": "asset_management_1",
+    "status": "clean",
+    "statement_count": 95,
+    "failed_count": 0,
+    "successful_count": 95,
+    "error_types": {}
+  },
+  {
+    "scenario": "forms_and_survey_management_1",
+    "status": "clean",
+    "statement_count": 213,
+    "failed_count": 0,
+    "successful_count": 213,
+    "error_types": {}
+  },
+  {
+    "scenario": "resource_booking_1",
+    "status": "failed",
+    "statement_count": 244,
+    "failed_count": 11,
+    "successful_count": 233,
+    "error_types": {
+      "IntegrityError": 11
+    }
+  },
+  {
+    "scenario": "contract_lifecycle_management_2",
+    "status": "failed",
+    "statement_count": 139,
+    "failed_count": 66,
+    "successful_count": 73,
+    "error_types": {
+      "IntegrityError": 66
+    }
+  },
+  {
+    "scenario": "habit_tracking_1",
+    "status": "clean",
+    "statement_count": 118,
+    "failed_count": 0,
+    "successful_count": 118,
+    "error_types": {}
+  },
+  {
+    "scenario": "personal_health_tracking_1",
+    "status": "clean",
+    "statement_count": 71,
+    "failed_count": 0,
+    "successful_count": 71,
+    "error_types": {}
+  },
+  {
+    "scenario": "practice_management_4",
+    "status": "clean",
+    "statement_count": 89,
+    "failed_count": 0,
+    "successful_count": 89,
+    "error_types": {}
+  },
+  {
+    "scenario": "field_service_management_2",
+    "status": "clean",
+    "statement_count": 103,
+    "failed_count": 0,
+    "successful_count": 103,
+    "error_types": {}
+  },
+  {
+    "scenario": "education_1",
+    "status": "clean",
+    "statement_count": 186,
+    "failed_count": 0,
+    "successful_count": 186,
+    "error_types": {}
+  },
+  {
+    "scenario": "logistics_management_11",
+    "status": "failed",
+    "statement_count": 102,
+    "failed_count": 1,
+    "successful_count": 101,
+    "error_types": {
+      "SQLError": 1
+    }
+  },
+  {
+    "scenario": "discussion_forum_2",
+    "status": "failed",
+    "statement_count": 134,
+    "failed_count": 1,
+    "successful_count": 133,
+    "error_types": {
+      "IntegrityError": 1
+    }
+  },
+  {
+    "scenario": "subscription_management_5",
+    "status": "clean",
+    "statement_count": 233,
+    "failed_count": 0,
+    "successful_count": 233,
+    "error_types": {}
+  },
+  {
+    "scenario": "e_commerce_8",
+    "status": "failed",
+    "statement_count": 191,
+    "failed_count": 47,
+    "successful_count": 144,
+    "error_types": {
+      "IntegrityError": 47
+    }
+  },
+  {
+    "scenario": "healthcare_1",
+    "status": "clean",
+    "statement_count": 113,
+    "failed_count": 0,
+    "successful_count": 113,
+    "error_types": {}
+  },
+  {
+    "scenario": "medical_healthcare_1",
+    "status": "clean",
+    "statement_count": 145,
+    "failed_count": 0,
+    "successful_count": 145,
+    "error_types": {}
+  },
+  {
+    "scenario": "subscription_management_9",
+    "status": "clean",
+    "statement_count": 121,
+    "failed_count": 0,
+    "successful_count": 121,
+    "error_types": {}
+  },
+  {
+    "scenario": "classifieds_marketplace_1",
+    "status": "failed",
+    "statement_count": 122,
+    "failed_count": 6,
+    "successful_count": 116,
+    "error_types": {
+      "SQLError": 3,
+      "IntegrityError": 3
+    }
+  },
+  {
+    "scenario": "education_learning_management_2",
+    "status": "clean",
+    "statement_count": 135,
+    "failed_count": 0,
+    "successful_count": 135,
+    "error_types": {}
+  },
+  {
+    "scenario": "task_management_20",
+    "status": "clean",
+    "statement_count": 124,
+    "failed_count": 0,
+    "successful_count": 124,
+    "error_types": {}
+  }
+]

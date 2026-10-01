@@ -1,0 +1,61 @@
+{
+  "row_count": 129328,
+  "positive_count": 1374,
+  "positive_rate": 0.010624149449461833,
+  "group_counts": {
+    "train": 699,
+    "validation": 150,
+    "test": 150
+  },
+  "feature_names": [
+    "sql_length",
+    "column_count",
+    "value_count",
+    "column_value_count_delta",
+    "unknown_column_count",
+    "null_count",
+    "string_literal_count",
+    "numeric_literal_count",
+    "datetime_expression_count",
+    "apostrophe_count",
+    "backslash_count",
+    "statement_index",
+    "table_column_count",
+    "table_foreign_key_count",
+    "table_unique_constraint_count"
+  ],
+  "models": [
+    {
+      "model": "majority",
+      "pr_auc": 0.018391046187798854,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "predicted_positive_count": 0
+    },
+    {
+      "model": "static_rules",
+      "pr_auc": 0.0251370783866066,
+      "precision": 0.12571428571428572,
+      "recall": 0.06285714285714286,
+      "f1": 0.0838095238095238,
+      "predicted_positive_count": 175
+    },
+    {
+      "model": "logistic_regression",
+      "pr_auc": 0.061480026393958824,
+      "precision": 0.03297818366311517,
+      "recall": 0.5571428571428572,
+      "f1": 0.06227047740699345,
+      "predicted_positive_count": 5913
+    },
+    {
+      "model": "random_forest",
+      "pr_auc": 0.052656426833634806,
+      "precision": 0.24615384615384617,
+      "recall": 0.045714285714285714,
+      "f1": 0.07710843373493977,
+      "predicted_positive_count": 65
+    }
+  ]
+}

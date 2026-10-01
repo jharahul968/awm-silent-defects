@@ -1,0 +1,243 @@
+{
+  "static_checker": {
+    "rows_checked": 129328,
+    "predicted_failure_count": 56176,
+    "true_positive_count": 1316,
+    "false_positive_count": 54860,
+    "false_negative_count": 58,
+    "precision": 0.02342637425234976,
+    "recall": 0.9577874818049491,
+    "flag_counts": {
+      "column_value_mismatch": 566,
+      "duplicate_prior_unique_key": 20375,
+      "missing_prior_foreign_key": 44225,
+      "unknown_column": 122,
+      "unbalanced_quote": 28,
+      "backslash_quote": 17,
+      "unknown_table": 54,
+      "unparseable_insert": 31
+    }
+  },
+  "error_categories": {
+    "foreign_key": 1054,
+    "unknown_column": 48,
+    "syntax_or_quoting": 77,
+    "column_value_or_schema_mismatch": 84,
+    "other_sql_error": 43,
+    "uniqueness_or_primary_key": 68
+  },
+  "failure_concentration": {
+    "failed_statements": 1374,
+    "failed_environments": 217,
+    "top_20_failure_share": 0.4890829694323144,
+    "top_20_environments": [
+      [
+        "workflow_automation_6",
+        92
+      ],
+      [
+        "contract_lifecycle_management_2",
+        66
+      ],
+      [
+        "workflow_automation_5",
+        63
+      ],
+      [
+        "e_commerce_8",
+        47
+      ],
+      [
+        "e_commerce_20",
+        43
+      ],
+      [
+        "vendor_management_1",
+        43
+      ],
+      [
+        "logistics_management_7",
+        39
+      ],
+      [
+        "ride_hailing_2",
+        38
+      ],
+      [
+        "q_a_forum_1",
+        38
+      ],
+      [
+        "subscription_billing_1",
+        32
+      ],
+      [
+        "document_management_6",
+        27
+      ],
+      [
+        "calendar_scheduling_2",
+        20
+      ],
+      [
+        "workflow_automation_7",
+        19
+      ],
+      [
+        "e_commerce_marketplace_22",
+        17
+      ],
+      [
+        "content_authoring_1",
+        17
+      ],
+      [
+        "real_time_chat_messaging_1",
+        15
+      ],
+      [
+        "hr_payroll_management_4",
+        15
+      ],
+      [
+        "professional_networking_1",
+        15
+      ],
+      [
+        "professional_networking_10",
+        13
+      ],
+      [
+        "social_dating_5",
+        13
+      ]
+    ]
+  },
+  "repeated_grouped_splits": [
+    {
+      "split": 1,
+      "train_environments": 799,
+      "test_environments": 200,
+      "models": {
+        "majority": {
+          "pr_auc": 0.008617636642663204,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "logistic_regression": {
+          "pr_auc": 0.031135079972487725,
+          "precision": 0.014569168863604829,
+          "recall": 0.4794520547945205,
+          "f1": 0.028279019660651765
+        },
+        "random_forest": {
+          "pr_auc": 0.03958218016057232,
+          "precision": 0.09302325581395349,
+          "recall": 0.0547945205479452,
+          "f1": 0.06896551724137931
+        }
+      }
+    },
+    {
+      "split": 2,
+      "train_environments": 799,
+      "test_environments": 200,
+      "models": {
+        "majority": {
+          "pr_auc": 0.014424160468785216,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "logistic_regression": {
+          "pr_auc": 0.040650016456866306,
+          "precision": 0.03234429296979417,
+          "recall": 0.6302083333333334,
+          "f1": 0.06153063818967709
+        },
+        "random_forest": {
+          "pr_auc": 0.033862003404954016,
+          "precision": 0.13253012048192772,
+          "recall": 0.028645833333333332,
+          "f1": 0.047109207708779445
+        }
+      }
+    },
+    {
+      "split": 3,
+      "train_environments": 799,
+      "test_environments": 200,
+      "models": {
+        "majority": {
+          "pr_auc": 0.010495695585518298,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "logistic_regression": {
+          "pr_auc": 0.02742202580096514,
+          "precision": 0.018354769560557344,
+          "recall": 0.5131086142322098,
+          "f1": 0.03544172810761868
+        },
+        "random_forest": {
+          "pr_auc": 0.03520767189196973,
+          "precision": 0.07692307692307693,
+          "recall": 0.0299625468164794,
+          "f1": 0.0431266846361186
+        }
+      }
+    },
+    {
+      "split": 4,
+      "train_environments": 799,
+      "test_environments": 200,
+      "models": {
+        "majority": {
+          "pr_auc": 0.010624474508904686,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "logistic_regression": {
+          "pr_auc": 0.04189674998899906,
+          "precision": 0.02242275088870659,
+          "recall": 0.5899280575539568,
+          "f1": 0.04320337197049526
+        },
+        "random_forest": {
+          "pr_auc": 0.04289750610327176,
+          "precision": 0.16216216216216217,
+          "recall": 0.06474820143884892,
+          "f1": 0.09254498714652956
+        }
+      }
+    },
+    {
+      "split": 5,
+      "train_environments": 799,
+      "test_environments": 200,
+      "models": {
+        "majority": {
+          "pr_auc": 0.010653462375271964,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "logistic_regression": {
+          "pr_auc": 0.04985317723922612,
+          "precision": 0.020559315540799386,
+          "recall": 0.5669014084507042,
+          "f1": 0.0396796056685151
+        },
+        "random_forest": {
+          "pr_auc": 0.040176110103876506,
+          "precision": 0.05426356589147287,
+          "recall": 0.02464788732394366,
+          "f1": 0.03389830508474576
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+
+# AWM runtime outputs (databases, trajectories, etc.)
+outputs/
+
+# Large dataset files downloaded from Hugging Face (too big for git)
+data/gen_*.jsonl
+data/.cache/
+
+# Computed result artifacts that can be regenerated
+# (keep scripts, gitignore the heavy outputs)
+analysis/results/insert_audit.jsonl
+analysis/results/static_checker_rows.jsonl
+analysis/results/official_reset.log
+
+# OS / editor
+.DS_Store
+*.swp
