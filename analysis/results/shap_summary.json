@@ -1,0 +1,109 @@
+{
+  "ranking": [
+    {
+      "feature": "min_year",
+      "mean_abs_shap": 0.3445688263451767
+    },
+    {
+      "feature": "log_min_numeric",
+      "mean_abs_shap": 0.05592725719983904
+    },
+    {
+      "feature": "has_negative_value",
+      "mean_abs_shap": 0.04319263369873661
+    },
+    {
+      "feature": "has_absurd_year",
+      "mean_abs_shap": 0.04229677369377623
+    },
+    {
+      "feature": "num_negative_values",
+      "mean_abs_shap": 0.040101318835560985
+    },
+    {
+      "feature": "num_money_cols",
+      "mean_abs_shap": 0.022014319921109703
+    },
+    {
+      "feature": "max_string_length",
+      "mean_abs_shap": 0.0209241785217108
+    },
+    {
+      "feature": "num_string_values",
+      "mean_abs_shap": 0.013968045437585166
+    },
+    {
+      "feature": "num_count_cols",
+      "mean_abs_shap": 0.012730730394866026
+    },
+    {
+      "feature": "avg_string_length",
+      "mean_abs_shap": 0.007454999726806733
+    },
+    {
+      "feature": "num_date_cols",
+      "mean_abs_shap": 0.006544589626014882
+    },
+    {
+      "feature": "has_rating_col",
+      "mean_abs_shap": 0.005778154491887516
+    },
+    {
+      "feature": "num_numeric_values",
+      "mean_abs_shap": 0.004521794251913449
+    },
+    {
+      "feature": "log_max_numeric",
+      "mean_abs_shap": 0.0032405256629343747
+    },
+    {
+      "feature": "num_columns",
+      "mean_abs_shap": 0.0029754294119042997
+    },
+    {
+      "feature": "num_values",
+      "mean_abs_shap": 0.002817397651835931
+    },
+    {
+      "feature": "table_col_count",
+      "mean_abs_shap": 0.0021699550858732273
+    },
+    {
+      "feature": "table_fk_count",
+      "mean_abs_shap": 0.002087004230719721
+    },
+    {
+      "feature": "sql_length",
+      "mean_abs_shap": 0.0018781454873316413
+    },
+    {
+      "feature": "statement_index",
+      "mean_abs_shap": 0.0008979418204267801
+    },
+    {
+      "feature": "table_unique_count",
+      "mean_abs_shap": 0.0006786090276359068
+    },
+    {
+      "feature": "col_fill_ratio",
+      "mean_abs_shap": 0.00057812476947908
+    },
+    {
+      "feature": "has_age_col",
+      "mean_abs_shap": 0.0004887965338914391
+    },
+    {
+      "feature": "num_null_values",
+      "mean_abs_shap": 0.000353136073058385
+    },
+    {
+      "feature": "num_unknown_cols",
+      "mean_abs_shap": 2.1957182031392574e-06
+    },
+    {
+      "feature": "col_val_delta",
+      "mean_abs_shap": 0.0
+    }
+  ],
+  "sample_size": 2000
+}
