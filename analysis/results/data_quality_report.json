@@ -1,0 +1,316 @@
+{
+  "dataset_summary": {
+    "total_instances": 613017,
+    "total_environments": 999,
+    "clean_instances": 126490,
+    "corrupted_instances": 486527,
+    "overall_imbalance_ratio": "486527:126490 (79.4% : 20.6%)",
+    "statements_per_env_mean": 613.6306306306307,
+    "statements_per_env_median": 557.0,
+    "statements_per_env_std": 416.91316106647866,
+    "statements_per_env_min": 15,
+    "statements_per_env_max": 2605
+  },
+  "corruption_distribution": {
+    "by_type": {
+      "anomalous_date": 366597,
+      "negative_money": 80844,
+      "negative_inventory": 34704,
+      "out_of_bounds_rating": 3854,
+      "impossible_age": 528
+    },
+    "by_severity": {
+      "medium": 162190,
+      "subtle": 162175,
+      "obvious": 162162
+    }
+  },
+  "feature_profiling": {
+    "scenario": {
+      "null_count": 0,
+      "null_percentage": 0.0
+    },
+    "table": {
+      "null_count": 0,
+      "null_percentage": 0.0
+    },
+    "label": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 126490,
+      "zero_pct": 0.20634011781076217,
+      "mean": 0.7936598821892378,
+      "std": 0.4046778233819304,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "corruption_type": {
+      "null_count": 0,
+      "null_percentage": 0.0
+    },
+    "severity": {
+      "null_count": 0,
+      "null_percentage": 0.0
+    },
+    "has_negative_value": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 486095,
+      "zero_pct": 0.7929551709006438,
+      "mean": 0.20704482909935615,
+      "std": 0.40518827187058326,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "num_negative_values": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 486095,
+      "zero_pct": 0.7929551709006438,
+      "mean": 0.21025844307743505,
+      "std": 0.4160848332559805,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "log_max_numeric": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 3721,
+      "zero_pct": 0.006069978483467832,
+      "mean": 4.082839036366759,
+      "std": 3.1050013597788744,
+      "min": -14.731801689838349,
+      "max": 28.660640533110065
+    },
+    "log_min_numeric": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 75110,
+      "zero_pct": 0.12252515019974976,
+      "mean": -0.05716132856845584,
+      "std": 2.7496798897923713,
+      "min": -22.802707378751247,
+      "max": 13.55959972523968
+    },
+    "num_numeric_values": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 3321,
+      "zero_pct": 0.005417468031066023,
+      "mean": 4.326209550469237,
+      "std": 2.4662398833176873,
+      "min": 0.0,
+      "max": 18.0
+    },
+    "has_absurd_year": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 490676,
+      "zero_pct": 0.8004280468567756,
+      "mean": 0.1995719531432244,
+      "std": 0.39967893270370486,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "min_year": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 0,
+      "zero_pct": 0.0,
+      "mean": 1958.704450284413,
+      "std": 74.49458608371368,
+      "min": 1.0,
+      "max": 6063.0
+    },
+    "num_null_values": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 462459,
+      "zero_pct": 0.754398328268221,
+      "mean": 0.4025353293628072,
+      "std": 0.8983018858155629,
+      "min": 0.0,
+      "max": 13.0
+    },
+    "num_string_values": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 25175,
+      "zero_pct": 0.04106737659803888,
+      "mean": 4.34027930709915,
+      "std": 2.4521434340801274,
+      "min": 0.0,
+      "max": 19.0
+    },
+    "max_string_length": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 25175,
+      "zero_pct": 0.04106737659803888,
+      "mean": 24.782834733783893,
+      "std": 27.323325538526543,
+      "min": 0.0,
+      "max": 3272.0
+    },
+    "avg_string_length": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 25175,
+      "zero_pct": 0.04106737659803888,
+      "mean": 15.65768224458393,
+      "std": 9.61893295080038,
+      "min": 0.0,
+      "max": 1113.3333333333333
+    },
+    "num_columns": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 0,
+      "zero_pct": 0.0,
+      "mean": 9.487467721123558,
+      "std": 3.8420880726206565,
+      "min": 2.0,
+      "max": 33.0
+    },
+    "num_values": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 0,
+      "zero_pct": 0.0,
+      "mean": 9.487467721123558,
+      "std": 3.8420880726206565,
+      "min": 2.0,
+      "max": 33.0
+    },
+    "col_val_delta": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 613017,
+      "zero_pct": 1.0,
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "num_money_cols": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 408829,
+      "zero_pct": 0.6669129893624484,
+      "mean": 0.707531765024461,
+      "std": 1.309115073243744,
+      "min": 0.0,
+      "max": 10.0
+    },
+    "num_count_cols": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 465995,
+      "zero_pct": 0.7601665206674529,
+      "mean": 0.3196893397736115,
+      "std": 0.6553643739479857,
+      "min": 0.0,
+      "max": 9.0
+    },
+    "num_date_cols": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 11992,
+      "zero_pct": 0.019562263363006246,
+      "mean": 2.4764468195824914,
+      "std": 1.2106182799179501,
+      "min": 0.0,
+      "max": 9.0
+    },
+    "has_rating_col": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 586277,
+      "zero_pct": 0.9563796762569391,
+      "mean": 0.04362032374306096,
+      "std": 0.20424901261115835,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "has_age_col": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 611943,
+      "zero_pct": 0.9982480094353011,
+      "mean": 0.0017519905646988583,
+      "std": 0.0418201380525932,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "table_fk_count": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 67876,
+      "zero_pct": 0.11072449866806304,
+      "mean": 1.975488444855526,
+      "std": 1.457534678516522,
+      "min": 0.0,
+      "max": 11.0
+    },
+    "table_unique_count": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 331286,
+      "zero_pct": 0.5404189443359646,
+      "mean": 0.5656449984258185,
+      "std": 0.6892166351145615,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "table_col_count": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 44,
+      "zero_pct": 7.177614976419903e-05,
+      "mean": 9.634665922804752,
+      "std": 3.857185662131134,
+      "min": 0.0,
+      "max": 33.0
+    },
+    "num_unknown_cols": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 612905,
+      "zero_pct": 0.9998172970733274,
+      "mean": 0.0010815360748559991,
+      "std": 0.1148519998488761,
+      "min": 0.0,
+      "max": 17.0
+    },
+    "statement_index": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 88307,
+      "zero_pct": 0.14405310130061647,
+      "mean": 6.0257056492723695,
+      "std": 9.154935014199726,
+      "min": 0.0,
+      "max": 149.0
+    },
+    "sql_length": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 0,
+      "zero_pct": 0.0,
+      "mean": 268.66178751975883,
+      "std": 104.20033791968726,
+      "min": 46.0,
+      "max": 3588.0
+    },
+    "col_fill_ratio": {
+      "null_count": 0,
+      "null_pct": 0.0,
+      "zero_count": 0,
+      "zero_pct": 0.0,
+      "mean": 0.9849771100322686,
+      "std": 0.11240282717219446,
+      "min": 0.6363636363636364,
+      "max": 17.0
+    }
+  }
+}
