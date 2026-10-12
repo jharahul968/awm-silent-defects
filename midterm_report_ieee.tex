@@ -128,6 +128,13 @@ Supervised & XGBoost & \textbf{0.9998} & \textbf{1.0000} & \textbf{0.0008} & \te
 \end{tabular}
 \end{table}
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig1_model_comparison.png}
+\caption{PR-AUC comparison across eight models on held-out test environments compared to prevalence baseline (0.7937).}
+\label{fig:model_comparison}
+\end{figure}
+
 \subsection{Controlled Experiment 1: Corruption Severity Decay}
 We evaluated whether models maintain sensitivity as corruptions shift from obvious outliers ($10\times$ negative shift, year 1823) to subtle shifts ($0.01\times$ fractional drift, $-30$ year offset). As detailed in Table \ref{tab:severity}, supervised HGB maintains consistent PR-AUC ($\approx 0.9987$), whereas unsupervised Isolation Forest exhibits clear sensitivity decay ($0.7687 \rightarrow 0.7504 \rightarrow 0.7257$) as subtle corruptions blend into normal data densities.
 
@@ -161,6 +168,13 @@ Using \texttt{TreeExplainer} \cite{lundberg2017shap} on Random Forest ($N=2,000$
     \item \texttt{log\_min\_numeric} ($0.0559$) \& \texttt{has\_negative\_value} ($0.0432$): Identifies negative currency/stock corruptions.
     \item \texttt{num\_money\_cols} ($0.0220$): Provides semantic contextualization.
 \end{enumerate}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig5_shap_beeswarm.png}
+\caption{Global SHAP beeswarm distribution illustrating the directional impact of top-10 features on silent defect predictions.}
+\label{fig:shap_beeswarm}
+\end{figure}
 
 \subsection{Case Studies: False Positives \& False Negatives}
 \textbf{False Positives (395 / 31,015 clean test records, FPR = 1.27\%):} 
