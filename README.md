@@ -107,15 +107,20 @@ uv run streamlit run demo_app.py
 
 Choose a source example, edit an INSERT, and inspect the synthetic-corruption score. The app separately checks SQLite acceptance using the actual schema and preceding source statements. It uses the same saved RF and validation threshold as the report's RF analysis, without fitting another model at launch. This supports manual inspection, not a guarantee of semantic correctness.
 
-## Report and reproduction
+## Report
 
-`midterm_report_ieee.tex` is the submission source. The copy in `analysis/results/` is retained for compatibility; compile from the root so paths resolve. In the course-required official IEEE Conference Template on Overleaf, upload this source, `analysis/results/midterm_numbers.tex`, and the referenced figure while preserving their paths, and select the root source as the main document. With a local LaTeX installation containing IEEEtran:
+The progress report is available as [`midterm_report_ieee.pdf`](midterm_report_ieee.pdf).
 
+To compile the LaTeX source locally:
 ```bash
 pdflatex -interaction=nonstopmode -halt-on-error midterm_report_ieee.tex
 pdflatex -interaction=nonstopmode -halt-on-error midterm_report_ieee.tex
 ```
 
-Verify at most three main-text pages, excluding references, readable tables, and unchanged IEEE margins/font sizes. The course requires the compiled PDF, a working code link or requested snapshot, and explanation of proposal changes. The [repository](https://github.com/jharahul968/awm-silent-defects) must contain the reviewed version before its link serves as submission evidence.
+To compile on Overleaf, upload `midterm_report_ieee.tex` together with `analysis/results/midterm_numbers.tex` and `figures/fig5_shap_bar.png`.
 
-The proposal's positive-value errors, temporal ordering violations, and semantically incorrect references remain future work. Current labels mainly evaluate controlled-mutation recognition; natural defect detection requires manual domain review. Keyword matching can overreach: `count` matches `is_bank_account`, so a Boolean flag is categorized as an inventory-family candidate. Family names describe injection recipes, not verified domain types.
+## Limitations and next steps
+
+- **Controlled vs. natural defects:** Current labels evaluate recognition of controlled synthetic mutations; detecting natural semantic defects requires ongoing manual domain review.
+- **Lexical column filtering:** Column eligibility relies on keyword matching, which can occasionally overreach (e.g., matching `count` inside `is_bank_account`).
+- **Planned extensions:** Evaluating plausible positive-value anomalies, temporal-consistency constraints, and cross-table relational dependencies.
