@@ -1,14 +1,13 @@
-"""Model interpretation and comprehensive error analysis for AWM silent defects.
+"""Model interpretation and comprehensive error analysis for silent defect detection.
 
-Fulfills Bonus Item #3 (Data or model interpretation via SHAP values) and
-Section 2.5 (Interpretation of representative successes and errors).
+Computes TreeExplainer SHAP values, extracts representative false positives
+and false negatives, and profiles root-cause failure modes.
 
-Generates:
-  1. figures/fig5_shap_beeswarm.png   - SHAP summary beeswarm plot
-  2. figures/fig5_shap_bar.png        - Mean absolute SHAP feature impact
-  3. analysis/results/error_cases.json- Catalog of analyzed false positives,
-                                        false negatives, and representative detections
-  4. analysis/results/shap_summary.json - Quantitative SHAP values per feature
+Outputs:
+  - figures/fig5_shap_beeswarm.png
+  - figures/fig5_shap_bar.png
+  - analysis/results/error_cases.json
+  - analysis/results/shap_summary.json
 """
 
 from __future__ import annotations
@@ -87,9 +86,7 @@ def main() -> None:
     df_test["prob"] = probs
     df_test["pred"] = preds
 
-    # ──────────────────────────────────────────────────────────────────────────
     # 1. SHAP TreeExplainer Analysis
-    # ──────────────────────────────────────────────────────────────────────────
     print("\nComputing SHAP values using TreeExplainer...")
     # Sample balanced set of test points for fast and representative SHAP computation
     rng = np.random.default_rng(RANDOM_SEED)
@@ -163,9 +160,7 @@ def main() -> None:
     plt.close()
     print(f"Saved: {bar_path}")
 
-    # ──────────────────────────────────────────────────────────────────────────
     # 2. Detailed Error Analysis (False Positives & False Negatives)
-    # ──────────────────────────────────────────────────────────────────────────
     raw_sql_map = load_raw_statements()
 
     # False Positives (Clean statement flagged as corrupt)
@@ -223,9 +218,7 @@ def main() -> None:
         json.dump(case_studies, f, indent=2)
     print(f"Saved: {error_cases_path}")
 
-    # ──────────────────────────────────────────────────────────────────────────
     # 3. Log to Weights & Biases
-    # ──────────────────────────────────────────────────────────────────────────
     print("\nLogging interpretation figures and error catalog to Weights & Biases ...")
     run = wandb.init(
         project="awm-silent-defects",

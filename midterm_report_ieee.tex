@@ -15,7 +15,7 @@
 
 \begin{document}
 
-\title{Mining Silent Data Defects in LLM-Synthesized Agent Environments: Midterm Progress Report}
+\title{Mining Silent Data Defects in LLM-Synthesized Agent Environments: Midterm Progress Report\thanks{Code repository: \url{https://github.com/jharahul968/awm-silent-defects}. Experiment tracking: \url{https://forge.coreweave.com/wandb/rahul-jha-tcu/awm-silent-defects/workspace?nw=nwuserrahuljha}.}}
 
 \author{\IEEEauthorblockN{Rahul Jha}
 \IEEEauthorblockA{\textit{Department of Computer Science} \\
@@ -45,7 +45,7 @@ Our initial reproduction of the official database reset protocol across all 1,00
 
 \textbf{Central Mining Question:} \textit{Can data-mining algorithms detect SQL-valid but semantically corrupted records in synthesized databases before downstream agent execution?}
 
-\textbf{Changes from Proposal:} In response to faculty feedback requiring graduate-level experimental depth, we expanded our methodology from 3 initial baselines to an \textbf{eight-model benchmark} spanning heuristic, statistical, unsupervised, and supervised paradigms. Furthermore, we implemented three controlled experiments (corruption severity, leave-one-type-out generalization, and feature ablation), quantitative SHAP feature attribution, an error root-cause catalog, and an interactive Streamlit demonstration.
+\textbf{Changes from Proposal:} To address the heterogeneity of multi-relational database domains and evaluate detection robustness systematically, we expanded our modeling scope beyond the initial three baselines into an \textbf{eight-model benchmark} spanning heuristic, statistical, unsupervised, and supervised paradigms. We also incorporated three controlled experiments (corruption severity breakdown, leave-one-type-out generalization, and cumulative feature ablation), quantitative SHAP feature attribution, a false-positive/negative root-cause catalog, and an interactive Streamlit demonstration.
 
 \section{Dataset Statistics \& Leakage Prevention}
 \subsection{Data Provenance and Preprocessing}

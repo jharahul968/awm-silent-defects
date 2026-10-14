@@ -1,11 +1,6 @@
-"""Interactive Runnable Demonstration for AWM Silent Defect Detection.
+"""Interactive demonstration tool for inspecting SQL statements and silent defect detection.
 
-Fulfills Course Syllabus Bonus Credit Item #4 (+1.25% course credit):
-"Provide a simple, documented demonstration using a notebook, Gradio,
-Streamlit, or a comparable interface that accepts an example input and displays
-a meaningful result."
-
-Run with:
+Usage:
     uv run streamlit run demo_app.py
 """
 
@@ -149,11 +144,11 @@ if sql_input.strip():
         is_corrupt = prob_corrupt >= 0.5
 
         with col1:
-            st.subheader("1. Mining Model Assessment")
+            st.subheader("Model Prediction & Attribution")
             if is_corrupt:
-                st.error(f"🚨 **SEMANTIC DEFECT DETECTED** (Probability: {prob_corrupt:.1%})")
+                st.error(f"🚨 **Semantic Defect Detected** (Probability: {prob_corrupt:.1%})")
             else:
-                st.success(f"✅ **CLEAN / PLAUSIBLE RECORD** (Probability: {prob_corrupt:.1%})")
+                st.success(f"✅ **Clean / Plausible Record** (Probability: {prob_corrupt:.1%})")
 
             st.progress(prob_corrupt)
             st.caption(f"Random Forest Anomaly Score: **{prob_corrupt:.4f}**")
@@ -176,9 +171,9 @@ if sql_input.strip():
                 st.write("• All attributes conform to expected ranges and temporal bounds.")
 
         with col2:
-            st.subheader("2. Database Engine Reality")
+            st.subheader("SQLite Engine Verification")
             if sqlite_accepted:
-                st.warning("⚠️ **SQLite Execution Status:** `Return Code 0 (Success)`\n\n*SQLite accepted this record into the database without warning. Ordinary sandboxes are completely blind to this defect!*")
+                st.warning("⚠️ **SQLite Execution Status:** `Return Code 0 (Success)`\n\n*SQLite committed this record without throwing an integrity exception. This confirms the defect is silent and bypasses database engine checks.*")
             else:
                 st.info(f"ℹ️ **SQLite Error:** `{sqlite_error}`")
 

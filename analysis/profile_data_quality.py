@@ -1,11 +1,11 @@
-"""Data quality, missingness, and imbalance profiler for AWM synthetic databases.
+"""Data quality, missingness, and distribution profiling for synthetic databases.
 
-Fulfills Course Syllabus Section 2.5 ("analysis of data types, quality, missingness,
-imbalance, and relevant preprocessing") and Section 3.2 for the Midterm Report.
+Analyzes attribute sparsity, class balance, and environment-level instance depth
+across the benchmark dataset.
 
-Generates:
-  1. analysis/results/data_quality_report.json - Quantitative metrics across all environments
-  2. figures/fig0_data_quality.png            - Missingness, class distribution, & table depth plots
+Outputs:
+  - analysis/results/data_quality_report.json
+  - figures/fig0_data_quality.png
 """
 
 from __future__ import annotations

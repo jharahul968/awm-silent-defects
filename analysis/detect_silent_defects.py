@@ -56,9 +56,7 @@ from xgboost import XGBClassifier
 
 from analysis.build_insert_audit import INSERT_RE, split_sql_list
 
-# ──────────────────────────────────────────────────────────────────────────────
 # Paths & global constants
-# ──────────────────────────────────────────────────────────────────────────────
 
 DATA_DIR     = Path("data")
 RESULTS_DIR  = Path("analysis/results")
@@ -79,9 +77,7 @@ CORRUPTION_TYPES = (
     "anomalous_date",
 )
 
-# ──────────────────────────────────────────────────────────────────────────────
 # Column keyword lists
-# ──────────────────────────────────────────────────────────────────────────────
 
 MONEY_WORDS  = ["price", "amount", "cost", "fee", "salary", "fare", "balance",
                 "total", "budget", "revenue", "wage", "rate", "charge", "payment"]
@@ -92,9 +88,7 @@ DATE_WORDS   = ["date", "time", "created", "scheduled", "birth", "due",
 RATING_WORDS = ["rating", "score", "stars", "grade"]
 AGE_WORDS    = frozenset(["age", "user_age", "patient_age", "customer_age"])
 
-# ──────────────────────────────────────────────────────────────────────────────
 # Corruption functions  (type × severity → new value string)
-# ──────────────────────────────────────────────────────────────────────────────
 
 def _corrupt_money(val: float, severity: str) -> str:
     """Negate a positive monetary value at three magnitudes."""
@@ -208,9 +202,7 @@ def parse_insert(stmt: str) -> tuple[str, list[str], list[str]] | None:
     vals  = split_sql_list(m.group(6)) if m.group(6) else []
     return table, cols, vals
 
-# ──────────────────────────────────────────────────────────────────────────────
 # Feature extraction  (27 features in 3 groups)
-# ──────────────────────────────────────────────────────────────────────────────
 
 FEATURE_GROUPS: dict[str, list[str]] = {
     # Derived purely from the literal values in the INSERT
@@ -274,7 +266,7 @@ def extract_features(
     normalized = {c.strip(' "`[]') for c in cols}
 
     return {
-        # ── Group A: value ─────────────────────────────────────────────
+        # Group A: value
         "has_negative_value":  float(any(n < 0 for n in numerics)),
         "num_negative_values": float(sum(1 for n in numerics if n < 0)),
         "log_max_numeric":     _signed_log(max(numerics)) if numerics else 0.0,
@@ -286,7 +278,7 @@ def extract_features(
         "num_string_values":   float(len(str_lens)),
         "max_string_length":   float(max(str_lens)) if str_lens else 0.0,
         "avg_string_length":   float(np.mean(str_lens)) if str_lens else 0.0,
-        # ── Group B: column-semantic ───────────────────────────────────
+        # Group B: column-semantic
         "num_columns":    float(len(cols)),
         "num_values":     float(len(vals)),
         "col_val_delta":  float(len(cols) - len(vals)),
@@ -295,7 +287,7 @@ def extract_features(
         "num_date_cols":  float(sum(1 for c in col_l if any(w in c for w in DATE_WORDS))),
         "has_rating_col": float(any(any(w in c for w in RATING_WORDS) for c in col_l)),
         "has_age_col":    float(any(c in AGE_WORDS for c in col_l)),
-        # ── Group C: schema-structural ─────────────────────────────────
+        # Group C: schema-structural
         "table_fk_count":     float(schema_meta.get("fk_count", 0)),
         "table_unique_count": float(schema_meta.get("unique_count", 0)),
         "table_col_count":    float(len(schema_meta.get("columns", {}))),
@@ -306,9 +298,7 @@ def extract_features(
                                / max(1.0, float(len(schema_meta.get("columns", {}))))),
     }
 
-# ──────────────────────────────────────────────────────────────────────────────
 # Dataset builder
-# ──────────────────────────────────────────────────────────────────────────────
 
 def _load_jsonl(path: Path) -> dict[str, dict]:
     data: dict[str, dict] = {}
@@ -415,7 +405,7 @@ def build_dataset(n_envs: int | None = None) -> tuple[pd.DataFrame, dict]:
                         pass
                     continue
 
-                # ── Add clean row ──
+                # Add clean row
                 feats = extract_features(cols, vals, stmt_meta)
                 rows.append({
                     "scenario":        scenario,
@@ -427,7 +417,7 @@ def build_dataset(n_envs: int | None = None) -> tuple[pd.DataFrame, dict]:
                 })
                 stats["clean_rows"] += 1
 
-                # ── Try all (col, type, severity) combinations ──
+                # Try all (col, type, severity) combinations
                 for col_idx, (col, val) in enumerate(zip(cols, vals)):
                     for corr_type, _ in candidate_corruptions(col, val):
                         for severity in SEVERITIES:
@@ -476,9 +466,7 @@ def build_dataset(n_envs: int | None = None) -> tuple[pd.DataFrame, dict]:
     print(f"Saved → {DATASET_PATH}  ({len(df):,} rows)")
     return df, dict(stats)
 
-# ──────────────────────────────────────────────────────────────────────────────
 # Evaluation helpers
-# ──────────────────────────────────────────────────────────────────────────────
 
 def _pr_at_k(y_true: np.ndarray, scores: np.ndarray, k: int) -> tuple[float, float]:
     top_k = np.argsort(scores)[::-1][:k]
@@ -530,9 +518,7 @@ def _zscore_scores(X_train_clean: np.ndarray, X_test: np.ndarray) -> np.ndarray:
     std = X_train_clean.std(axis=0) + 1e-8
     return np.abs((X_test - mu) / std).max(axis=1)
 
-# ──────────────────────────────────────────────────────────────────────────────
 # Model comparison
-# ──────────────────────────────────────────────────────────────────────────────
 
 def _make_split(
     df: pd.DataFrame, feature_cols: list[str]
@@ -562,20 +548,20 @@ def run_comparison(
 
     results: list[dict] = []
 
-    # ── 1. Rule-based baseline (no training) ──────────────────────────
+    # 1. Rule-based baseline (no training)
     scores = _rule_scores(df.iloc[te_idx])
     results.append(_eval("rule_baseline", y_te, scores))
 
-    # ── 2. Z-score (unsupervised, clean train only) ───────────────────
+    # 2. Z-score (unsupervised, clean train only)
     scores = _zscore_scores(X_tr_clean, X_te)
     results.append(_eval("z_score", y_te, scores))
 
-    # ── 3. Isolation Forest (unsupervised, clean train only) ──────────
+    # 3. Isolation Forest (unsupervised, clean train only)
     iso = IsolationForest(n_estimators=200, contamination="auto", random_state=RANDOM_SEED, n_jobs=N_JOBS)
     iso.fit(X_tr_clean)
     results.append(_eval("isolation_forest", y_te, -iso.decision_function(X_te)))
 
-    # ── 4. Local Outlier Factor (novelty mode, clean train only) ──────
+    # 4. Local Outlier Factor (novelty mode, clean train only)
     if len(X_tr_clean) > 25000:
         rng = np.random.default_rng(RANDOM_SEED)
         lof_tr_idx = rng.choice(len(X_tr_clean), size=25000, replace=False)
@@ -586,7 +572,7 @@ def run_comparison(
     lof.fit(X_lof_tr)
     results.append(_eval("local_outlier_factor", y_te, -lof.decision_function(X_te)))
 
-    # ── 5. Logistic Regression (supervised) ───────────────────────────
+    # 5. Logistic Regression (supervised)
     pipe_lr = make_pipeline(
         StandardScaler(),
         LogisticRegression(class_weight="balanced", max_iter=1000, random_state=RANDOM_SEED),
@@ -594,21 +580,21 @@ def run_comparison(
     pipe_lr.fit(X_tr, y_tr)
     results.append(_eval("logistic_regression", y_te, pipe_lr.predict_proba(X_te)[:, 1]))
 
-    # ── 6. Random Forest (supervised) ─────────────────────────────────
+    # 6. Random Forest (supervised)
     rf = RandomForestClassifier(
         n_estimators=200, class_weight="balanced", random_state=RANDOM_SEED, n_jobs=N_JOBS,
     )
     rf.fit(X_tr, y_tr)
     results.append(_eval("random_forest", y_te, rf.predict_proba(X_te)[:, 1]))
 
-    # ── 7. HistGradientBoosting (supervised) ──────────────────────────
+    # 7. HistGradientBoosting (supervised)
     hgb = HistGradientBoostingClassifier(
         max_iter=300, class_weight="balanced", random_state=RANDOM_SEED,
     )
     hgb.fit(X_tr, y_tr)
     results.append(_eval("hist_gradient_boosting", y_te, hgb.predict_proba(X_te)[:, 1]))
 
-    # ── 8. XGBoost (supervised) ───────────────────────────────────────
+    # 8. XGBoost (supervised)
     # use_label_encoder and eval_metric removed in XGBoost ≥ 2.0
     xgb = XGBClassifier(
         n_estimators=300,
@@ -620,15 +606,14 @@ def run_comparison(
     xgb.fit(X_tr, y_tr)
     results.append(_eval("xgboost", y_te, xgb.predict_proba(X_te)[:, 1]))
 
-    # ── Print ──────────────────────────────────────────────────────────
-    print(f"\n── {tag} comparison  "
-          f"(n_test={len(te_idx):,}  pos_rate={y_te.mean():.3%}) ──")
+    # Print summary
+    print(f"\n[{tag}] Model comparison (n_test={len(te_idx):,}, pos_rate={y_te.mean():.3%}):")
     print(f"{'Model':<28} {'PR-AUC':>8} {'P@100':>8} {'R@100':>8} {'F1':>8}")
     for r in results:
         print(f"{r['model']:<28} {r['pr_auc']:>8.4f} {r[f'p@{K_RANK}']:>8.4f}"
               f" {r[f'r@{K_RANK}']:>8.4f} {r['f1']:>8.4f}")
 
-    # ── W&B ───────────────────────────────────────────────────────────
+    # W&B
     if wandb_run:
         tbl = wandb.Table(columns=list(results[0].keys()),
                           data=[list(r.values()) for r in results])
@@ -638,9 +623,7 @@ def run_comparison(
 
     return results, tr_idx, te_idx
 
-# ──────────────────────────────────────────────────────────────────────────────
 # Controlled experiment 1: severity breakdown
-# ──────────────────────────────────────────────────────────────────────────────
 
 def run_severity_breakdown(
     df: pd.DataFrame,
@@ -667,7 +650,7 @@ def run_severity_breakdown(
 
     clean_mask = sev_te == "none"
     rows: list[dict] = []
-    print("\n── Severity breakdown ──")
+    print("\n=== Severity breakdown ===")
     for sev in ("obvious", "medium", "subtle"):
         corr_mask = sev_te == sev
         if corr_mask.sum() == 0:
@@ -690,9 +673,7 @@ def run_severity_breakdown(
 
     return rows
 
-# ──────────────────────────────────────────────────────────────────────────────
 # Controlled experiment 2: corruption-type holdout
-# ──────────────────────────────────────────────────────────────────────────────
 
 def run_type_holdout(
     df: pd.DataFrame,
@@ -709,7 +690,7 @@ def run_type_holdout(
     tr_idx, te_idx = next(splitter.split(X, y, g))
 
     rows: list[dict] = []
-    print("\n── Type holdout (HGB trained without held-out type) ──")
+    print("\n=== Type holdout (HGB trained without held-out type) ===")
     for held_out in CORRUPTION_TYPES:
         # Train: clean rows + corrupted rows that are NOT the held-out type
         tr_use = tr_idx[(y[tr_idx] == 0) | (types[tr_idx] != held_out)]
@@ -742,9 +723,7 @@ def run_type_holdout(
 
     return rows
 
-# ──────────────────────────────────────────────────────────────────────────────
 # Controlled experiment 3: feature-group ablation
-# ──────────────────────────────────────────────────────────────────────────────
 
 def run_feature_ablation(
     df: pd.DataFrame,
@@ -761,7 +740,7 @@ def run_feature_ablation(
     }
 
     rows: list[dict] = []
-    print("\n── Feature ablation (HGB) ──")
+    print("\n=== Feature ablation (HGB) ===")
     for label, feats in ablation_sets.items():
         X = df[feats].values.astype(float)
         splitter = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SPLIT_SEED)
@@ -782,9 +761,7 @@ def run_feature_ablation(
 
     return rows
 
-# ──────────────────────────────────────────────────────────────────────────────
 # Feature importance
-# ──────────────────────────────────────────────────────────────────────────────
 
 def log_feature_importance(
     df: pd.DataFrame,
@@ -799,7 +776,7 @@ def log_feature_importance(
     rf.fit(X[tr_idx], y[tr_idx])
     pairs = sorted(zip(ALL_FEATURES, rf.feature_importances_), key=lambda x: -x[1])
 
-    print("\n── Top-10 RF feature importances ──")
+    print("\n=== Top-10 RF feature importances ===")
     for feat, imp in pairs[:10]:
         print(f"  {feat:<30} {imp:.4f}")
 
@@ -810,9 +787,7 @@ def log_feature_importance(
 
     return [{"feature": f, "importance": float(i)} for f, i in pairs]
 
-# ──────────────────────────────────────────────────────────────────────────────
 # Entry point
-# ──────────────────────────────────────────────────────────────────────────────
 
 def main() -> None:
     parser = argparse.ArgumentParser(
@@ -833,7 +808,7 @@ def main() -> None:
                         help="Disable W&B logging entirely")
     args = parser.parse_args()
 
-    # ── Build or load dataset ──────────────────────────────────────────
+    # Build or load dataset
     dataset_stats: dict = {}
     if args.skip_build:
         print(f"Loading cached dataset from {DATASET_PATH} …")
@@ -851,7 +826,7 @@ def main() -> None:
     print(f"\nDataset: {len(df):,} rows | {n_corr:,} corrupted ({corr_rate:.2%}) "
           f"| {n_envs_actual} environments")
 
-    # ── W&B initialisation ─────────────────────────────────────────────
+    # W&B initialisation
     wandb_run = None
     if not args.no_wandb:
         wandb_run = wandb.init(
@@ -882,24 +857,24 @@ def main() -> None:
                 )
             })
 
-    # ── Main model comparison ──────────────────────────────────────────
+    # Main model comparison
     comparison_results, tr_idx, te_idx = run_comparison(
         df, ALL_FEATURES, tag="main", wandb_run=wandb_run,
     )
 
-    # ── Controlled experiment 1: severity breakdown ────────────────────
+    # Controlled experiment 1: severity breakdown
     severity_results = run_severity_breakdown(df, ALL_FEATURES, tr_idx, te_idx, wandb_run=wandb_run)
 
-    # ── Controlled experiment 2: type holdout ─────────────────────────
+    # Controlled experiment 2: type holdout
     type_holdout_results = run_type_holdout(df, ALL_FEATURES, wandb_run=wandb_run)
 
-    # ── Controlled experiment 3: feature ablation ─────────────────────
+    # Controlled experiment 3: feature ablation
     ablation_results = run_feature_ablation(df, wandb_run=wandb_run)
 
-    # ── Feature importance ─────────────────────────────────────────────
+    # Feature importance
     feature_importance_results = log_feature_importance(df, tr_idx, wandb_run=wandb_run)
 
-    # ── Save structured JSON summary ──────────────────────────────────
+    # Save structured JSON summary
     final_output = {
         "dataset": {
             "n_environments": n_envs_actual,
