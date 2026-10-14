@@ -1,251 +1,278 @@
-"""Model interpretation and comprehensive error analysis for silent defect detection.
+"""Explain the saved detector and preserve the exact SQL behind held-out cases.
 
-Computes TreeExplainer SHAP values, extracts representative false positives
-and false negatives, and profiles root-cause failure modes.
+Run after the main experiment:
+    uv run python -m analysis.interpret_and_analyze_errors --no-wandb
 
-Outputs:
-  - figures/fig5_shap_beeswarm.png
-  - figures/fig5_shap_bar.png
-  - analysis/results/error_cases.json
-  - analysis/results/shap_summary.json
+Writes SHAP figures, a SHAP summary and a traceable error/success catalog.
 """
 
 from __future__ import annotations
 
 import os
 
-# Cap threads to prevent OpenBLAS exhaustion
-for _var in ["OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "OMP_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS"]:
-    os.environ[_var] = "8"
+for _var in ("OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "OMP_NUM_THREADS"):
+    os.environ.setdefault(_var, "8")
 
+import argparse
 import json
 from pathlib import Path
+from typing import Any
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import shap
 import wandb
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import GroupShuffleSplit
-from tqdm import tqdm
+from joblib import Parallel, delayed, parallel_config
 
-from analysis.detect_silent_defects import ALL_FEATURES, RANDOM_SEED, SPLIT_SEED, TEST_SIZE
+from analysis.detect_silent_defects import (
+    CORRUPTION_TYPES,
+    RANDOM_SEED,
+    dataset_fingerprint,
+    load_model_bundle,
+    split_dataset,
+)
 
 DATA_PATH = Path("analysis/results/tier2_dataset.parquet")
-SAMPLE_PATH = Path("data/gen_sample.jsonl")
+MODEL_PATH = Path("analysis/results/detector.joblib")
 RESULTS_DIR = Path("analysis/results")
 FIGURES_DIR = Path("figures")
+PROVENANCE_COLUMNS = (
+    "source_id", "original_sql", "sql_statement", "corrupted_column",
+    "column_index", "original_value", "corrupted_value",
+)
 
 
-def load_raw_statements() -> dict[tuple[str, str, int], str]:
-    """Build a lookup mapping (scenario, table, stmt_index) -> raw SQL string."""
-    lookup = {}
-    print("Indexing raw SQL statements from gen_sample.jsonl ...")
-    with SAMPLE_PATH.open() as f:
-        for line in f:
-            rec = json.loads(line)
-            scenario = rec["scenario"]
-            tables = rec.get("sample_data", {}).get("tables", [])
-            for t in tables:
-                t_name = t.get("table_name", "")
-                stmts = t.get("insert_statements", [])
-                for idx, stmt in enumerate(stmts):
-                    lookup[(scenario, t_name, idx)] = stmt
-    return lookup
+def _json_value(value: Any) -> Any:
+    if value is None or pd.isna(value):
+        return None
+    return value.item() if isinstance(value, np.generic) else value
+
+
+def extract_case(row: pd.Series, case_type: str, features: list[str]) -> dict[str, Any]:
+    """Keep original and mutated SQL separate; never substitute source SQL for a mutation."""
+    if not isinstance(row["sql_statement"], str) or not row["sql_statement"].strip():
+        raise ValueError("Case is missing its evaluated SQL statement; rebuild the benchmark.")
+    case = {name: _json_value(row[name]) for name in PROVENANCE_COLUMNS}
+    case.update({
+        "case_type": case_type,
+        "scenario": row["scenario"],
+        "table": row["table"],
+        "statement_index": int(row["statement_index"]),
+        "actual_label": int(row["label"]),
+        "predicted_prob": float(row["prob"]),
+        "predicted_label": int(row["pred"]),
+        "corruption_type": row["corruption_type"],
+        "severity": row["severity"],
+        "key_features": {name: float(row[name]) for name in features},
+    })
+    return case
+
+
+def build_case_catalog(df_test: pd.DataFrame, features: list[str], metadata: dict) -> dict:
+    label, predicted = df_test["label"], df_test["pred"]
+    fp = (label == 0) & (predicted == 1)
+    fn = (label == 1) & (predicted == 0)
+    tp = (label == 1) & (predicted == 1)
+    tn = (label == 0) & (predicted == 0)
+    n_unmodified, n_injected = int((label == 0).sum()), int((label == 1).sum())
+    catalog = {
+        "metadata": metadata,
+        "summary": {
+            "total_test_samples": len(df_test),
+            "unmodified_test_samples": n_unmodified,
+            "injected_test_samples": n_injected,
+            "false_positives_count": int(fp.sum()),
+            "false_negatives_count": int(fn.sum()),
+            "true_positives_count": int(tp.sum()),
+            "true_negatives_count": int(tn.sum()),
+            "false_positive_rate": float(fp.sum() / max(1, n_unmodified)),
+            "false_negative_rate": float(fn.sum() / max(1, n_injected)),
+        },
+        "false_positive_cases": [],
+        "false_negative_cases": [],
+        "representative_true_positives": [],
+        "representative_true_negatives": [],
+        "detection_by_type": [],
+    }
+    for key, mask, ascending in (
+        ("false_positive_cases", fp, False), ("false_negative_cases", fn, True),
+        ("representative_true_negatives", tn, True),
+    ):
+        rows = df_test[mask].sort_values("prob", ascending=ascending).drop_duplicates("source_id").head(5)
+        case_type = {"false_positive_cases": "false_positive", "false_negative_cases": "false_negative",
+                     "representative_true_negatives": "true_negative"}[key]
+        catalog[key] = [extract_case(row, case_type, features) for _, row in rows.iterrows()]
+    for corruption_type in CORRUPTION_TYPES:
+        rows = df_test[tp & (df_test["corruption_type"] == corruption_type)]
+        obvious = rows[rows["severity"] == "obvious"]
+        if not obvious.empty:
+            rows = obvious
+        if not rows.empty:
+            catalog["representative_true_positives"].append(
+                extract_case(rows.iloc[0], f"true_positive_{corruption_type}", features)
+            )
+        subset = df_test[(label == 1) & (df_test["corruption_type"] == corruption_type)]
+        if not subset.empty:
+            detected = int(subset["pred"].sum())
+            catalog["detection_by_type"].append({
+                "corruption_type": corruption_type,
+                "test_count": len(subset),
+                "detected_count": detected,
+                "missed_count": len(subset) - detected,
+                "recall": detected / len(subset),
+            })
+    return catalog
+
+
+def _shap_chunk(model: Any, x: np.ndarray) -> np.ndarray:
+    values = shap.TreeExplainer(model).shap_values(x)
+    if isinstance(values, list):
+        return np.asarray(values[1])
+    if values.ndim == 3:
+        return values[:, :, 1]
+    return np.asarray(values)
+
+
+def compute_shap_values(model: Any, x: np.ndarray, n_jobs: int = 4) -> np.ndarray:
+    """Compute exact positive-class SHAP values in ordered, independent chunks."""
+    if not 1 <= n_jobs <= 8:
+        raise ValueError("SHAP worker count must be between 1 and 8.")
+    if x.ndim != 2:
+        raise ValueError("SHAP input must be a two-dimensional feature matrix.")
+    if len(x) == 0:
+        return np.empty_like(x, dtype=float)
+    jobs = min(n_jobs, len(x))
+    if jobs == 1:
+        return _shap_chunk(model, x)
+    chunks = np.array_split(x, jobs)
+    with parallel_config(backend="loky", inner_max_num_threads=1):
+        values = Parallel(n_jobs=jobs)(delayed(_shap_chunk)(model, chunk) for chunk in chunks)
+    return np.concatenate(values, axis=0)
 
 
 def main() -> None:
-    print(f"Loading dataset from {DATA_PATH} ...")
-    df = pd.read_parquet(DATA_PATH)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--data-path", type=Path, default=DATA_PATH)
+    parser.add_argument("--model-path", type=Path, default=MODEL_PATH)
+    parser.add_argument("--sample-per-class", type=int, default=1000)
+    parser.add_argument("--shap-jobs", type=int, default=4, help="Exact SHAP workers, 1–8 (default: 4)")
+    parser.add_argument("--seed", type=int, default=RANDOM_SEED)
+    parser.add_argument("--no-wandb", action="store_true")
+    parser.add_argument("--wandb-project", default="awm-silent-defects")
+    parser.add_argument("--wandb-entity", default=None)
+    args = parser.parse_args()
+    if args.sample_per_class < 1:
+        parser.error("--sample-per-class must be positive")
+    if not 1 <= args.shap_jobs <= 8:
+        parser.error("--shap-jobs must be between 1 and 8")
 
-    X = df[ALL_FEATURES].values.astype(float)
-    y = df["label"].values.astype(int)
-    groups = df["scenario"].values
+    bundle = load_model_bundle(args.model_path)
+    fingerprint = dataset_fingerprint(args.data_path)
+    if fingerprint != bundle["dataset_fingerprint"]:
+        raise ValueError("Dataset differs from the saved model's dataset; rerun the main experiment.")
+    df = pd.read_parquet(args.data_path)
+    missing = set(PROVENANCE_COLUMNS) - set(df.columns)
+    if missing:
+        raise ValueError(f"Missing SQL provenance {sorted(missing)}; rebuild the benchmark.")
+    features = bundle["features"]
+    train_idx, val_idx, test_idx = split_dataset(df, split_seed=bundle["split_seed"])
+    df_test = df.iloc[test_idx].copy().reset_index(drop=True)
+    x_test = df_test[features].to_numpy(dtype=float)
+    y_test = df_test["label"].to_numpy(dtype=int)
+    model = bundle["model"]
+    df_test["prob"] = model.predict_proba(x_test)[:, 1]
+    df_test["pred"] = (df_test["prob"] >= bundle["threshold"]).astype(int)
+    print(f"Saved RF: train={len(train_idx):,}, validation={len(val_idx):,}, test={len(test_idx):,}")
 
-    splitter = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SPLIT_SEED)
-    tr_idx, te_idx = next(splitter.split(X, y, groups))
-
-    print(f"Train samples: {len(tr_idx):,} | Test samples: {len(te_idx):,}")
-
-    # Train Random Forest classifier
-    print("Fitting Random Forest classifier...")
-    rf = RandomForestClassifier(
-        n_estimators=150,
-        class_weight="balanced",
-        random_state=RANDOM_SEED,
-        n_jobs=8,
-    )
-    rf.fit(X[tr_idx], y[tr_idx])
-
-    probs = rf.predict_proba(X[te_idx])[:, 1]
-    preds = (probs >= 0.5).astype(int)
-    y_test = y[te_idx]
-    df_test = df.iloc[te_idx].copy().reset_index(drop=True)
-
-    df_test["prob"] = probs
-    df_test["pred"] = preds
-
-    # 1. SHAP TreeExplainer Analysis
-    print("\nComputing SHAP values using TreeExplainer...")
-    # Sample balanced set of test points for fast and representative SHAP computation
-    rng = np.random.default_rng(RANDOM_SEED)
-    clean_test_indices = np.where(y_test == 0)[0]
-    corr_test_indices = np.where(y_test == 1)[0]
-
-    sample_size_per_class = min(1000, len(clean_test_indices), len(corr_test_indices))
-    sample_sub = np.concatenate([
-        rng.choice(clean_test_indices, size=sample_size_per_class, replace=False),
-        rng.choice(corr_test_indices, size=sample_size_per_class, replace=False),
+    rng = np.random.default_rng(args.seed)
+    unmodified = np.flatnonzero(y_test == 0)
+    injected = np.flatnonzero(y_test == 1)
+    n_per_class = min(args.sample_per_class, len(unmodified), len(injected))
+    if n_per_class == 0:
+        raise ValueError("Both labels are required in the held-out SHAP sample.")
+    sample_indices = np.concatenate([
+        rng.choice(unmodified, n_per_class, replace=False),
+        rng.choice(injected, n_per_class, replace=False),
     ])
-    rng.shuffle(sample_sub)
-
-    X_sample = X[te_idx][sample_sub]
-
-    explainer = shap.TreeExplainer(rf)
-    shap_values = explainer.shap_values(X_sample)
-
-    # In modern shap / binary classification, check shape
-    if isinstance(shap_values, list):
-        sv = shap_values[1]  # positive class (corrupt)
-    elif shap_values.ndim == 3:
-        sv = shap_values[:, :, 1]
-    else:
-        sv = shap_values
-
-    # Mean absolute SHAP impact
-    mean_abs_shap = np.abs(sv).mean(axis=0)
-    shap_ranking = sorted(zip(ALL_FEATURES, mean_abs_shap), key=lambda x: -x[1])
-
-    print("\nTop-10 Features by Mean Absolute SHAP Value:")
-    for feat, val in shap_ranking[:10]:
-        print(f"  {feat:<28} {val:.5f}")
-
-    shap_summary = {
-        "ranking": [{"feature": f, "mean_abs_shap": float(v)} for f, v in shap_ranking],
-        "sample_size": len(sample_sub),
+    rng.shuffle(sample_indices)
+    x_sample = x_test[sample_indices]
+    values = compute_shap_values(model, x_sample, n_jobs=args.shap_jobs)
+    mean_abs = np.abs(values).mean(axis=0)
+    ranking = sorted(zip(features, mean_abs), key=lambda item: -item[1])
+    metadata = {
+        "model": "random_forest",
+        "model_path": str(args.model_path),
+        "model_config": bundle["model_config"],
+        "features": features,
+        "threshold": float(bundle["threshold"]),
+        "split_seed": int(bundle["split_seed"]),
+        "dataset_fingerprint": fingerprint,
+        "shap_seed": args.seed,
+        "shap_jobs": min(args.shap_jobs, len(x_sample)),
+        "shap_method": "exact TreeExplainer, independent ordered chunks",
+        "shap_sampling": "balanced held-out sample; not the natural benchmark class distribution",
+        "shap_sample_per_class": n_per_class,
+        "n_train": len(train_idx), "n_validation": len(val_idx), "n_test": len(test_idx),
     }
-    with (RESULTS_DIR / "shap_summary.json").open("w") as f:
-        json.dump(shap_summary, f, indent=2)
+    summary = {
+        "metadata": metadata,
+        "sample_size": len(sample_indices),
+        "ranking": [{"feature": name, "mean_abs_shap": float(value)} for name, value in ranking],
+    }
+    catalog = build_case_catalog(df_test, features, metadata)
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
+    (RESULTS_DIR / "shap_summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+    (RESULTS_DIR / "error_cases.json").write_text(json.dumps(catalog, indent=2) + "\n")
 
-    # Plot 1: SHAP Beeswarm Plot
-    plt.figure(figsize=(7.5, 5.0))
-    shap.summary_plot(
-        sv,
-        X_sample,
-        feature_names=ALL_FEATURES,
-        max_display=12,
-        show=False,
-    )
-    plt.title("SHAP Feature Attribution (Impact on Defect Detection)", fontsize=11, pad=12)
+    shap.summary_plot(values, x_sample, feature_names=features, max_display=12, show=False)
+    plt.title("Saved Random Forest: held-out SHAP values", fontsize=11)
     beeswarm_path = FIGURES_DIR / "fig5_shap_beeswarm.png"
     plt.savefig(beeswarm_path, bbox_inches="tight", dpi=300)
     plt.close()
-    print(f"Saved: {beeswarm_path}")
-
-    # Plot 2: SHAP Bar Plot
-    top10_feats = [f for f, _ in shap_ranking[:10]][::-1]
-    top10_vals = [v for _, v in shap_ranking[:10]][::-1]
-
+    top = ranking[:10][::-1]
     fig, ax = plt.subplots(figsize=(6.5, 3.8))
-    ax.barh(top10_feats, top10_vals, color="#e69f00", edgecolor="black", linewidth=0.6, height=0.6)
-    for i, v in enumerate(top10_vals):
-        ax.text(v + 0.002, i, f"{v:.4f}", va="center", fontsize=8.5)
-    ax.set_xlabel("Mean |SHAP Value| (Average Impact on Prediction)")
-    ax.set_title("Global Feature Importance via SHAP Values")
-    ax.set_xlim(0, max(top10_vals) * 1.18)
-    ax.grid(axis="x", linestyle=":", alpha=0.6)
+    ax.barh([name for name, _ in top], [value for _, value in top], color="#e69f00")
+    ax.set_xlabel("Mean absolute SHAP value (balanced held-out sample)")
+    ax.set_title("Saved Random Forest feature attribution")
     bar_path = FIGURES_DIR / "fig5_shap_bar.png"
-    plt.savefig(bar_path, bbox_inches="tight", dpi=300)
-    plt.close()
-    print(f"Saved: {bar_path}")
+    fig.savefig(bar_path, bbox_inches="tight", dpi=300)
+    plt.close(fig)
 
-    # 2. Detailed Error Analysis (False Positives & False Negatives)
-    raw_sql_map = load_raw_statements()
-
-    # False Positives (Clean statement flagged as corrupt)
-    fp_mask = (df_test["label"] == 0) & (df_test["pred"] == 1)
-    df_fp = df_test[fp_mask].sort_values(by="prob", ascending=False)
-    print(f"\nTotal False Positives on Test Set: {len(df_fp):,} / {len(clean_test_indices):,}")
-
-    # False Negatives (Corrupt statement missed by model)
-    fn_mask = (df_test["label"] == 1) & (df_test["pred"] == 0)
-    df_fn = df_test[fn_mask].sort_values(by="prob", ascending=True)
-    print(f"Total False Negatives on Test Set: {len(df_fn):,} / {len(corr_test_indices):,}")
-
-    # Extract concrete case studies
-    def extract_case(row: pd.Series, case_type: str) -> dict:
-        scen = row["scenario"]
-        tbl = row["table"]
-        stmt_idx = int(row["statement_index"])
-        raw_sql = raw_sql_map.get((scen, tbl, stmt_idx), "[Original SQL unavailable in cache]")
-
-        feature_values = {f: float(row[f]) for f in ALL_FEATURES if abs(float(row[f])) > 0.001}
-        return {
-            "case_type": case_type,
-            "scenario": scen,
-            "table": tbl,
-            "statement_index": stmt_idx,
-            "actual_label": int(row["label"]),
-            "predicted_prob": float(row["prob"]),
-            "corruption_type": str(row["corruption_type"]),
-            "severity": str(row["severity"]),
-            "sql_statement": raw_sql,
-            "key_features": feature_values,
-        }
-
-    case_studies = {
-        "summary": {
-            "total_test_samples": len(df_test),
-            "false_positives_count": int(fp_mask.sum()),
-            "false_negatives_count": int(fn_mask.sum()),
-            "true_positives_count": int(((df_test["label"] == 1) & (df_test["pred"] == 1)).sum()),
-            "true_negatives_count": int(((df_test["label"] == 0) & (df_test["pred"] == 0)).sum()),
-        },
-        "false_positive_cases": [extract_case(row, "false_positive") for _, row in df_fp.head(5).iterrows()],
-        "false_negative_cases": [extract_case(row, "false_negative") for _, row in df_fn.head(5).iterrows()],
-        "representative_true_positives": [],
-    }
-
-    # Add 1 representative true positive per corruption type
-    for c_type in ["negative_money", "negative_inventory", "impossible_age", "out_of_bounds_rating", "anomalous_date"]:
-        tp_sub = df_test[(df_test["label"] == 1) & (df_test["pred"] == 1) & (df_test["corruption_type"] == c_type)]
-        if not tp_sub.empty:
-            case_studies["representative_true_positives"].append(extract_case(tp_sub.iloc[0], f"true_positive_{c_type}"))
-
-    error_cases_path = RESULTS_DIR / "error_cases.json"
-    with error_cases_path.open("w") as f:
-        json.dump(case_studies, f, indent=2)
-    print(f"Saved: {error_cases_path}")
-
-    # 3. Log to Weights & Biases
-    print("\nLogging interpretation figures and error catalog to Weights & Biases ...")
-    run = wandb.init(
-        project="awm-silent-defects",
-        job_type="interpretation",
-        name="interpretability-shap-errors",
-        tags=["interpretation", "shap", "error-analysis"],
-    )
-
-    run.log({
-        "interpretation/shap_beeswarm": wandb.Image(str(beeswarm_path)),
-        "interpretation/shap_bar": wandb.Image(str(bar_path)),
-        "interpretation/shap_table": wandb.Table(
-            columns=["feature", "mean_abs_shap"],
-            data=[[d["feature"], d["mean_abs_shap"]] for d in shap_summary["ranking"]],
-        ),
-    })
-
-    # Log error cases table
-    all_cases = case_studies["false_positive_cases"] + case_studies["false_negative_cases"] + case_studies["representative_true_positives"]
-    cases_table = wandb.Table(
-        columns=["type", "scenario", "table", "prob", "corr_type", "severity", "sql_sample"],
-        data=[[c["case_type"], c["scenario"], c["table"], c["predicted_prob"], c["corruption_type"], c["severity"], c["sql_statement"][:120]] for c in all_cases],
-    )
-    run.log({"interpretation/error_cases_table": cases_table})
-    run.finish()
-
-    print("\n✓ Interpretation and error analysis complete!")
+    if not args.no_wandb:
+        with wandb.init(
+            project=args.wandb_project,
+            entity=args.wandb_entity,
+            job_type="interpretation",
+            name="saved-rf-shap-errors",
+            config=metadata,
+            tags=["interpretation", "shap", "error-analysis"],
+        ) as run:
+            run.log({
+                "interpretation/shap_beeswarm": wandb.Image(str(beeswarm_path)),
+                "interpretation/shap_bar": wandb.Image(str(bar_path)),
+                "interpretation/shap_table": wandb.Table(
+                    columns=["feature", "mean_abs_shap"],
+                    data=[[item["feature"], item["mean_abs_shap"]] for item in summary["ranking"]],
+                ),
+                **{f"interpretation/{name}": value for name, value in catalog["summary"].items()},
+            })
+            cases = sum((catalog[group] for group in (
+                "false_positive_cases", "false_negative_cases", "representative_true_positives",
+                "representative_true_negatives",
+            )), [])
+            columns = ["case_type", "source_id", "scenario", "table", "predicted_prob",
+                       "corruption_type", "severity", "corrupted_column", "original_value",
+                       "corrupted_value", "original_sql", "sql_statement"]
+            run.log({"interpretation/error_cases_table": wandb.Table(
+                columns=columns, data=[[case[column] for column in columns] for case in cases],
+            )})
+            artifact = wandb.Artifact("saved-rf-interpretation", type="interpretation", metadata=metadata)
+            for path in (RESULTS_DIR / "shap_summary.json", RESULTS_DIR / "error_cases.json", beeswarm_path, bar_path):
+                artifact.add_file(str(path))
+            run.log_artifact(artifact)
+    print(f"Interpretation complete: {json.dumps(catalog['summary'])}")
 
 
 if __name__ == "__main__":

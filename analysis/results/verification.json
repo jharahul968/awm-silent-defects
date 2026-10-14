@@ -1,0 +1,566 @@
+{
+  "status": "passed",
+  "verified_at_utc": "2026-10-14T05:16:15.586995+00:00",
+  "artifact_sha256": {
+    "dataset": "7c32b0a358f3257b1cbb3c00e1aea2bdf1a5ac47ea4fff02cdcabedcf9a8fd98",
+    "dataset_stats": "3f513b21ddfaf914044658841fbb252d84305925b49cc43847465cfbd6f49014",
+    "model": "b2c617e596fd632ddf3c788303fa16bacc567200dd0bd0da3d354a2edd38f1ef",
+    "results": "a94986e791af0f25a102a6ad06fe4ade4109229990bf778e4e99e2a0bf791c19",
+    "cases": "39923c9a8280fbcff3093e92336bba68c1a82be55ea1dc0633a099234bc6785e",
+    "shap": "afcd1f7e915b0e06250638c897d870c1d63a7055088e6271f1a56b528e0030cb"
+  },
+  "source_sha256": {
+    "gen_db.jsonl": "ae8acb3c23765ca4866b35799ffb980fbb15831240fdc35c046e8a7d27a2c0e8",
+    "gen_sample.jsonl": "39c40969ad76d52a3ea51384752a639cf55dce15bc1a8f0f022cfb6bbd25db3c"
+  },
+  "dataset_counts": {
+    "n_rows": 619619,
+    "n_environments": 999,
+    "n_corrupted": 491665
+  },
+  "split_seed": 42,
+  "threshold": 0.2870548323901319,
+  "model_config": {
+    "random_forest": {
+      "bootstrap": true,
+      "ccp_alpha": 0.0,
+      "class_weight": "balanced",
+      "criterion": "gini",
+      "max_depth": null,
+      "max_features": "sqrt",
+      "max_leaf_nodes": null,
+      "max_samples": null,
+      "min_impurity_decrease": 0.0,
+      "min_samples_leaf": 1,
+      "min_samples_split": 2,
+      "min_weight_fraction_leaf": 0.0,
+      "monotonic_cst": null,
+      "n_estimators": 200,
+      "n_jobs": 8,
+      "oob_score": false,
+      "random_state": 42,
+      "verbose": 0,
+      "warm_start": false
+    },
+    "hist_gradient_boosting": {
+      "categorical_features": "from_dtype",
+      "class_weight": "balanced",
+      "early_stopping": "auto",
+      "interaction_cst": null,
+      "l2_regularization": 0.0,
+      "learning_rate": 0.1,
+      "loss": "log_loss",
+      "max_bins": 255,
+      "max_depth": null,
+      "max_features": 1.0,
+      "max_iter": 300,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 20,
+      "monotonic_cst": null,
+      "n_iter_no_change": 10,
+      "random_state": 42,
+      "scoring": "loss",
+      "tol": 1e-07,
+      "validation_fraction": 0.1,
+      "verbose": 0,
+      "warm_start": false
+    },
+    "logistic_regression": {
+      "C": 1.0,
+      "class_weight": "balanced",
+      "dual": false,
+      "fit_intercept": true,
+      "intercept_scaling": 1,
+      "l1_ratio": 0.0,
+      "max_iter": 1000,
+      "n_jobs": null,
+      "penalty": "deprecated",
+      "random_state": 42,
+      "solver": "lbfgs",
+      "tol": 0.0001,
+      "verbose": 0,
+      "warm_start": false
+    },
+    "isolation_forest": {
+      "bootstrap": false,
+      "contamination": "auto",
+      "max_features": 1.0,
+      "max_samples": "auto",
+      "n_estimators": 200,
+      "n_jobs": 8,
+      "random_state": 42,
+      "verbose": 0,
+      "warm_start": false
+    },
+    "local_outlier_factor": {
+      "algorithm": "auto",
+      "contamination": 0.1,
+      "leaf_size": 30,
+      "metric": "minkowski",
+      "metric_params": null,
+      "n_jobs": 8,
+      "n_neighbors": 20,
+      "novelty": true,
+      "p": 2
+    },
+    "standard_scaler": {
+      "copy": true,
+      "with_mean": true,
+      "with_std": true
+    },
+    "xgboost": {
+      "objective": "binary:logistic",
+      "base_score": null,
+      "booster": null,
+      "callbacks": null,
+      "colsample_bylevel": null,
+      "colsample_bynode": null,
+      "colsample_bytree": null,
+      "device": null,
+      "early_stopping_rounds": null,
+      "enable_categorical": true,
+      "eval_metric": null,
+      "feature_types": null,
+      "feature_weights": null,
+      "gamma": null,
+      "grow_policy": null,
+      "importance_type": null,
+      "interaction_constraints": null,
+      "learning_rate": null,
+      "max_bin": null,
+      "max_cat_threshold": null,
+      "max_cat_to_onehot": null,
+      "max_delta_step": null,
+      "max_depth": null,
+      "max_leaves": null,
+      "min_child_weight": null,
+      "missing": "NaN",
+      "monotone_constraints": null,
+      "multi_strategy": null,
+      "n_estimators": 300,
+      "n_jobs": 8,
+      "num_parallel_tree": null,
+      "random_state": 42,
+      "reg_alpha": null,
+      "reg_lambda": null,
+      "sampling_method": null,
+      "scale_pos_weight": "n_clean_train / n_corrupted_train",
+      "subsample": null,
+      "tree_method": null,
+      "validate_parameters": null,
+      "verbosity": 0
+    },
+    "z_score": {
+      "location": "clean_training_mean",
+      "scale": "clean_training_std",
+      "epsilon": 1e-08
+    },
+    "lof_training_cap": 25000,
+    "threshold_selection": "highest validation score threshold maximizing F1"
+  },
+  "checks": [
+    "Dataset, source, model, SHAP and case catalog fingerprints agree",
+    "Interpretation uses the benchmark RF, features, threshold and split seed",
+    "Dataset/partition counts agree; no environments or source variants cross partitions",
+    "Saved RF test predictions reproduce benchmark metrics and error confusion counts",
+    "Catalog cases and stratified review pairs execute under original SQLite state and reproduce their features"
+  ],
+  "recomputed_rf_metrics": {
+    "model": "random_forest",
+    "average_precision": 0.9996831238210461,
+    "pr_auc": 0.9996831238210461,
+    "p@100": 1.0,
+    "r@100": 0.0008323830293747971,
+    "precision": 0.9942528735632183,
+    "recall": 0.9950556448055137,
+    "f1": 0.9946540972080659,
+    "threshold": 0.2870548323901319,
+    "n_test": 151470,
+    "n_positive": 120137,
+    "prevalence": 0.7931405558856539
+  },
+  "confusion_counts": {
+    "total_test_samples": 151470,
+    "unmodified_test_samples": 31333,
+    "injected_test_samples": 120137,
+    "false_positives_count": 691,
+    "false_negatives_count": 594,
+    "true_positives_count": 119543,
+    "true_negatives_count": 30642
+  },
+  "catalog_case_checks": [
+    {
+      "source_id": "[\"hr_employee_management_1\",\"user_points_transactions\",2]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"personal_finance_8\",\"cashflow_projections\",4]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"e_commerce_32\",\"charges\",6]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"personal_finance_9\",\"accounts\",2]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"hr_employee_management_1\",\"user_points_transactions\",3]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"ats_applicant_tracking_system_3\",\"scorecard_ratings\",7]",
+      "corruption_type": "out_of_bounds_rating",
+      "severity": "subtle",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 4
+    },
+    {
+      "source_id": "[\"ats_applicant_tracking_system_3\",\"scorecard_ratings\",14]",
+      "corruption_type": "out_of_bounds_rating",
+      "severity": "medium",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 4
+    },
+    {
+      "source_id": "[\"wishlist_management_1\",\"dishes\",11]",
+      "corruption_type": "out_of_bounds_rating",
+      "severity": "medium",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"wishlist_management_1\",\"dishes\",17]",
+      "corruption_type": "out_of_bounds_rating",
+      "severity": "subtle",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"wishlist_management_1\",\"dishes\",13]",
+      "corruption_type": "out_of_bounds_rating",
+      "severity": "medium",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"accounting_finance_1\",\"tax_codes\",0]",
+      "corruption_type": "negative_money",
+      "severity": "obvious",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"accounting_finance_1\",\"accounts\",0]",
+      "corruption_type": "negative_inventory",
+      "severity": "obvious",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"dating_5\",\"users\",0]",
+      "corruption_type": "impossible_age",
+      "severity": "obvious",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"ats_applicant_tracking_1\",\"interview_feedback_notes\",0]",
+      "corruption_type": "out_of_bounds_rating",
+      "severity": "obvious",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"accounting_finance_1\",\"users\",0]",
+      "corruption_type": "anomalous_date",
+      "severity": "obvious",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"e_commerce_marketplace_1\",\"option_packages\",0]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"e_commerce_marketplace_12\",\"categories\",4]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"e_commerce_marketplace_12\",\"categories\",3]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"e_commerce_marketplace_1\",\"vehicle_option_packages\",0]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"e_commerce_marketplace_1\",\"accessories\",2]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    }
+  ],
+  "review_pair_checks": [
+    {
+      "source_id": "[\"banking_4\",\"account_balances\",6]",
+      "corruption_type": "negative_money",
+      "severity": "obvious",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"payments_donations_1\",\"recurring_plans\",2]",
+      "corruption_type": "negative_money",
+      "severity": "medium",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"information_lookup_1\",\"current_weather\",7]",
+      "corruption_type": "negative_money",
+      "severity": "subtle",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"e_commerce_4\",\"order_items\",8]",
+      "corruption_type": "negative_inventory",
+      "severity": "obvious",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"e_commerce_4\",\"cart_items\",3]",
+      "corruption_type": "negative_inventory",
+      "severity": "medium",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"short_form_video_platform_1\",\"video_stats\",44]",
+      "corruption_type": "negative_inventory",
+      "severity": "subtle",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"dating_5\",\"users\",2]",
+      "corruption_type": "impossible_age",
+      "severity": "obvious",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"social_dating_5\",\"dating_profiles\",0]",
+      "corruption_type": "impossible_age",
+      "severity": "medium",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"dating_5\",\"users\",6]",
+      "corruption_type": "impossible_age",
+      "severity": "subtle",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"ats_applicant_tracking_system_3\",\"scorecard_ratings\",6]",
+      "corruption_type": "out_of_bounds_rating",
+      "severity": "obvious",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 4
+    },
+    {
+      "source_id": "[\"professional_networking_13\",\"user_stats\",3]",
+      "corruption_type": "out_of_bounds_rating",
+      "severity": "medium",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 7
+    },
+    {
+      "source_id": "[\"workflow_task_management_1\",\"applications\",13]",
+      "corruption_type": "out_of_bounds_rating",
+      "severity": "subtle",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"patient_portal_1\",\"medication_renewal_requests\",1]",
+      "corruption_type": "anomalous_date",
+      "severity": "obvious",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 1
+    },
+    {
+      "source_id": "[\"professional_networking_8\",\"team_profile_games\",5]",
+      "corruption_type": "anomalous_date",
+      "severity": "medium",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"messaging_chat_1\",\"notification_preferences\",0]",
+      "corruption_type": "anomalous_date",
+      "severity": "subtle",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"fleet_management_1\",\"drivers\",3]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"hr_ats_applicant_tracking_system_1\",\"candidate_experiences\",5]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"collaboration_3\",\"spec_documents\",4]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"property_management_15\",\"accounts\",4]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"healthcare_patient_portal_4\",\"appointments\",1]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"booking_and_scheduling_15\",\"providers\",5]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"task_management_20\",\"challenge_activity_links\",7]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"property_management_14\",\"payment_applications\",1]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"social_dating_5\",\"interest_tags\",6]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    },
+    {
+      "source_id": "[\"e_commerce_4\",\"order_item_modifiers\",2]",
+      "corruption_type": "none",
+      "severity": "none",
+      "sql_accepted": true,
+      "features_recomputed": 26,
+      "earlier_source_failures": 0
+    }
+  ],
+  "recipe_quality_findings": [],
+  "manual_review": {
+    "path": "analysis/results/manual_review_pairs.csv",
+    "sha256": "504ef3411b955ceddc5d34e36c0f1f6cf385b37896a6c6f7e28ce7f9e7765ea6",
+    "n_pairs": 25,
+    "sampling_seed": 42,
+    "sampling": "One held-out injection per available type/severity and ten unmodified source records",
+    "review_status": "unreviewed",
+    "human_validation_completed": false
+  },
+  "scope": "Artifact identity, prediction consistency, SQL execution and mutation traceability; semantic business rules require human review."
+}

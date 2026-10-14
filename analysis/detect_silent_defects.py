@@ -2,7 +2,7 @@
 
 Builds a controlled benchmark of SQL-valid but semantically corrupted
 INSERT statements, evaluates eight detection methods under an environment-
-grouped train/test split, and logs all results to Weights & Biases.
+grouped train/validation/test split, and logs all results to Weights & Biases.
 
 Three controlled experiments:
   1. Severity breakdown  – same models, performance split by obvious/medium/subtle
@@ -10,10 +10,9 @@ Three controlled experiments:
   3. Feature ablation    – cumulative feature groups (value → +column → +structural)
 
 Usage:
-    uv run python analysis/detect_silent_defects.py              # build + full run
-    uv run python analysis/detect_silent_defects.py --skip-build # use cached dataset
-    uv run python analysis/detect_silent_defects.py --build-only # build only, then exit
-    uv run python analysis/detect_silent_defects.py --n-envs 50  # quick smoke test
+    python -m analysis.detect_silent_defects --no-wandb
+    python -m analysis.detect_silent_defects --skip-build --no-wandb
+    python -m analysis.detect_silent_defects --build-only
 """
 
 from __future__ import annotations
@@ -25,6 +24,7 @@ for _var in ["OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "OMP_NUM_THREADS", "VECL
     os.environ[_var] = "8"
 
 import argparse
+import hashlib
 import json
 import re
 import sqlite3
@@ -34,6 +34,7 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+import joblib
 import wandb
 from sklearn.ensemble import (
     HistGradientBoostingClassifier,
@@ -44,6 +45,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
     average_precision_score,
     f1_score,
+    precision_recall_curve,
     precision_score,
     recall_score,
 )
@@ -61,10 +63,13 @@ from analysis.build_insert_audit import INSERT_RE, split_sql_list
 DATA_DIR     = Path("data")
 RESULTS_DIR  = Path("analysis/results")
 DATASET_PATH = RESULTS_DIR / "tier2_dataset.parquet"
+DATASET_STATS_PATH = RESULTS_DIR / "dataset_stats.json"
+MODEL_PATH = RESULTS_DIR / "detector.joblib"
 
 RANDOM_SEED = 42
 SPLIT_SEED  = 42
 TEST_SIZE   = 0.25   # fraction of environments for test
+VALIDATION_SIZE = 0.20  # fraction of the remaining environments
 K_RANK      = 100    # k for Precision@K / Recall@K
 N_JOBS      = 8      # cap parallelism — OpenBLAS has a compiled thread limit (128)
 
@@ -75,6 +80,10 @@ CORRUPTION_TYPES = (
     "impossible_age",
     "out_of_bounds_rating",
     "anomalous_date",
+)
+PROVENANCE_COLUMNS = (
+    "source_id", "original_sql", "sql_statement", "corrupted_column",
+    "original_value", "corrupted_value", "column_index",
 )
 
 # Column keyword lists
@@ -93,11 +102,14 @@ AGE_WORDS    = frozenset(["age", "user_age", "patient_age", "customer_age"])
 def _corrupt_money(val: float, severity: str) -> str:
     """Negate a positive monetary value at three magnitudes."""
     if severity == "obvious":
-        return f"{-abs(val) * 10:.4f}"
-    if severity == "medium":
-        return f"{-abs(val):.4f}"
-    # subtle: tiny negative — plausible rounding artefact
-    return f"{-max(0.01, abs(val) * 0.01):.4f}"
+        corrupted = -abs(val) * 10
+    elif severity == "medium":
+        corrupted = -abs(val)
+    else:
+        corrupted = -max(0.01, abs(val) * 0.01)
+    formatted = f"{corrupted:.4f}"
+    # Retain the sign for positive source values smaller than the output precision.
+    return repr(corrupted) if float(formatted) == 0 else formatted
 
 
 def _corrupt_count(val: int, severity: str) -> str:
@@ -202,7 +214,7 @@ def parse_insert(stmt: str) -> tuple[str, list[str], list[str]] | None:
     vals  = split_sql_list(m.group(6)) if m.group(6) else []
     return table, cols, vals
 
-# Feature extraction  (27 features in 3 groups)
+# Feature extraction (26 features in three groups)
 
 FEATURE_GROUPS: dict[str, list[str]] = {
     # Derived purely from the literal values in the INSERT
@@ -323,581 +335,591 @@ def _schema_meta(cur: sqlite3.Cursor, t_name: str) -> dict[str, Any]:
         return {"columns": {}, "fk_count": 0, "unique_count": 0}
 
 
+def _file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def source_fingerprint() -> dict[str, str]:
+    return {name: _file_sha256(DATA_DIR / name)
+            for name in ("gen_db.jsonl", "gen_sample.jsonl")}
+
+
+def dataset_fingerprint(path: str | Path | None = None) -> str:
+    return _file_sha256(DATASET_PATH if path is None else Path(path))
+
+
+def _try_statement(cur: sqlite3.Cursor, statement: str) -> tuple[bool, str | None]:
+    """Test a statement without changing the database state."""
+    cur.execute("SAVEPOINT candidate")
+    try:
+        cur.execute(statement)
+        return True, None
+    except sqlite3.Error as error:
+        return False, type(error).__name__
+    finally:
+        cur.execute("ROLLBACK TO candidate")
+        cur.execute("RELEASE candidate")
+
+
 def build_dataset(n_envs: int | None = None) -> tuple[pd.DataFrame, dict]:
-    """Build the Tier-2 benchmark dataset.
+    """Retain executable source rows and accepted, traceable injected variants.
 
-    For every successfully executing clean INSERT:
-      - One clean row  (label=0)
-      - One corrupted row per applicable (corruption_type × severity)
-        if and only if SQLite accepts the corrupted version (label=1)
+    Label zero means unmodified source data, not manually verified semantics.
+    Label one means a rule-based mutation that SQLite accepts.
     """
-    print("Loading JSONL files …")
-    db_map     = _load_jsonl(DATA_DIR / "gen_db.jsonl")
+    db_map = _load_jsonl(DATA_DIR / "gen_db.jsonl")
     sample_map = _load_jsonl(DATA_DIR / "gen_sample.jsonl")
-
     scenarios = sorted(set(db_map) & set(sample_map))
-    if n_envs:
+    if n_envs is not None:
         scenarios = scenarios[:n_envs]
-
-    rows:  list[dict] = []
+    rows: list[dict] = []
     stats: dict[str, int] = defaultdict(int)
 
     for scenario in tqdm(scenarios, desc="Environments"):
-        db_entry    = db_map[scenario]
-        sample_data = sample_map[scenario].get("sample_data", {})
-        tables_data = sample_data.get("tables", [])
+        db_entry = db_map[scenario]
+        tables_data = sample_map[scenario].get("sample_data", {}).get("tables", [])
         if not isinstance(tables_data, list) or not tables_data:
-            stats["skipped_malformed"] += 1
+            stats["skipped_malformed_environments"] += 1
             continue
-
         conn = sqlite3.connect(":memory:")
-        cur  = conn.cursor()
-        cur.execute("PRAGMA foreign_keys = ON;")
-
-        # Create schema
-        for t in db_entry.get("db_schema", {}).get("tables", []):
+        cur = conn.cursor()
+        cur.execute("PRAGMA foreign_keys = ON")
+        for table in db_entry.get("db_schema", {}).get("tables", []):
             try:
-                cur.execute(t["ddl"])
-                for idx in t.get("indexes", []):
-                    try:
-                        cur.execute(idx)
-                    except Exception:
-                        pass
-            except Exception:
-                pass
-
-        # Collect per-table schema metadata
-        meta_cache: dict[str, dict] = {
-            t["name"]: _schema_meta(cur, t["name"])
-            for t in db_entry.get("db_schema", {}).get("tables", [])
-        }
+                cur.execute(table["ddl"])
+            except sqlite3.Error as error:
+                stats["schema_errors"] += 1
+                stats[f"schema_error_{type(error).__name__}"] += 1
+                continue
+            for index in table.get("indexes", []):
+                try:
+                    cur.execute(index)
+                except sqlite3.Error as error:
+                    stats["index_errors"] += 1
+                    stats[f"index_error_{type(error).__name__}"] += 1
+        meta_cache = {table["name"]: _schema_meta(cur, table["name"])
+                      for table in db_entry.get("db_schema", {}).get("tables", [])}
 
         for table_item in tables_data:
             t_name = table_item.get("table_name", "")
-            stmts  = table_item.get("insert_statements", [])
             schema = meta_cache.get(t_name, {"columns": {}, "fk_count": 0, "unique_count": 0})
-
-            for stmt_idx, stmt in enumerate(stmts):
+            for stmt_idx, stmt in enumerate(table_item.get("insert_statements", [])):
+                stats["source_statements_seen"] += 1
                 parsed = parse_insert(stmt)
                 if not parsed:
+                    stats["skipped_unparseable"] += 1
                     continue
-                _, cols, vals = parsed
+                parsed_table, cols, vals = parsed
                 if not cols or len(cols) != len(vals):
+                    stats["skipped_unsupported_insert"] += 1
                     continue
-
-                stmt_meta = {**schema, "stmt_idx": stmt_idx, "sql_length": len(stmt)}
-
-                # Test if clean statement executes successfully
-                cur.execute("SAVEPOINT sp;")
-                clean_ok = True
-                try:
-                    cur.execute(stmt)
-                except Exception:
-                    clean_ok = False
-                cur.execute("ROLLBACK TO SAVEPOINT sp;")
-
-                if not clean_ok:
+                accepted, error_kind = _try_statement(cur, stmt)
+                if not accepted:
                     stats["skipped_failed_clean"] += 1
-                    # Still commit so FK chain stays intact for later rows
-                    try:
-                        cur.execute(stmt)
-                    except Exception:
-                        pass
+                    stats[f"source_error_{error_kind}"] += 1
                     continue
-
-                # Add clean row
-                feats = extract_features(cols, vals, stmt_meta)
-                rows.append({
-                    "scenario":        scenario,
-                    "table":           t_name,
-                    "label":           0,
-                    "corruption_type": "none",
-                    "severity":        "none",
-                    **feats,
-                })
+                source_id = json.dumps([scenario, t_name, stmt_idx], separators=(",", ":"))
+                shared = {"scenario": scenario, "table": t_name,
+                          "source_id": source_id, "original_sql": stmt}
+                stmt_meta = {**schema, "stmt_idx": stmt_idx, "sql_length": len(stmt)}
+                rows.append({**shared, "label": 0, "corruption_type": "none",
+                             "severity": "none", "sql_statement": stmt,
+                             "corrupted_column": None, "original_value": None,
+                             "corrupted_value": None, "column_index": -1,
+                             **extract_features(cols, vals, stmt_meta)})
                 stats["clean_rows"] += 1
 
-                # Try all (col, type, severity) combinations
                 for col_idx, (col, val) in enumerate(zip(cols, vals)):
                     for corr_type, _ in candidate_corruptions(col, val):
                         for severity in SEVERITIES:
-                            new_val  = apply_corruption(col, val, corr_type, severity)
+                            new_val = apply_corruption(col, val, corr_type, severity)
+                            if new_val == val.strip():
+                                stats["skipped_unchanged_mutations"] += 1
+                                continue
                             new_vals = list(vals)
                             new_vals[col_idx] = new_val
-                            corrupted_stmt = reconstruct_insert(t_name, cols, new_vals)
-
-                            cur.execute("SAVEPOINT sp_c;")
-                            accepted = False
-                            try:
-                                cur.execute(corrupted_stmt)
-                                accepted = True
-                            except Exception:
-                                pass
-                            cur.execute("ROLLBACK TO SAVEPOINT sp_c;")
-
-                            if accepted:
-                                c_feats = extract_features(cols, new_vals, stmt_meta)
-                                rows.append({
-                                    "scenario":        scenario,
-                                    "table":           t_name,
-                                    "label":           1,
-                                    "corruption_type": corr_type,
-                                    "severity":        severity,
-                                    **c_feats,
-                                })
-                                stats["corrupted_rows"] += 1
-                                stats[f"sev_{severity}"] += 1
-                                stats[f"type_{corr_type}"] += 1
-                            else:
+                            corrupted_stmt = reconstruct_insert(parsed_table, cols, new_vals)
+                            accepted, error_kind = _try_statement(cur, corrupted_stmt)
+                            if not accepted:
                                 stats["corruption_rejected_by_sqlite"] += 1
-
-                # Commit clean statement so FK chain continues
-                try:
-                    cur.execute(stmt)
-                except Exception:
-                    pass
-
+                                stats[f"corruption_error_{error_kind}"] += 1
+                                continue
+                            variant_meta = {**stmt_meta, "sql_length": len(corrupted_stmt)}
+                            rows.append({**shared, "label": 1, "corruption_type": corr_type,
+                                         "severity": severity, "sql_statement": corrupted_stmt,
+                                         "corrupted_column": col, "original_value": val,
+                                         "corrupted_value": new_val, "column_index": col_idx,
+                                         **extract_features(cols, new_vals, variant_meta)})
+                            stats["corrupted_rows"] += 1
+                            stats[f"sev_{severity}"] += 1
+                            stats[f"type_{corr_type}"] += 1
+                # Retain the source state for subsequent foreign-key dependencies.
+                cur.execute(stmt)
         conn.close()
 
-    print(f"\nDataset build complete: {dict(stats)}")
     df = pd.DataFrame(rows)
+    if df.empty:
+        raise ValueError("No executable source INSERT statements were retained")
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     df.to_parquet(DATASET_PATH, index=False)
-    print(f"Saved → {DATASET_PATH}  ({len(df):,} rows)")
-    return df, dict(stats)
+    metadata = {"dataset_version": 2, "source_fingerprint": source_fingerprint(),
+                "dataset_fingerprint": dataset_fingerprint(), "n_envs_limit": n_envs,
+                "builder_stats": dict(stats)}
+    DATASET_STATS_PATH.write_text(json.dumps(metadata, indent=2) + "\n")
+    print(f"Built {len(df):,} records: {dict(stats)}")
+    return df, metadata
 
-# Evaluation helpers
+
+# Evaluation and grouped experiments
+
+
+def split_dataset(df: pd.DataFrame, split_seed: int = SPLIT_SEED) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Keep the original outer test holdout; reserve validation within training."""
+    groups = df["scenario"].to_numpy()
+    outer = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=split_seed)
+    remaining, test = next(outer.split(df, groups=groups))
+    inner = GroupShuffleSplit(n_splits=1, test_size=VALIDATION_SIZE, random_state=split_seed + 1)
+    train_rel, validation_rel = next(inner.split(remaining, groups=groups[remaining]))
+    train, validation = remaining[train_rel], remaining[validation_rel]
+    partitions = [set(groups[index]) for index in (train, validation, test)]
+    if any(partitions[i] & partitions[j] for i, j in ((0, 1), (0, 2), (1, 2))):
+        raise AssertionError("Environment partitions overlap")
+    return train, validation, test
+
+
+def _hgb() -> HistGradientBoostingClassifier:
+    return HistGradientBoostingClassifier(max_iter=300, class_weight="balanced", random_state=RANDOM_SEED)
+
+
+def _rf() -> RandomForestClassifier:
+    return RandomForestClassifier(n_estimators=200, class_weight="balanced", random_state=RANDOM_SEED, n_jobs=N_JOBS)
+
+
+def _lr():
+    return make_pipeline(StandardScaler(), LogisticRegression(class_weight="balanced", max_iter=1000, random_state=RANDOM_SEED))
+
+
+def _iforest() -> IsolationForest:
+    return IsolationForest(n_estimators=200, contamination="auto", random_state=RANDOM_SEED, n_jobs=N_JOBS)
+
+
+def train_random_forest(X: np.ndarray, y: np.ndarray) -> RandomForestClassifier:
+    model = _rf()
+    model.fit(X, y)
+    return model
+
+
+def model_config() -> dict:
+    """Parameters used by the benchmark, including estimator defaults."""
+    params = {
+        "random_forest": _rf().get_params(),
+        "hist_gradient_boosting": _hgb().get_params(),
+        "logistic_regression": _lr().steps[-1][1].get_params(),
+        "isolation_forest": _iforest().get_params(),
+        "local_outlier_factor": LocalOutlierFactor(n_neighbors=20, novelty=True, contamination=0.1, n_jobs=N_JOBS).get_params(),
+        "standard_scaler": StandardScaler().get_params(),
+        "xgboost": XGBClassifier(n_estimators=300, random_state=RANDOM_SEED, n_jobs=N_JOBS, verbosity=0).get_params(),
+        "z_score": {"location": "clean_training_mean", "scale": "clean_training_std", "epsilon": 1e-8},
+        "lof_training_cap": 25000,
+        "threshold_selection": "highest validation score threshold maximizing F1",
+    }
+    # XGBoost uses NaN to represent its default missing-value marker.
+    for config in params.values():
+        if isinstance(config, dict):
+            for key, value in config.items():
+                if isinstance(value, float) and not np.isfinite(value):
+                    config[key] = "NaN"
+    params["xgboost"]["scale_pos_weight"] = "n_clean_train / n_corrupted_train"
+    return params
+
+
+def load_model_bundle(path: str | Path = MODEL_PATH) -> dict:
+    bundle = joblib.load(path)
+    required = {"model", "features", "threshold", "split_seed", "model_config", "dataset_fingerprint"}
+    if not isinstance(bundle, dict) or not required.issubset(bundle):
+        raise ValueError("Detector bundle is missing required metadata; rerun the benchmark")
+    if bundle["features"] != ALL_FEATURES:
+        raise ValueError("Detector feature list differs from this implementation")
+    return bundle
+
+
+def select_threshold(y_validation: np.ndarray, scores: np.ndarray) -> float:
+    """Choose a threshold on validation records, never on the test records."""
+    if len(np.unique(y_validation)) != 2:
+        raise ValueError("Validation must contain both source and injected records")
+    if not np.isfinite(scores).all():
+        raise ValueError("Model returned non-finite validation scores")
+    precision, recall, thresholds = precision_recall_curve(y_validation, scores)
+    f1 = np.divide(2 * precision[:-1] * recall[:-1], precision[:-1] + recall[:-1],
+                   out=np.zeros(len(thresholds)), where=(precision[:-1] + recall[:-1]) > 0)
+    best = np.flatnonzero(np.isclose(f1, f1.max(), rtol=0, atol=1e-12))[-1]
+    return float(thresholds[best])
+
 
 def _pr_at_k(y_true: np.ndarray, scores: np.ndarray, k: int) -> tuple[float, float]:
-    top_k = np.argsort(scores)[::-1][:k]
-    tp    = int(y_true[top_k].sum())
-    return tp / k, tp / max(1, int(y_true.sum()))
+    actual_k = min(k, len(y_true))
+    if actual_k == 0:
+        return 0.0, 0.0
+    top = np.argsort(-scores, kind="stable")[:actual_k]
+    tp = int(y_true[top].sum())
+    return tp / actual_k, tp / max(1, int(y_true.sum()))
 
 
-def _eval(
-    name: str,
-    y_true: np.ndarray,
-    scores: np.ndarray,
-    k: int = K_RANK,
-    threshold: float = 0.5,
-) -> dict:
-    preds = (scores >= threshold).astype(int)
+def _eval(name: str, y_true: np.ndarray, scores: np.ndarray,
+          k: int = K_RANK, threshold: float = 0.5) -> dict:
+    predictions = scores >= threshold
     p_k, r_k = _pr_at_k(y_true, scores, k)
-    return {
-        "model":        name,
-        "pr_auc":       float(average_precision_score(y_true, scores)),
-        f"p@{k}":       p_k,
-        f"r@{k}":       r_k,
-        "precision":    float(precision_score(y_true, preds, zero_division=0)),
-        "recall":       float(recall_score(y_true, preds, zero_division=0)),
-        "f1":           float(f1_score(y_true, preds, zero_division=0)),
-    }
+    ap = float(average_precision_score(y_true, scores))
+    return {"model": name, "average_precision": ap, "pr_auc": ap,
+            f"p@{k}": p_k, f"r@{k}": r_k,
+            "precision": float(precision_score(y_true, predictions, zero_division=0)),
+            "recall": float(recall_score(y_true, predictions, zero_division=0)),
+            "f1": float(f1_score(y_true, predictions, zero_division=0)),
+            "threshold": float(threshold), "n_test": len(y_true),
+            "n_positive": int(y_true.sum()), "prevalence": float(y_true.mean())}
 
 
 def _rule_scores(df_slice: pd.DataFrame) -> np.ndarray:
-    """Deterministic rule-based flags — no training required."""
     flag = (
-        # Negative value in a money or count column
         ((df_slice["has_negative_value"] > 0)
          & (df_slice["num_money_cols"] + df_slice["num_count_cols"] > 0))
-        # Rating-scale column with a value well above 5
         | ((df_slice["has_rating_col"] > 0)
            & (df_slice["log_max_numeric"] > np.log1p(5.0)))
-        # Absurd year in a date column
         | (df_slice["has_absurd_year"] > 0)
-        # Age column with a value above 110
         | ((df_slice["has_age_col"] > 0)
            & (df_slice["log_max_numeric"] > np.log1p(110.0)))
     )
-    return flag.astype(float).values
+    return flag.astype(float).to_numpy()
 
 
 def _zscore_scores(X_train_clean: np.ndarray, X_test: np.ndarray) -> np.ndarray:
-    """Max absolute z-score across features, fit on clean training data only."""
-    mu  = X_train_clean.mean(axis=0)
+    mu = X_train_clean.mean(axis=0)
     std = X_train_clean.std(axis=0) + 1e-8
     return np.abs((X_test - mu) / std).max(axis=1)
 
-# Model comparison
 
-def _make_split(
-    df: pd.DataFrame, feature_cols: list[str]
-) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    X = df[feature_cols].values.astype(float)
-    y = df["label"].values.astype(int)
-    g = df["scenario"].values
-    splitter = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SPLIT_SEED)
-    tr, te = next(splitter.split(X, y, g))
-    return X, y, g, tr, te, X[tr][y[tr] == 0]   # last element = clean-only train X
+def _log_table(wandb_run: Any, name: str, rows: list[dict]) -> None:
+    if wandb_run is not None and rows:
+        wandb_run.log({name: wandb.Table(columns=list(rows[0]), data=[list(row.values()) for row in rows])})
 
 
-def run_comparison(
-    df: pd.DataFrame,
-    feature_cols: list[str],
-    tag: str = "main",
-    wandb_run: Any = None,
-) -> tuple[list[dict], np.ndarray, np.ndarray]:
-    """Train and evaluate all 8 models. Returns (metrics, tr_idx, te_idx)."""
-    X, y, _, tr_idx, te_idx, X_tr_clean = _make_split(df, feature_cols)
-    X_tr, X_te = X[tr_idx], X[te_idx]
-    y_tr, y_te = y[tr_idx], y[te_idx]
+def _partition_metadata(df: pd.DataFrame, indices: tuple[np.ndarray, np.ndarray, np.ndarray], seed: int) -> dict:
+    output = {"split_seed": seed, "outer_test_fraction": TEST_SIZE,
+              "inner_validation_fraction": VALIDATION_SIZE,
+              "threshold_selection": "validation maximum F1; highest threshold breaks ties",
+              "metric": "average_precision_score (AP), legacy pr_auc is an alias",
+              "overlapping_environments": 0, "overlapping_sources": 0}
+    for name, index in zip(("train", "validation", "test"), indices):
+        subset = df.iloc[index]
+        output[name] = {"n_environments": int(subset.scenario.nunique()), "n_rows": len(subset),
+                        "n_positive": int(subset.label.sum()), "prevalence": float(subset.label.mean())}
+    if "source_id" in df:
+        source_sets = [set(df.iloc[index].source_id) for index in indices]
+        output["overlapping_sources"] = sum(len(source_sets[i] & source_sets[j]) for i, j in ((0, 1), (0, 2), (1, 2)))
+        if output["overlapping_sources"]:
+            raise AssertionError("Source statement variants cross partitions")
+    return output
 
-    n_neg    = int((y_tr == 0).sum())
-    n_pos    = int(y_tr.sum())
-    scale_pw = n_neg / max(1, n_pos)
 
-    results: list[dict] = []
+def run_comparison(df: pd.DataFrame, feature_cols: list[str], tag: str = "main",
+                   wandb_run: Any = None) -> tuple[list[dict], dict]:
+    X = df[feature_cols].to_numpy(dtype=float)
+    y = df.label.to_numpy(dtype=int)
+    train, validation, test = split_dataset(df)
+    clean = X[train][y[train] == 0]
+    if len(clean) == 0:
+        raise ValueError("Training partition contains no unmodified records")
+    models: dict[str, Any] = {}
+    scores: dict[str, np.ndarray] = {}
+    validation_scores: dict[str, np.ndarray] = {}
+    thresholds: dict[str, float] = {}
+    scores["rule_baseline"] = _rule_scores(df.iloc[test])
+    thresholds["rule_baseline"] = 0.5
+    validation_scores["z_score"] = _zscore_scores(clean, X[validation])
+    scores["z_score"] = _zscore_scores(clean, X[test])
 
-    # 1. Rule-based baseline (no training)
-    scores = _rule_scores(df.iloc[te_idx])
-    results.append(_eval("rule_baseline", y_te, scores))
+    iso = _iforest().fit(clean)
+    models["isolation_forest"] = iso
+    validation_scores["isolation_forest"] = -iso.decision_function(X[validation])
+    scores["isolation_forest"] = -iso.decision_function(X[test])
 
-    # 2. Z-score (unsupervised, clean train only)
-    scores = _zscore_scores(X_tr_clean, X_te)
-    results.append(_eval("z_score", y_te, scores))
+    scaler = StandardScaler().fit(clean)
+    clean_scaled = scaler.transform(clean)
+    if len(clean_scaled) > 25000:
+        sample = np.random.default_rng(RANDOM_SEED).choice(len(clean_scaled), size=25000, replace=False)
+        clean_scaled = clean_scaled[sample]
+    lof = LocalOutlierFactor(n_neighbors=20, novelty=True, contamination=0.1, n_jobs=N_JOBS).fit(clean_scaled)
+    models["local_outlier_factor"] = {"scaler": scaler, "model": lof}
+    validation_scores["local_outlier_factor"] = -lof.decision_function(scaler.transform(X[validation]))
+    scores["local_outlier_factor"] = -lof.decision_function(scaler.transform(X[test]))
 
-    # 3. Isolation Forest (unsupervised, clean train only)
-    iso = IsolationForest(n_estimators=200, contamination="auto", random_state=RANDOM_SEED, n_jobs=N_JOBS)
-    iso.fit(X_tr_clean)
-    results.append(_eval("isolation_forest", y_te, -iso.decision_function(X_te)))
-
-    # 4. Local Outlier Factor (novelty mode, clean train only)
-    if len(X_tr_clean) > 25000:
-        rng = np.random.default_rng(RANDOM_SEED)
-        lof_tr_idx = rng.choice(len(X_tr_clean), size=25000, replace=False)
-        X_lof_tr = X_tr_clean[lof_tr_idx]
-    else:
-        X_lof_tr = X_tr_clean
-    lof = LocalOutlierFactor(n_neighbors=20, novelty=True, contamination=0.1, n_jobs=N_JOBS)
-    lof.fit(X_lof_tr)
-    results.append(_eval("local_outlier_factor", y_te, -lof.decision_function(X_te)))
-
-    # 5. Logistic Regression (supervised)
-    pipe_lr = make_pipeline(
-        StandardScaler(),
-        LogisticRegression(class_weight="balanced", max_iter=1000, random_state=RANDOM_SEED),
-    )
-    pipe_lr.fit(X_tr, y_tr)
-    results.append(_eval("logistic_regression", y_te, pipe_lr.predict_proba(X_te)[:, 1]))
-
-    # 6. Random Forest (supervised)
-    rf = RandomForestClassifier(
-        n_estimators=200, class_weight="balanced", random_state=RANDOM_SEED, n_jobs=N_JOBS,
-    )
-    rf.fit(X_tr, y_tr)
-    results.append(_eval("random_forest", y_te, rf.predict_proba(X_te)[:, 1]))
-
-    # 7. HistGradientBoosting (supervised)
-    hgb = HistGradientBoostingClassifier(
-        max_iter=300, class_weight="balanced", random_state=RANDOM_SEED,
-    )
-    hgb.fit(X_tr, y_tr)
-    results.append(_eval("hist_gradient_boosting", y_te, hgb.predict_proba(X_te)[:, 1]))
-
-    # 8. XGBoost (supervised)
-    # use_label_encoder and eval_metric removed in XGBoost ≥ 2.0
-    xgb = XGBClassifier(
-        n_estimators=300,
-        scale_pos_weight=scale_pw,
-        random_state=RANDOM_SEED,
-        n_jobs=N_JOBS,
-        verbosity=0,
-    )
-    xgb.fit(X_tr, y_tr)
-    results.append(_eval("xgboost", y_te, xgb.predict_proba(X_te)[:, 1]))
-
-    # Print summary
-    print(f"\n[{tag}] Model comparison (n_test={len(te_idx):,}, pos_rate={y_te.mean():.3%}):")
-    print(f"{'Model':<28} {'PR-AUC':>8} {'P@100':>8} {'R@100':>8} {'F1':>8}")
-    for r in results:
-        print(f"{r['model']:<28} {r['pr_auc']:>8.4f} {r[f'p@{K_RANK}']:>8.4f}"
-              f" {r[f'r@{K_RANK}']:>8.4f} {r['f1']:>8.4f}")
-
-    # W&B
-    if wandb_run:
-        tbl = wandb.Table(columns=list(results[0].keys()),
-                          data=[list(r.values()) for r in results])
-        wandb_run.log({f"{tag}/comparison_table": tbl})
-        for r in results:
-            wandb_run.log({f"{tag}/{r['model']}_pr_auc": r["pr_auc"]})
-
-    return results, tr_idx, te_idx
-
-# Controlled experiment 1: severity breakdown
-
-def run_severity_breakdown(
-    df: pd.DataFrame,
-    feature_cols: list[str],
-    tr_idx: np.ndarray,
-    te_idx: np.ndarray,
-    wandb_run: Any = None,
-) -> None:
-    """Break down HGB and IF performance on test set by corruption severity."""
-    X, y, _, _, _, X_tr_clean = _make_split(df, feature_cols)
-    X_tr, X_te = X[tr_idx], X[te_idx]
-    y_tr, y_te = y[tr_idx], y[te_idx]
-    sev_te = df.iloc[te_idx]["severity"].values
-
-    hgb = HistGradientBoostingClassifier(
-        max_iter=300, class_weight="balanced", random_state=RANDOM_SEED,
-    )
-    hgb.fit(X_tr, y_tr)
-    hgb_scores = hgb.predict_proba(X_te)[:, 1]
-
-    iso = IsolationForest(n_estimators=200, contamination="auto", random_state=RANDOM_SEED, n_jobs=N_JOBS)
-    iso.fit(X_tr_clean)
-    iso_scores = -iso.decision_function(X_te)
-
-    clean_mask = sev_te == "none"
-    rows: list[dict] = []
-    print("\n=== Severity breakdown ===")
-    for sev in ("obvious", "medium", "subtle"):
-        corr_mask = sev_te == sev
-        if corr_mask.sum() == 0:
-            continue
-        combined = clean_mask | corr_mask
-        yt = y_te[combined]
-        hgb_pr = float(average_precision_score(yt, hgb_scores[combined]))
-        iso_pr = float(average_precision_score(yt, iso_scores[combined]))
-        rows.append({"severity": sev,
-                     "n_corrupted": int(corr_mask.sum()),
-                     "hgb_pr_auc": hgb_pr,
-                     "iso_pr_auc": iso_pr})
-        print(f"  {sev:>8}: HGB={hgb_pr:.4f}  IF={iso_pr:.4f}"
-              f"  (n_corrupted={int(corr_mask.sum())})")
-
-    if wandb_run and rows:
-        tbl = wandb.Table(columns=list(rows[0].keys()),
-                          data=[list(r.values()) for r in rows])
-        wandb_run.log({"severity/breakdown_table": tbl})
-
-    return rows
-
-# Controlled experiment 2: corruption-type holdout
-
-def run_type_holdout(
-    df: pd.DataFrame,
-    feature_cols: list[str],
-    wandb_run: Any = None,
-) -> None:
-    """For each corruption type: train HGB without it, test on it exclusively."""
-    X = df[feature_cols].values.astype(float)
-    y = df["label"].values.astype(int)
-    g = df["scenario"].values
-    types = df["corruption_type"].values
-
-    splitter = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SPLIT_SEED)
-    tr_idx, te_idx = next(splitter.split(X, y, g))
-
-    rows: list[dict] = []
-    print("\n=== Type holdout (HGB trained without held-out type) ===")
-    for held_out in CORRUPTION_TYPES:
-        # Train: clean rows + corrupted rows that are NOT the held-out type
-        tr_use = tr_idx[(y[tr_idx] == 0) | (types[tr_idx] != held_out)]
-        if y[tr_use].sum() == 0:
-            continue
-
-        hgb = HistGradientBoostingClassifier(
-            max_iter=300, class_weight="balanced", random_state=RANDOM_SEED,
-        )
-        hgb.fit(X[tr_use], y[tr_use])
-
-        # Test: clean rows + only the held-out type
-        te_use = te_idx[(y[te_idx] == 0) | (types[te_idx] == held_out)]
-        yt = y[te_use]
-        if yt.sum() == 0:
-            continue
-
-        scores = hgb.predict_proba(X[te_use])[:, 1]
-        pr = float(average_precision_score(yt, scores))
-        n_held = int((types[te_use] == held_out).sum())
-        rows.append({"held_out_type": held_out,
-                     "n_test_corrupted": n_held,
-                     "hgb_pr_auc": pr})
-        print(f"  {held_out:>25}: PR-AUC={pr:.4f}  (n={n_held})")
-
-    if wandb_run and rows:
-        tbl = wandb.Table(columns=list(rows[0].keys()),
-                          data=[list(r.values()) for r in rows])
-        wandb_run.log({"type_holdout/table": tbl})
-
-    return rows
-
-# Controlled experiment 3: feature-group ablation
-
-def run_feature_ablation(
-    df: pd.DataFrame,
-    wandb_run: Any = None,
-) -> None:
-    """Cumulative feature-group ablation with HGB."""
-    y = df["label"].values.astype(int)
-    g = df["scenario"].values
-
-    ablation_sets = {
-        "value only":                  FEATURE_GROUPS["value"],
-        "value + column":              FEATURE_GROUPS["value"] + FEATURE_GROUPS["column"],
-        "value + column + structural": ALL_FEATURES,
+    n_positive = int(y[train].sum())
+    scale_weight = int((y[train] == 0).sum()) / max(1, n_positive)
+    supervised = {
+        "logistic_regression": _lr(), "random_forest": _rf(),
+        "hist_gradient_boosting": _hgb(),
+        "xgboost": XGBClassifier(n_estimators=300, scale_pos_weight=scale_weight,
+                                 random_state=RANDOM_SEED, n_jobs=N_JOBS, verbosity=0),
     }
+    for name, model in supervised.items():
+        print(f"Fitting {name}...", flush=True)
+        model.fit(X[train], y[train])
+        models[name] = model
+        validation_scores[name] = model.predict_proba(X[validation])[:, 1]
+        scores[name] = model.predict_proba(X[test])[:, 1]
+    for name, val_scores in validation_scores.items():
+        thresholds[name] = select_threshold(y[validation], val_scores)
 
-    rows: list[dict] = []
-    print("\n=== Feature ablation (HGB) ===")
-    for label, feats in ablation_sets.items():
-        X = df[feats].values.astype(float)
-        splitter = GroupShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=SPLIT_SEED)
-        tr_idx, te_idx = next(splitter.split(X, y, g))
-        hgb = HistGradientBoostingClassifier(
-            max_iter=300, class_weight="balanced", random_state=RANDOM_SEED,
-        )
-        hgb.fit(X[tr_idx], y[tr_idx])
-        scores = hgb.predict_proba(X[te_idx])[:, 1]
-        pr = float(average_precision_score(y[te_idx], scores))
-        rows.append({"feature_set": label, "n_features": len(feats), "hgb_pr_auc": pr})
-        print(f"  {label:>35}: n={len(feats):>2}  PR-AUC={pr:.4f}")
+    results = [_eval(name, y[test], model_scores, threshold=thresholds[name])
+               for name, model_scores in scores.items()]
+    baseline = _eval("prevalence_baseline", y[test], np.full(len(test), y[train].mean()), threshold=0.0)
+    results.append(baseline)
+    for result in results:
+        print(f"{result['model']}: AP={result['average_precision']:.4f}, F1={result['f1']:.4f}, threshold={result['threshold']:.6g}")
+    _log_table(wandb_run, f"{tag}/comparison_table", results)
+    context = {"train": train, "validation": validation, "test": test,
+               "models": models, "scores": scores, "thresholds": thresholds,
+               "protocol": _partition_metadata(df, (train, validation, test), SPLIT_SEED),
+               "xgboost_scale_pos_weight": scale_weight}
+    return results, context
 
-    if wandb_run and rows:
-        tbl = wandb.Table(columns=list(rows[0].keys()),
-                          data=[list(r.values()) for r in rows])
-        wandb_run.log({"ablation/table": tbl})
 
+def _subset_summary(y: np.ndarray) -> dict:
+    return {"n_test": len(y), "n_positive": int(y.sum()), "n_clean": int((y == 0).sum()),
+            "prevalence": float(y.mean()), "random_average_precision": float(y.mean())}
+
+
+def run_severity_breakdown(df: pd.DataFrame, context: dict, wandb_run: Any = None) -> list[dict]:
+    test = df.iloc[context["test"]]
+    y = test.label.to_numpy(dtype=int)
+    rows = []
+    for severity in SEVERITIES:
+        mask = (test.severity == "none") | (test.severity == severity)
+        use = mask.to_numpy()
+        summary = {"severity": severity, "n_corrupted": int((test.severity == severity).sum()),
+                   **_subset_summary(y[use])}
+        for model, prefix in (("hist_gradient_boosting", "hgb"), ("isolation_forest", "iso")):
+            ap = float(average_precision_score(y[use], context["scores"][model][use]))
+            summary[f"{prefix}_average_precision"] = ap
+            summary[f"{prefix}_pr_auc"] = ap
+        rows.append(summary)
+    _log_table(wandb_run, "severity/breakdown_table", rows)
     return rows
 
-# Feature importance
 
-def log_feature_importance(
-    df: pd.DataFrame,
-    tr_idx: np.ndarray,
-    wandb_run: Any = None,
-) -> list[dict]:
-    X = df[ALL_FEATURES].values.astype(float)
-    y = df["label"].values.astype(int)
-    rf = RandomForestClassifier(
-        n_estimators=200, class_weight="balanced", random_state=RANDOM_SEED, n_jobs=N_JOBS,
-    )
-    rf.fit(X[tr_idx], y[tr_idx])
-    pairs = sorted(zip(ALL_FEATURES, rf.feature_importances_), key=lambda x: -x[1])
+def run_type_holdout(df: pd.DataFrame, feature_cols: list[str], wandb_run: Any = None) -> list[dict]:
+    X = df[feature_cols].to_numpy(dtype=float)
+    y = df.label.to_numpy(dtype=int)
+    types = df.corruption_type.to_numpy()
+    train, validation, test = split_dataset(df)
+    rows = []
+    for held_out in CORRUPTION_TYPES:
+        tr = train[types[train] != held_out]
+        va = validation[(y[validation] == 0) | (types[validation] != held_out)]
+        te = test[(y[test] == 0) | (types[test] == held_out)]
+        if len(np.unique(y[tr])) != 2 or y[te].sum() == 0:
+            continue
+        model = _hgb().fit(X[tr], y[tr])
+        threshold = select_threshold(y[va], model.predict_proba(X[va])[:, 1])
+        metrics = _eval(held_out, y[te], model.predict_proba(X[te])[:, 1], threshold=threshold)
+        rows.append({"held_out_type": held_out, "n_test_corrupted": int(y[te].sum()),
+                     **_subset_summary(y[te]), "hgb_average_precision": metrics["average_precision"],
+                     "hgb_pr_auc": metrics["average_precision"], "precision": metrics["precision"],
+                     "recall": metrics["recall"], "f1": metrics["f1"], "threshold": threshold})
+    _log_table(wandb_run, "type_holdout/table", rows)
+    return rows
 
-    print("\n=== Top-10 RF feature importances ===")
-    for feat, imp in pairs[:10]:
-        print(f"  {feat:<30} {imp:.4f}")
 
-    if wandb_run:
-        tbl = wandb.Table(columns=["feature", "importance"],
-                          data=[[f, float(i)] for f, i in pairs])
-        wandb_run.log({"feature_importance/rf_table": tbl})
+def run_feature_ablation(df: pd.DataFrame, context: dict, wandb_run: Any = None) -> list[dict]:
+    y = df.label.to_numpy(dtype=int)
+    train, validation, test = context["train"], context["validation"], context["test"]
+    rows = []
+    sets = {"value only": FEATURE_GROUPS["value"],
+            "value + column": FEATURE_GROUPS["value"] + FEATURE_GROUPS["column"],
+            "value + column + structural": ALL_FEATURES}
+    for name, features in sets.items():
+        if features == ALL_FEATURES:
+            scores = context["scores"]["hist_gradient_boosting"]
+            threshold = context["thresholds"]["hist_gradient_boosting"]
+        else:
+            X = df[features].to_numpy(dtype=float)
+            model = _hgb().fit(X[train], y[train])
+            threshold = select_threshold(y[validation], model.predict_proba(X[validation])[:, 1])
+            scores = model.predict_proba(X[test])[:, 1]
+        metrics = _eval(name, y[test], scores, threshold=threshold)
+        rows.append({"feature_set": name, "n_features": len(features),
+                     "hgb_average_precision": metrics["average_precision"],
+                     "hgb_pr_auc": metrics["average_precision"], "f1": metrics["f1"]})
+    _log_table(wandb_run, "ablation/table", rows)
+    return rows
 
-    return [{"feature": f, "importance": float(i)} for f, i in pairs]
 
-# Entry point
+def run_repeated_splits(df: pd.DataFrame, seeds: list[int], context: dict, wandb_run: Any = None) -> dict:
+    """Measure sensitivity to environment partitioning with fixed model parameters."""
+    X = df[ALL_FEATURES].to_numpy(dtype=float)
+    y = df.label.to_numpy(dtype=int)
+    rows = []
+    names = ("logistic_regression", "hist_gradient_boosting", "isolation_forest")
+    for seed in seeds:
+        train, validation, test = split_dataset(df, seed)
+        for name in names:
+            if seed == SPLIT_SEED:
+                scores, threshold = context["scores"][name], context["thresholds"][name]
+            else:
+                model = {"logistic_regression": _lr, "hist_gradient_boosting": _hgb,
+                         "isolation_forest": _iforest}[name]()
+                if name == "isolation_forest":
+                    model.fit(X[train][y[train] == 0])
+                    val_scores = -model.decision_function(X[validation])
+                    scores = -model.decision_function(X[test])
+                else:
+                    model.fit(X[train], y[train])
+                    val_scores = model.predict_proba(X[validation])[:, 1]
+                    scores = model.predict_proba(X[test])[:, 1]
+                threshold = select_threshold(y[validation], val_scores)
+            rows.append({"split_seed": seed, **_eval(name, y[test], scores, threshold=threshold)})
+    summaries = []
+    for name in names:
+        subset = [row for row in rows if row["model"] == name]
+        summary = {"model": name, "n_splits": len(subset)}
+        for metric in ("average_precision", "f1", "precision", "recall"):
+            values = [row[metric] for row in subset]
+            summary[f"{metric}_mean"] = float(np.mean(values))
+            summary[f"{metric}_std"] = float(np.std(values, ddof=1)) if len(values) > 1 else 0.0
+        summaries.append(summary)
+    _log_table(wandb_run, "repeated/splits", rows)
+    _log_table(wandb_run, "repeated/summary", summaries)
+    return {"seeds": seeds, "runs": rows, "summary": summaries,
+            "interpretation": "Sample standard deviation across grouped partitions; overlapping holdouts are not independent replicates."}
+
+
+def low_prevalence_indices(y: np.ndarray, prevalence: float, seed: int = RANDOM_SEED) -> np.ndarray:
+    """Keep all source test rows and downsample injections to a stated prevalence."""
+    if not 0 < prevalence < 1:
+        raise ValueError("Prevalence must be between zero and one")
+    clean = np.flatnonzero(y == 0)
+    injected = np.flatnonzero(y == 1)
+    n_positive = min(len(injected), int(len(clean) * prevalence / (1 - prevalence)))
+    if len(clean) == 0 or n_positive == 0:
+        raise ValueError("Not enough clean or injected test records for this prevalence")
+    chosen = np.random.default_rng(seed).choice(injected, size=n_positive, replace=False)
+    index = np.concatenate([clean, chosen])
+    return np.random.default_rng(seed + 1).permutation(index)
+
+
+def run_low_prevalence(df: pd.DataFrame, context: dict, wandb_run: Any = None) -> list[dict]:
+    test = df.iloc[context["test"]]
+    y = test.label.to_numpy(dtype=int)
+    rows = []
+    for target in (0.01, 0.05):
+        index = low_prevalence_indices(y, target)
+        for name, scores in context["scores"].items():
+            rows.append({"target_prevalence": target,
+                         **_eval(name, y[index], scores[index], threshold=context["thresholds"][name])})
+        rows.append({"target_prevalence": target,
+                     **_eval("prevalence_baseline", y[index], np.full(len(index), target), threshold=0.0)})
+    _log_table(wandb_run, "prevalence/sensitivity", rows)
+    return rows
+
+
+def log_feature_importance(model: RandomForestClassifier, wandb_run: Any = None) -> list[dict]:
+    pairs = sorted(zip(ALL_FEATURES, model.feature_importances_), key=lambda item: -item[1])
+    rows = [{"feature": feature, "importance": float(importance)} for feature, importance in pairs]
+    _log_table(wandb_run, "feature_importance/rf_table", rows)
+    return rows
+
+
+def _load_cached_dataset() -> tuple[pd.DataFrame, dict]:
+    df = pd.read_parquet(DATASET_PATH)
+    missing = set(PROVENANCE_COLUMNS) - set(df)
+    if missing:
+        raise ValueError(f"Cached dataset predates mutation provenance ({sorted(missing)} missing). Rebuild without --skip-build.")
+    if not DATASET_STATS_PATH.exists():
+        raise ValueError("Cached dataset has no build metadata. Rebuild without --skip-build.")
+    metadata = json.loads(DATASET_STATS_PATH.read_text())
+    if metadata.get("dataset_version") != 2:
+        raise ValueError("Unsupported cached dataset version. Rebuild without --skip-build.")
+    if metadata.get("source_fingerprint") != source_fingerprint():
+        raise ValueError("Raw source data changed since the cached build. Rebuild without --skip-build.")
+    if metadata.get("dataset_fingerprint") != dataset_fingerprint():
+        raise ValueError("Cached dataset fingerprint differs from its metadata. Rebuild without --skip-build.")
+    return df, metadata
+
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description=__doc__,
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
-    parser.add_argument("--n-envs",        type=int,   default=None,
-                        help="Limit to N environments (default: all 1,000)")
-    parser.add_argument("--skip-build",    action="store_true",
-                        help="Load cached dataset from disk instead of rebuilding")
-    parser.add_argument("--build-only",    action="store_true",
-                        help="Build and save dataset, then exit without running models")
-    parser.add_argument("--wandb-project", default="awm-silent-defects",
-                        help="W&B project name  (default: awm-silent-defects)")
-    parser.add_argument("--wandb-entity",  default=None,
-                        help="W&B entity / username  (default: auto-detected)")
-    parser.add_argument("--no-wandb",      action="store_true",
-                        help="Disable W&B logging entirely")
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--n-envs", type=int, default=None, help="Build only the first N sorted environments")
+    parser.add_argument("--skip-build", action="store_true", help="Use a provenance-bearing, source-verified cached dataset")
+    parser.add_argument("--build-only", action="store_true")
+    parser.add_argument("--wandb-project", default="awm-silent-defects")
+    parser.add_argument("--wandb-entity", default=None)
+    parser.add_argument("--no-wandb", action="store_true")
+    parser.add_argument("--repeat-seeds", type=int, nargs="+", default=[42, 43, 44])
     args = parser.parse_args()
-
-    # Build or load dataset
-    dataset_stats: dict = {}
-    if args.skip_build:
-        print(f"Loading cached dataset from {DATASET_PATH} …")
-        df = pd.read_parquet(DATASET_PATH)
-    else:
-        df, dataset_stats = build_dataset(n_envs=args.n_envs)
-
+    if args.n_envs is not None and args.n_envs < 1:
+        parser.error("--n-envs must be positive")
+    if args.skip_build and args.n_envs is not None:
+        parser.error("--n-envs controls rebuilding and cannot be combined with --skip-build")
+    seeds = list(dict.fromkeys(args.repeat_seeds))
+    df, dataset_metadata = _load_cached_dataset() if args.skip_build else build_dataset(args.n_envs)
     if args.build_only:
-        print("Build complete. Exiting (--build-only).")
         return
 
-    n_envs_actual = df["scenario"].nunique()
-    n_corr        = int(df["label"].sum())
-    corr_rate     = float(df["label"].mean())
-    print(f"\nDataset: {len(df):,} rows | {n_corr:,} corrupted ({corr_rate:.2%}) "
-          f"| {n_envs_actual} environments")
-
-    # W&B initialisation
-    wandb_run = None
-    if not args.no_wandb:
-        wandb_run = wandb.init(
-            project=args.wandb_project,
-            entity=args.wandb_entity,
-            config={
-                "n_environments":   n_envs_actual,
-                "n_rows":           len(df),
-                "n_corrupted":      n_corr,
-                "corruption_rate":  corr_rate,
-                "test_size":        TEST_SIZE,
-                "random_seed":      RANDOM_SEED,
-                "split_seed":       SPLIT_SEED,
-                "k_rank":           K_RANK,
-                "n_features":       len(ALL_FEATURES),
-                "severities":       list(SEVERITIES),
-                "corruption_types": list(CORRUPTION_TYPES),
-                **dataset_stats,
-            },
-            tags=["tier2", "silent-defects", "awm"],
+    config = {"model_config": model_config(), "features": ALL_FEATURES,
+              "protocol": _partition_metadata(df, split_dataset(df), SPLIT_SEED),
+              "dataset_metadata": dataset_metadata,
+              "repeat_seeds": seeds, "severities": list(SEVERITIES),
+              "corruption_types": list(CORRUPTION_TYPES), "k_rank": K_RANK}
+    config["implementation_fingerprint"] = {
+        name: _file_sha256(Path(name)) for name in (
+            "analysis/detect_silent_defects.py", "analysis/build_insert_audit.py", "uv.lock"
         )
-        for groupby_col, tag in [("corruption_type", "type"), ("severity", "severity")]:
-            counts = df.groupby(groupby_col).size().reset_index(name="count")
-            wandb_run.log({
-                f"dataset/{tag}_counts": wandb.Table(
-                    columns=list(counts.columns),
-                    data=counts.values.tolist(),
-                )
-            })
-
-    # Main model comparison
-    comparison_results, tr_idx, te_idx = run_comparison(
-        df, ALL_FEATURES, tag="main", wandb_run=wandb_run,
-    )
-
-    # Controlled experiment 1: severity breakdown
-    severity_results = run_severity_breakdown(df, ALL_FEATURES, tr_idx, te_idx, wandb_run=wandb_run)
-
-    # Controlled experiment 2: type holdout
-    type_holdout_results = run_type_holdout(df, ALL_FEATURES, wandb_run=wandb_run)
-
-    # Controlled experiment 3: feature ablation
-    ablation_results = run_feature_ablation(df, wandb_run=wandb_run)
-
-    # Feature importance
-    feature_importance_results = log_feature_importance(df, tr_idx, wandb_run=wandb_run)
-
-    # Save structured JSON summary
-    final_output = {
-        "dataset": {
-            "n_environments": n_envs_actual,
-            "n_rows": len(df),
-            "n_corrupted": n_corr,
-            "corruption_rate": corr_rate,
-            "features": ALL_FEATURES,
-        },
-        "main_comparison": comparison_results,
-        "severity_breakdown": severity_results,
-        "type_holdout": type_holdout_results,
-        "feature_ablation": ablation_results,
-        "feature_importance": feature_importance_results,
     }
-    json_path = RESULTS_DIR / "tier2_results.json"
-    with json_path.open("w") as fh:
-        json.dump(final_output, fh, indent=2)
-    print(f"\nStructured results saved → {json_path}")
-
-    if wandb_run:
-        wandb_run.finish()
-
-    print("\n✓ Done.")
+    run = None if args.no_wandb else wandb.init(project=args.wandb_project, entity=args.wandb_entity,
+                                                config=config, tags=["midterm", "controlled-injections"])
+    try:
+        comparison, context = run_comparison(df, ALL_FEATURES, wandb_run=run)
+        rf = context["models"]["random_forest"]
+        bundle = {"model": rf, "features": ALL_FEATURES,
+                  "threshold": context["thresholds"]["random_forest"], "split_seed": SPLIT_SEED,
+                  "model_config": config["model_config"],
+                  "implementation_fingerprint": config["implementation_fingerprint"],
+                  "tracking": ({"run_id": run.id, "url": run.url, "project": run.project,
+                                "entity": run.entity, "mode": run.settings.mode}
+                               if run is not None else {"mode": "disabled"}),
+                  "dataset_fingerprint": dataset_metadata["dataset_fingerprint"]}
+        joblib.dump(bundle, MODEL_PATH)
+        output = {"dataset": {"n_environments": int(df.scenario.nunique()), "n_rows": len(df),
+                              "n_corrupted": int(df.label.sum()), "corruption_rate": float(df.label.mean()),
+                              "features": ALL_FEATURES, "dataset_fingerprint": dataset_metadata["dataset_fingerprint"]},
+                  "dataset_metadata": dataset_metadata, "protocol": context["protocol"],
+                  "model_config": config["model_config"],
+                  "implementation_fingerprint": config["implementation_fingerprint"],
+                  "tracking": bundle["tracking"],
+                  "xgboost_scale_pos_weight": context["xgboost_scale_pos_weight"],
+                  "main_comparison": comparison,
+                  "prevalence_baseline_note": "Constant scores give AP equal to test prevalence; threshold zero predicts every record positive.",
+                  "severity_breakdown": run_severity_breakdown(df, context, run),
+                  "type_holdout": run_type_holdout(df, ALL_FEATURES, run),
+                  "feature_ablation": run_feature_ablation(df, context, run),
+                  "feature_importance": log_feature_importance(rf, run),
+                  "repeated_grouped_splits": run_repeated_splits(df, seeds, context, run),
+                  "low_prevalence_evaluation": run_low_prevalence(df, context, run),
+                  "low_prevalence_note": "Simulated 1% and 5% injection prevalence; fixed validation thresholds, no retraining. Does not estimate natural defect prevalence.",
+                  "label_definition": "0=unmodified executable source; 1=SQLite-accepted rule-based injection. Semantic validity has not been exhaustively manually annotated."}
+        (RESULTS_DIR / "tier2_results.json").write_text(json.dumps(output, indent=2) + "\n")
+        if run is not None:
+            run.summary["dataset_fingerprint"] = dataset_metadata["dataset_fingerprint"]
+            run.summary["model_bundle"] = str(MODEL_PATH)
+            run.summary["test_average_precision"] = {row["model"]: row["average_precision"] for row in comparison}
+        print(f"Saved benchmark results and detector bundle in {RESULTS_DIR}")
+    finally:
+        if run is not None:
+            run.finish()
 
 
 if __name__ == "__main__":

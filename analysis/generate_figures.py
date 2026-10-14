@@ -4,7 +4,7 @@ Reads from analysis/results/tier2_results.json and creates clean, high-DPI
 figures in figures/ suitable for IEEE 2-column conference papers.
 
 Figures generated:
-  1. figures/fig1_model_comparison.png   - PR-AUC comparison across all 8 models
+  1. figures/fig1_model_comparison.png   - Average precision across all 8 models
   2. figures/fig2_severity_decay.png     - Performance decay across corruption severities
   3. figures/fig3_type_generalization.png- Leave-one-type-out generalization gap
   4. figures/fig4_feature_importance.png - Top-12 feature importance ranking
@@ -45,8 +45,8 @@ def load_results() -> dict:
 
 
 def plot_model_comparison(results: dict) -> None:
-    """Figure 1: PR-AUC comparison across all 8 benchmarked models."""
-    models_data = results["main_comparison"]
+    """Compare ranking metrics against the held-out positive prevalence."""
+    models_data = [row for row in results["main_comparison"] if row["model"] != "prevalence_baseline"]
     
     # Pretty display names and grouping colors
     model_name_map = {
@@ -92,12 +92,12 @@ def plot_model_comparison(results: dict) -> None:
                 fontweight="bold", fontsize=8.5)
 
     # Prevalence baseline reference line
-    prevalence = results["dataset"]["corruption_rate"]
+    prevalence = models_data[0]["prevalence"]
     ax.axvline(prevalence, color="#d55e00", linestyle="--", linewidth=1.2,
                label=f"Random Baseline ({prevalence:.2%})")
 
-    ax.set_xlim(0.70, 1.01)
-    ax.set_xlabel("PR-AUC (Higher is Better)")
+    ax.set_xlim(0, 1.01)
+    ax.set_xlabel("Average precision")
     ax.set_title("Detection Performance Across 8 Models on Held-Out Environments")
     ax.grid(axis="x", linestyle=":", alpha=0.6)
     
@@ -127,6 +127,8 @@ def plot_severity_decay(results: dict) -> None:
 
     ax.plot(x, hgb_scores, marker="o", linewidth=2.0, color="#009e73", label="HistGradientBoosting (Supervised)")
     ax.plot(x, iso_scores, marker="s", linewidth=2.0, color="#d55e00", linestyle="--", label="Isolation Forest (Unsupervised)")
+    ax.plot(x, [row["prevalence"] for row in sev_data], marker=".", color="gray",
+            linestyle=":", label="Subset prevalence")
 
     for i, (h, s) in enumerate(zip(hgb_scores, iso_scores)):
         ax.annotate(f"{h:.4f}", (x[i], h), textcoords="offset points", xytext=(0, 7), ha="center", fontsize=8.5, color="#009e73")
@@ -135,8 +137,8 @@ def plot_severity_decay(results: dict) -> None:
     ax.set_xticks(x)
     ax.set_xticklabels(severities)
     ax.set_xlabel("Corruption Severity")
-    ax.set_ylabel("PR-AUC")
-    ax.set_ylim(0.68, 1.02)
+    ax.set_ylabel("Average precision")
+    ax.set_ylim(0, 1.02)
     ax.set_title("Sensitivity vs. Corruption Subtlety")
     ax.grid(True, linestyle=":", alpha=0.6)
     ax.legend(loc="center left", framealpha=0.9)
@@ -152,20 +154,20 @@ def plot_type_generalization(results: dict) -> None:
     type_data = results["type_holdout"]
     
     type_name_map = {
-        "negative_money": "Negative Money\n(n=18.5k)",
-        "negative_inventory": "Negative Inventory\n(n=8.1k)",
-        "anomalous_date": "Anomalous Date\n(n=91.4k)",
-        "out_of_bounds_rating": "Out-of-Bounds Rating\n(n=1.2k)",
-        "impossible_age": "Impossible Age\n(n=75)",
+        "negative_money": "Money",
+        "negative_inventory": "Inventory",
+        "anomalous_date": "Date",
+        "out_of_bounds_rating": "Rating",
+        "impossible_age": "Age",
     }
 
     # Sort from highest to lowest
     sorted_data = sorted(type_data, key=lambda x: x["hgb_pr_auc"], reverse=True)
-    labels = [type_name_map[d["held_out_type"]] for d in sorted_data]
+    labels = [f"{type_name_map[d['held_out_type']]}\n(n+={d['n_test_corrupted']:,})" for d in sorted_data]
     scores = [d["hgb_pr_auc"] for d in sorted_data]
 
     fig, ax = plt.subplots(figsize=(6.0, 3.4))
-    colors = ["#009e73" if s > 0.5 else "#d55e00" for s in scores]
+    colors = ["#0072b2"] * len(scores)
     bars = ax.bar(labels, scores, color=colors, edgecolor="black", linewidth=0.6, width=0.55)
 
     for bar in bars:
@@ -173,13 +175,14 @@ def plot_type_generalization(results: dict) -> None:
         ax.text(bar.get_x() + bar.get_width() / 2, h + 0.02, f"{h:.4f}",
                 ha="center", va="bottom", fontsize=8.5, fontweight="bold")
 
-    ax.set_ylabel("PR-AUC on Held-Out Type")
+    ax.scatter(np.arange(len(sorted_data)), [row["prevalence"] for row in sorted_data],
+               color="#d55e00", marker="_", s=250, zorder=3, label="Subset prevalence")
+    ax.set_ylabel("Average precision on held-out type")
     ax.set_ylim(0, 1.08)
-    ax.set_title("Zero-Shot Generalization to Unseen Defect Categories")
+    ax.set_title("Transfer to corruption types excluded from training")
     ax.grid(axis="y", linestyle=":", alpha=0.6)
     
-    # Annotate the catastrophic generalization drop
-    ax.axhline(0.5, color="gray", linestyle=":", linewidth=1)
+    ax.legend(loc="upper right", framealpha=0.9)
 
     out_path = FIGURES_DIR / "fig3_type_generalization.png"
     plt.savefig(out_path)
@@ -215,7 +218,7 @@ def plot_feature_importance(results: dict) -> None:
         ax.text(w + 0.01, bar.get_y() + bar.get_height() / 2, f"{w:.3f}",
                 ha="left", va="center", fontsize=8.5)
 
-    ax.set_xlim(0, 0.70)
+    ax.set_xlim(0, max(importances) * 1.25)
     ax.set_xlabel("Gini Feature Importance (Random Forest)")
     ax.set_title("Top-10 Predictive Features for Silent Defect Detection")
     ax.grid(axis="x", linestyle=":", alpha=0.6)

@@ -20,7 +20,21 @@ analysis/results/insert_audit.jsonl
 analysis/results/static_checker_rows.jsonl
 analysis/results/official_reset.log
 analysis/results/tier2_dataset.parquet
+analysis/results/*.joblib
+analysis/results/*.log
 wandb/
+
+# LaTeX build files (the submitted PDF is kept)
+*.aux
+*.log
+*.out
+*.synctex.gz
+/midterm_report_overleaf.zip
+/midterm_code_snapshot.zip
+
+# Personal preparation notes
+/personal_notes/
+/docs/
 
 # OS / editor
 .DS_Store

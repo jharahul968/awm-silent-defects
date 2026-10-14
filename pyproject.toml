@@ -9,6 +9,7 @@ dependencies = [
     "fastapi-mcp==0.4.0",
     "fastparquet>=2026.9.0",
     "json-repair>=0.56.0",
+    "joblib>=1.5.0",
     "loguru>=0.7.3",
     "matplotlib>=3.11.2",
     "mcp-agent==0.2.6",

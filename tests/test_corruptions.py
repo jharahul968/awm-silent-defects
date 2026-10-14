@@ -44,6 +44,17 @@ def test_apply_corruption_money(sev: str) -> None:
     assert val < 0
 
 
+@pytest.mark.parametrize("severity", ["obvious", "medium", "subtle"])
+def test_small_price_stays_negative_after_sql_roundtrip(severity: str) -> None:
+    import sqlite3
+
+    value = apply_corruption("unit_price", "0.00002", "negative_money", severity)
+    with sqlite3.connect(":memory:") as conn:
+        conn.execute("CREATE TABLE prices (price REAL)")
+        conn.execute(f"INSERT INTO prices VALUES ({value})")
+        assert conn.execute("SELECT price < 0 FROM prices").fetchone()[0] == 1
+
+
 @pytest.mark.parametrize("sev", ["obvious", "medium", "subtle"])
 def test_apply_corruption_inventory(sev: str) -> None:
     corrupted = apply_corruption("stock", "20", "negative_inventory", sev)

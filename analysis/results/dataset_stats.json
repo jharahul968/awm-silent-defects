@@ -1,0 +1,31 @@
+{
+  "dataset_version": 2,
+  "source_fingerprint": {
+    "gen_db.jsonl": "ae8acb3c23765ca4866b35799ffb980fbb15831240fdc35c046e8a7d27a2c0e8",
+    "gen_sample.jsonl": "39c40969ad76d52a3ea51384752a639cf55dce15bc1a8f0f022cfb6bbd25db3c"
+  },
+  "dataset_fingerprint": "7c32b0a358f3257b1cbb3c00e1aea2bdf1a5ac47ea4fff02cdcabedcf9a8fd98",
+  "n_envs_limit": null,
+  "builder_stats": {
+    "source_statements_seen": 129328,
+    "clean_rows": 127954,
+    "corrupted_rows": 491665,
+    "sev_obvious": 163876,
+    "type_negative_money": 81897,
+    "sev_medium": 163900,
+    "sev_subtle": 163889,
+    "corruption_rejected_by_sqlite": 38680,
+    "corruption_error_IntegrityError": 38680,
+    "type_anomalous_date": 369980,
+    "type_negative_inventory": 35346,
+    "type_out_of_bounds_rating": 3887,
+    "skipped_failed_clean": 1231,
+    "source_error_IntegrityError": 1165,
+    "source_error_OperationalError": 66,
+    "skipped_unsupported_insert": 112,
+    "skipped_unparseable": 31,
+    "skipped_unchanged_mutations": 4,
+    "skipped_malformed_environments": 1,
+    "type_impossible_age": 555
+  }
+}

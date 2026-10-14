@@ -25,19 +25,22 @@ def load_records(path: Path) -> dict[str, dict]:
 
 
 def split_sql_list(value: str) -> list[str]:
+    """Split SQL values without splitting quoted strings or nested expressions.
+
+    SQLite escapes a quote by doubling it. Consume the pair together so that
+    commas later in the same literal do not become column separators.
+    """
     items: list[str] = []
     start = 0
     depth = 0
     quote: str | None = None
-    escaped = False
-    for index, char in enumerate(value):
+    index = 0
+    while index < len(value):
+        char = value[index]
         if quote:
-            if escaped:
-                escaped = False
-            elif char == "\\":
-                escaped = True
-            elif char == quote:
+            if char == quote:
                 if index + 1 < len(value) and value[index + 1] == quote:
+                    index += 2
                     continue
                 quote = None
         elif char in "'\"`":
@@ -49,6 +52,7 @@ def split_sql_list(value: str) -> list[str]:
         elif char == "," and depth == 0:
             items.append(value[start:index].strip())
             start = index + 1
+        index += 1
     items.append(value[start:].strip())
     return items
 

@@ -1,109 +1,290 @@
 {
+  "metadata": {
+    "model": "random_forest",
+    "model_path": "analysis/results/detector.joblib",
+    "model_config": {
+      "random_forest": {
+        "bootstrap": true,
+        "ccp_alpha": 0.0,
+        "class_weight": "balanced",
+        "criterion": "gini",
+        "max_depth": null,
+        "max_features": "sqrt",
+        "max_leaf_nodes": null,
+        "max_samples": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "n_estimators": 200,
+        "n_jobs": 8,
+        "oob_score": false,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "hist_gradient_boosting": {
+        "categorical_features": "from_dtype",
+        "class_weight": "balanced",
+        "early_stopping": "auto",
+        "interaction_cst": null,
+        "l2_regularization": 0.0,
+        "learning_rate": 0.1,
+        "loss": "log_loss",
+        "max_bins": 255,
+        "max_depth": null,
+        "max_features": 1.0,
+        "max_iter": 300,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 20,
+        "monotonic_cst": null,
+        "n_iter_no_change": 10,
+        "random_state": 42,
+        "scoring": "loss",
+        "tol": 1e-07,
+        "validation_fraction": 0.1,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "logistic_regression": {
+        "C": 1.0,
+        "class_weight": "balanced",
+        "dual": false,
+        "fit_intercept": true,
+        "intercept_scaling": 1,
+        "l1_ratio": 0.0,
+        "max_iter": 1000,
+        "n_jobs": null,
+        "penalty": "deprecated",
+        "random_state": 42,
+        "solver": "lbfgs",
+        "tol": 0.0001,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "isolation_forest": {
+        "bootstrap": false,
+        "contamination": "auto",
+        "max_features": 1.0,
+        "max_samples": "auto",
+        "n_estimators": 200,
+        "n_jobs": 8,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "local_outlier_factor": {
+        "algorithm": "auto",
+        "contamination": 0.1,
+        "leaf_size": 30,
+        "metric": "minkowski",
+        "metric_params": null,
+        "n_jobs": 8,
+        "n_neighbors": 20,
+        "novelty": true,
+        "p": 2
+      },
+      "standard_scaler": {
+        "copy": true,
+        "with_mean": true,
+        "with_std": true
+      },
+      "xgboost": {
+        "objective": "binary:logistic",
+        "base_score": null,
+        "booster": null,
+        "callbacks": null,
+        "colsample_bylevel": null,
+        "colsample_bynode": null,
+        "colsample_bytree": null,
+        "device": null,
+        "early_stopping_rounds": null,
+        "enable_categorical": true,
+        "eval_metric": null,
+        "feature_types": null,
+        "feature_weights": null,
+        "gamma": null,
+        "grow_policy": null,
+        "importance_type": null,
+        "interaction_constraints": null,
+        "learning_rate": null,
+        "max_bin": null,
+        "max_cat_threshold": null,
+        "max_cat_to_onehot": null,
+        "max_delta_step": null,
+        "max_depth": null,
+        "max_leaves": null,
+        "min_child_weight": null,
+        "missing": "NaN",
+        "monotone_constraints": null,
+        "multi_strategy": null,
+        "n_estimators": 300,
+        "n_jobs": 8,
+        "num_parallel_tree": null,
+        "random_state": 42,
+        "reg_alpha": null,
+        "reg_lambda": null,
+        "sampling_method": null,
+        "scale_pos_weight": "n_clean_train / n_corrupted_train",
+        "subsample": null,
+        "tree_method": null,
+        "validate_parameters": null,
+        "verbosity": 0
+      },
+      "z_score": {
+        "location": "clean_training_mean",
+        "scale": "clean_training_std",
+        "epsilon": 1e-08
+      },
+      "lof_training_cap": 25000,
+      "threshold_selection": "highest validation score threshold maximizing F1"
+    },
+    "features": [
+      "has_negative_value",
+      "num_negative_values",
+      "log_max_numeric",
+      "log_min_numeric",
+      "num_numeric_values",
+      "has_absurd_year",
+      "min_year",
+      "num_null_values",
+      "num_string_values",
+      "max_string_length",
+      "avg_string_length",
+      "num_columns",
+      "num_values",
+      "col_val_delta",
+      "num_money_cols",
+      "num_count_cols",
+      "num_date_cols",
+      "has_rating_col",
+      "has_age_col",
+      "table_fk_count",
+      "table_unique_count",
+      "table_col_count",
+      "num_unknown_cols",
+      "statement_index",
+      "sql_length",
+      "col_fill_ratio"
+    ],
+    "threshold": 0.2870548323901319,
+    "split_seed": 42,
+    "dataset_fingerprint": "7c32b0a358f3257b1cbb3c00e1aea2bdf1a5ac47ea4fff02cdcabedcf9a8fd98",
+    "shap_seed": 42,
+    "shap_jobs": 4,
+    "shap_method": "exact TreeExplainer, independent ordered chunks",
+    "shap_sampling": "balanced held-out sample; not the natural benchmark class distribution",
+    "shap_sample_per_class": 200,
+    "n_train": 376201,
+    "n_validation": 91948,
+    "n_test": 151470
+  },
+  "sample_size": 400,
   "ranking": [
     {
       "feature": "min_year",
-      "mean_abs_shap": 0.3445688263451767
+      "mean_abs_shap": 0.3473541032543583
     },
     {
       "feature": "log_min_numeric",
-      "mean_abs_shap": 0.05592725719983904
+      "mean_abs_shap": 0.04858686156812563
     },
     {
       "feature": "has_negative_value",
-      "mean_abs_shap": 0.04319263369873661
+      "mean_abs_shap": 0.04759997381152421
     },
     {
       "feature": "has_absurd_year",
-      "mean_abs_shap": 0.04229677369377623
+      "mean_abs_shap": 0.04459646392507234
     },
     {
       "feature": "num_negative_values",
-      "mean_abs_shap": 0.040101318835560985
-    },
-    {
-      "feature": "num_money_cols",
-      "mean_abs_shap": 0.022014319921109703
+      "mean_abs_shap": 0.041867332140590595
     },
     {
       "feature": "max_string_length",
-      "mean_abs_shap": 0.0209241785217108
+      "mean_abs_shap": 0.02113304148335201
+    },
+    {
+      "feature": "num_money_cols",
+      "mean_abs_shap": 0.019822705287979785
     },
     {
       "feature": "num_string_values",
-      "mean_abs_shap": 0.013968045437585166
+      "mean_abs_shap": 0.013467240234154474
     },
     {
       "feature": "num_count_cols",
-      "mean_abs_shap": 0.012730730394866026
+      "mean_abs_shap": 0.010502445361232914
     },
     {
       "feature": "avg_string_length",
-      "mean_abs_shap": 0.007454999726806733
+      "mean_abs_shap": 0.007459145430836634
     },
     {
       "feature": "num_date_cols",
-      "mean_abs_shap": 0.006544589626014882
+      "mean_abs_shap": 0.006407938243606628
     },
     {
       "feature": "has_rating_col",
-      "mean_abs_shap": 0.005778154491887516
+      "mean_abs_shap": 0.0055812602477542505
     },
     {
       "feature": "num_numeric_values",
-      "mean_abs_shap": 0.004521794251913449
+      "mean_abs_shap": 0.004885809062677372
     },
     {
       "feature": "log_max_numeric",
-      "mean_abs_shap": 0.0032405256629343747
+      "mean_abs_shap": 0.004134985374992146
     },
     {
       "feature": "num_columns",
-      "mean_abs_shap": 0.0029754294119042997
-    },
-    {
-      "feature": "num_values",
-      "mean_abs_shap": 0.002817397651835931
-    },
-    {
-      "feature": "table_col_count",
-      "mean_abs_shap": 0.0021699550858732273
+      "mean_abs_shap": 0.0032003723017966328
     },
     {
       "feature": "table_fk_count",
-      "mean_abs_shap": 0.002087004230719721
+      "mean_abs_shap": 0.0028266141794763807
+    },
+    {
+      "feature": "table_col_count",
+      "mean_abs_shap": 0.002528839394560922
     },
     {
       "feature": "sql_length",
-      "mean_abs_shap": 0.0018781454873316413
+      "mean_abs_shap": 0.002199839879365604
+    },
+    {
+      "feature": "num_values",
+      "mean_abs_shap": 0.0019836746125336023
     },
     {
       "feature": "statement_index",
-      "mean_abs_shap": 0.0008979418204267801
+      "mean_abs_shap": 0.0008537795512393458
     },
     {
       "feature": "table_unique_count",
-      "mean_abs_shap": 0.0006786090276359068
+      "mean_abs_shap": 0.0007545945302569853
     },
     {
       "feature": "col_fill_ratio",
-      "mean_abs_shap": 0.00057812476947908
-    },
-    {
-      "feature": "has_age_col",
-      "mean_abs_shap": 0.0004887965338914391
+      "mean_abs_shap": 0.0004618601168774382
     },
     {
       "feature": "num_null_values",
-      "mean_abs_shap": 0.000353136073058385
+      "mean_abs_shap": 0.00030163382398977083
+    },
+    {
+      "feature": "has_age_col",
+      "mean_abs_shap": 0.000218053370131649
     },
     {
       "feature": "num_unknown_cols",
-      "mean_abs_shap": 2.1957182031392574e-06
+      "mean_abs_shap": 1.1624468674720508e-07
     },
     {
       "feature": "col_val_delta",
       "mean_abs_shap": 0.0
     }
-  ],
-  "sample_size": 2000
+  ]
 }
