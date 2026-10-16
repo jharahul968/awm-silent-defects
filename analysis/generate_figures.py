@@ -45,7 +45,7 @@ def load_results() -> dict:
 
 
 def plot_model_comparison(results: dict) -> None:
-    """Compare ranking metrics against the held-out positive prevalence."""
+    """Compare ranking metrics against the held-out positive prevalence using an IEEE-style dot plot."""
     models_data = [row for row in results["main_comparison"] if row["model"] != "prevalence_baseline"]
     
     # Pretty display names and grouping colors
@@ -80,38 +80,49 @@ def plot_model_comparison(results: dict) -> None:
     pr_aucs = [m["pr_auc"] for m in models_data]
     cats = [categories[m["model"]] for m in models_data]
     colors = [palette[c] for c in cats]
+    y_pos = np.arange(len(names))
 
-    fig, ax = plt.subplots(figsize=(6.5, 3.6))
-    bars = ax.barh(names, pr_aucs, color=colors, edgecolor="black", linewidth=0.6, height=0.65)
+    fig, ax = plt.subplots(figsize=(6.5, 3.8))
     
-    # Value annotations on bars
-    for bar in bars:
-        w = bar.get_width()
-        ax.text(w - 0.04, bar.get_y() + bar.get_height() / 2, f"{w:.4f}",
-                ha="right", va="center", color="white" if w > 0.9 else "black",
-                fontweight="bold", fontsize=8.5)
+    # Light guide lines from 0.70 to each score
+    ax.hlines(y_pos, 0.70, pr_aucs, color=colors, alpha=0.55, linewidth=2.0, zorder=2)
+    
+    # Prominent point markers
+    ax.scatter(pr_aucs, y_pos, color=colors, edgecolor="black", s=70, linewidth=0.8, zorder=4)
+    
+    # Value annotations placed clearly to the right of each point
+    for y, score in zip(y_pos, pr_aucs):
+        ax.text(score + 0.007, y, f"{score:.4f}", va="center", ha="left",
+                fontsize=8.5, fontweight="bold", color="#222222")
 
     # Prevalence baseline reference line
     prevalence = models_data[0]["prevalence"]
-    ax.axvline(prevalence, color="#d55e00", linestyle="--", linewidth=1.2,
-               label=f"Random Baseline ({prevalence:.2%})")
+    ax.axvline(prevalence, color="#d55e00", linestyle="--", linewidth=1.2, zorder=1)
 
-    ax.set_xlim(0, 1.01)
-    ax.set_xlabel("Average precision")
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(names)
+    ax.set_xlim(0.70, 1.055)
+    ax.set_xlabel("Average Precision (AP)")
     ax.set_title("Detection Performance Across 8 Models on Held-Out Environments")
-    ax.grid(axis="x", linestyle=":", alpha=0.6)
+    ax.grid(axis="x", linestyle=":", alpha=0.6, zorder=0)
     
-    # Legend for categories
-    handles = [plt.Rectangle((0, 0), 1, 1, color=palette[k], ec="black", lw=0.6) for k in palette]
+    # Clean legend positioned outside the plotting area below the x-axis
+    handles = [
+        plt.Line2D([0], [0], marker="o", color="w", markerfacecolor=palette[k],
+                   markeredgecolor="black", markersize=7) for k in palette
+    ]
     labels = list(palette.keys())
     handles.append(plt.Line2D([0], [0], color="#d55e00", linestyle="--", lw=1.2))
-    labels.append(f"Prevalence ({prevalence:.1%})")
-    ax.legend(handles, labels, loc="lower left", framealpha=0.9, edgecolor="none")
+    labels.append(f"Prevalence ({prevalence:.2%})")
+    
+    ax.legend(handles, labels, loc="upper center", bbox_to_anchor=(0.5, -0.18),
+              ncol=5, frameon=False, fontsize=8.5)
 
     out_path = FIGURES_DIR / "fig1_model_comparison.png"
-    plt.savefig(out_path)
+    plt.savefig(out_path, bbox_inches="tight")
     plt.close()
     print(f"Saved: {out_path}")
+
 
 
 def plot_severity_decay(results: dict) -> None:

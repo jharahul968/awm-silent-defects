@@ -95,10 +95,6 @@ uv run streamlit run demo_app.py
 ```
 Pre-computed mutation presets are available, and custom INSERT statements can be evaluated against the saved Random Forest model.
 
-## Report
-
-The project progress report is available as [`midterm_report_ieee.pdf`](midterm_report_ieee.pdf).
-
 ## Limitations and Next Steps
 
 - **Synthetic vs. Natural Defects:** Benchmark labels reflect controlled synthetic mutations; evaluation against naturally occurring semantic defects requires ongoing manual domain review.
