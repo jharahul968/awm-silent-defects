@@ -2,45 +2,42 @@
 
 COSC 50303: Data Mining, Fall 2026 · Rahul Jha, Texas Christian University
 
-[Proposal](Project_Proposal.pdf) · [Midterm Report](midterm_report_ieee.pdf) · [LaTeX Source](midterm_report_ieee.tex)
+[Proposal](Project_Proposal.pdf) · [Midterm source](midterm_report_ieee.tex)
 
-## Overview
+## Research question
 
-This project investigates whether tabular data mining methods can detect SQL-valid injected value defects in synthetic databases synthesized for LLM agents. 
+Can tabular data-mining methods identify SQL-valid injected value defects in previously unseen AWM environments?
 
-The dataset is derived from [AgentWorldModel-1K](https://huggingface.co/datasets/Snowflake/AgentWorldModel-1K) (CC-BY-4.0), which contains 1,000 relational database environments. While SQLite automatically catches structural and constraint errors during database execution, silent semantic defects—such as negative balances, extreme ages, or corrupted dates—remain executable without database rejection. The objective is to evaluate pre-execution static statement features for identifying such anomalies across previously unseen database environments.
+[Agent World Model](https://arxiv.org/abs/2602.10090) supplies 1,000 synthetic database-backed environments. This project first reproduces initialization failures, then builds a labeled benchmark by modifying individual values in statements that SQLite accepts. SQL acceptance establishes executable validity; it does not establish that an unmodified statement is semantically correct or that every injected change is invalid in its domain.
 
-Upstream environment initialization routines in `awm/` are adapted from [Snowflake-Labs/agent-world-model](https://github.com/Snowflake-Labs/agent-world-model). All defect injection mechanisms, feature extractors, tabular benchmarks, SHAP explanations, test suites, and demo interfaces reside in `analysis/`, `tests/`, and `demo_app.py`.
+The proposal selected an in-place subset of 129,328 statements. The implemented benchmark keeps unmodified statements and separate corruption variants. Variants are dependent examples, not additional independent source observations. Every version of a source statement stays in the same environment partition.
 
-## Setup and Data
+## Data and setup
 
-Python 3.12+ and [uv](https://docs.astral.sh/uv/) are used for environment and dependency management.
+Use Python 3.12 or newer and [uv](https://docs.astral.sh/uv/). Run commands from the repository root.
 
-Dependencies are locked and installed via:
 ```bash
 uv sync --locked
-```
-
-The underlying environment schemas and sample data are retrieved from Hugging Face into `data/`:
-```bash
 uv run --with huggingface-hub hf download Snowflake/AgentWorldModel-1K \
     gen_db.jsonl gen_sample.jsonl README.md --repo-type dataset --local-dir data
 ```
 
-## Reproducing Experiments
+The dataset is [Snowflake/AgentWorldModel-1K](https://huggingface.co/datasets/Snowflake/AgentWorldModel-1K), released under **CC-BY-4.0**. Its card is preserved in [data/README.md](data/README.md). Only `gen_db.jsonl` and `gen_sample.jsonl` are required. Downloaded data, generated databases, the benchmark parquet file, and the fitted model are excluded from Git. Source hashes and a benchmark fingerprint are recorded in `analysis/results/dataset_stats.json`; use them to check whether a later download matches the reported experiment.
 
-The experimental workflow consists of an initialization audit, benchmark generation and model evaluation, data quality profiling, model interpretation, and figure generation.
+The upstream database initialization code in `awm/` is adapted from [Snowflake-Labs/agent-world-model](https://github.com/Snowflake-Labs/agent-world-model). All defect injection, feature extraction, tabular benchmarks, analysis pipelines, tests, and the demo application live in `analysis/`, `tests/`, and `demo_app.py`.
 
-### 1. Initialization Audit
-The execution behavior of 129,328 original INSERT statements across 1,000 environments is audited under SQLite with foreign key constraints enabled:
+## Reproduce the experiments
+
+The audit reproduces SQLite initialization with foreign keys enabled. It records 129,328 statements, 1,374 execution failures, 217 affected environments, and one malformed sample payload. These are observed runtime failures, separate from the injected labels.
+
 ```bash
 uv run python -m analysis.build_insert_audit --data-dir data --output-dir analysis/results
 uv run python -m analysis.evaluate_insert_predictability
 uv run python -m analysis.run_final_checks
 ```
 
-### 2. Benchmark Evaluation
-Eight detection methods are evaluated across disjoint environment splits (Rules, Mean/Std Z-Score, Isolation Forest, Local Outlier Factor, Logistic Regression, Random Forest, HistGradientBoosting, and XGBoost):
+The main benchmark compares rules, mean/std Z-score, Isolation Forest, Local Outlier Factor, logistic regression, Random Forest, HistGradientBoosting, and XGBoost. It retains only variants accepted by SQLite in the source database state. Money/count mutations change sign or magnitude; ratings, ages, and dates use specified values or year offsets. See `analysis/detect_silent_defects.py` for transformations and eligibility rules.
+
 ```bash
 uv run python -m analysis.detect_silent_defects --no-wandb
 uv run python -m analysis.profile_data_quality
@@ -48,68 +45,82 @@ uv run python -m analysis.interpret_and_analyze_errors --no-wandb --sample-per-c
 uv run python -m analysis.validate_artifacts
 uv run python -m analysis.generate_figures
 ```
-Validation-tuned decision thresholds are applied to anomaly estimators. Fast verification or lightweight test runs can be performed using `--skip-build` or `--n-envs 25`.
 
-## Artifacts and Testing
+The detector rebuilds the benchmark and fits the models. After a successful build, `--skip-build` verifies the cached dataset version, source hashes, and dataset fingerprint. Rebuild after changing the generator; the cache check does not establish that an edited generator would produce identical examples. `--n-envs 25` provides a development run; its outputs are not full-benchmark results. Restore the full build before generating submission figures or launching the submitted demo.
 
-Key experimental results and trained models are stored in `analysis/results/`:
+The submitted SHAP summary uses a balanced 400-example test sample (200 per label), seed 42, and four workers. Each worker computes exact TreeExplainer values; larger samples can use `--sample-per-class`, and `--shap-jobs 1` runs serially. Sampling affects attribution summaries, not model training or the benchmark metrics.
 
-| Artifact | Description |
+The outer split holds out 25% of environments; a second grouped split reserves 20% of the remainder for validation. Seed 42 fixes the main split. Models fit on training environments only, and learned thresholds maximize validation F1; Boolean rules keep their fixed cutoff. Test average precision (AP) uses `average_precision_score`, rather than trapezoidal precision–recall integration. Compare AP with positive prevalence, since this synthetic benchmark has many more injected variants than unmodified statements. Experiments also report severity subsets, omitted-type generalization, feature ablation, three grouped seeds, and sensitivity to 1%/5% positive prevalence.
+
+Isolation Forest, Z-score, and LOF fit on unmodified training examples. LOF standardizes features using that subset and caps its fitting sample for runtime. Supervised models use both labels. Partition counts, configuration, thresholds, and fingerprint are saved with results; do not infer them from old tables.
+
+## Outputs and checks
+
+| Artifact | Purpose |
 |---|---|
-| `analysis/results/tier2_dataset.parquet` | Benchmark dataset containing 26 extracted static features |
-| `analysis/results/dataset_stats.json` | Dataset build metadata, SHA-256 hashes, and fingerprint |
-| `analysis/results/tier2_results.json` | Evaluation metrics across held-out environment partitions |
-| `analysis/results/detector.joblib` | Saved Random Forest model bundle and threshold configuration |
-| `analysis/results/error_cases.json` | Catalog of false-positive and false-negative mutations |
-| `analysis/results/shap_summary.json` | TreeExplainer feature attribution values |
-| `analysis/results/midterm_numbers.tex` | Generated LaTeX macros for empirical figures in the report |
-| `figures/` | Generated plots for model comparisons, severity decay, and SHAP attributions |
+| `analysis/results/audit_summary.json` | Source initialization counts |
+| `analysis/results/tier2_dataset.parquet` | Features and exact source/mutation provenance |
+| `analysis/results/dataset_stats.json` | Build counts, hashes, and fingerprint |
+| `analysis/results/tier2_results.json` | Metrics, protocol, configuration |
+| `analysis/results/data_quality_report.json` | Source and feature quality/missingness |
+| `analysis/results/detector.joblib` | Shared RF, feature order, threshold, provenance |
+| `analysis/results/error_cases.json` | Original/mutated SQL and predictions |
+| `analysis/results/shap_summary.json` | SHAP for the shared RF |
+| `analysis/results/verification.json` | SQL replay, feature/prediction and metric reconciliation |
+| `analysis/results/manual_review_pairs.csv` | Stratified pairs for human semantic review; judgments initially blank |
+| `figures/` | Plots generated from recorded results |
 
-Automated unit tests covering SQL parsing, mutation generation, feature extraction, validation thresholds, and artifact reconciliation are executed via:
 ```bash
 uv run python -m pytest tests/
 ```
 
-## Experiment Tracking
+The final check passed 47 tests in a clean environment. Tests cover parsing, corruption eligibility, features, SQL validation, grouped partitions, and thresholds. The artifact audit passes five reconciliation checks, including replay/feature checks for 25 stratified pairs. These pairs retain blank semantic judgments for human review. Passing tests does not replace executing the reproduction commands from a clean environment. Earlier evaluation outputs are superseded by refreshed result files.
 
-Experiment tracking is integrated via Weights & Biases:
-- **Main benchmark run:** [yj2l19av](https://wandb.ai/rahul-jha-tcu/awm-silent-defects/runs/yj2l19av)
-- **Model interpretation run:** [vnawnwr7](https://wandb.ai/rahul-jha-tcu/awm-silent-defects/runs/vnawnwr7)
-- **Project workspace:** [awm-silent-defects](https://wandb.ai/rahul-jha-tcu/awm-silent-defects)
+## Experiment tracking
 
-Offline tracking is supported without external credentials:
+W&B is optional. To record a local run without cloud access:
+
 ```bash
 WANDB_MODE=offline uv run python -m analysis.detect_silent_defects --skip-build
+WANDB_MODE=offline uv run python -m analysis.interpret_and_analyze_errors --sample-per-class 200 --shap-jobs 4
 ```
 
-Synchronization to a remote workspace is initiated with:
+These log configurations, metrics, tables, and plots beneath `wandb/`. An offline run is local evidence, not proof of a public workspace. To upload after authenticating:
+
 ```bash
+uv run wandb login
 uv run python -m analysis.detect_silent_defects --skip-build \
+    --wandb-project awm-silent-defects --wandb-entity rahul-jha-tcu
+uv run python -m analysis.interpret_and_analyze_errors --sample-per-class 200 --shap-jobs 4 \
     --wandb-project awm-silent-defects --wandb-entity rahul-jha-tcu
 ```
 
-## Interactive Demonstration
+Existing offline runs can instead be uploaded with `uv run wandb sync <offline-run-directory>`. The refreshed [main run](https://wandb.ai/rahul-jha-tcu/awm-silent-defects/runs/yj2l19av) and [interpretation run](https://wandb.ai/rahul-jha-tcu/awm-silent-defects/runs/vnawnwr7) have finished and synchronized. Check the [workspace](https://wandb.ai/rahul-jha-tcu/awm-silent-defects) for reviewer access before submission. Credentials belong in the local login store or environment, never source files.
 
-An interactive demonstration is provided via Streamlit for inspecting SQL statements and comparing detector scores against live SQLite execution:
+## Demonstration
+
+After generating the benchmark, saved model, and error cases:
+
 ```bash
 uv run streamlit run demo_app.py
 ```
-Pre-computed mutation presets are available, and custom INSERT statements can be evaluated against the saved Random Forest model.
 
-## Report Compilation
+Choose a source example, edit an INSERT, and inspect the synthetic-corruption score. The app separately checks SQLite acceptance using the actual schema and preceding source statements. It uses the same saved RF and validation threshold as the report's RF analysis, without fitting another model at launch. This supports manual inspection, not a guarantee of semantic correctness.
 
-The project progress report is available as [`midterm_report_ieee.pdf`](midterm_report_ieee.pdf), written in the standard IEEE conference format ([`midterm_report_ieee.tex`](midterm_report_ieee.tex)).
+## Report
 
-Local compilation is performed via:
+The progress report is available as [`midterm_report_ieee.pdf`](midterm_report_ieee.pdf).
+
+To compile the LaTeX source locally:
 ```bash
 pdflatex -interaction=nonstopmode -halt-on-error midterm_report_ieee.tex
 pdflatex -interaction=nonstopmode -halt-on-error midterm_report_ieee.tex
 ```
 
-For Overleaf, compilation is supported by uploading `midterm_report_ieee.tex` together with `analysis/results/midterm_numbers.tex` and `figures/fig5_shap_bar.png`.
+To compile on Overleaf, upload `midterm_report_ieee.tex` together with `analysis/results/midterm_numbers.tex` and `figures/fig5_shap_bar.png`.
 
-## Limitations and Next Steps
+## Limitations and next steps
 
-- **Synthetic vs. Natural Defects:** Benchmark labels reflect controlled synthetic mutations; evaluation against naturally occurring semantic defects requires ongoing manual domain review.
-- **Lexical Column Filtering:** Column candidate eligibility relies on keyword matching, which can occasionally select tangential attributes.
-- **Planned Extensions:** Future experiments will evaluate multi-table relational consistency, temporal sequence ordering, and plausible positive-value anomalies.
+- **Controlled vs. natural defects:** Current labels evaluate recognition of controlled synthetic mutations; detecting natural semantic defects requires ongoing manual domain review.
+- **Lexical column filtering:** Column eligibility relies on keyword matching, which can occasionally overreach (e.g., matching `count` inside `is_bank_account`).
+- **Planned extensions:** Evaluating plausible positive-value anomalies, temporal-consistency constraints, and cross-table relational dependencies.
