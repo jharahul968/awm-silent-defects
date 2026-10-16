@@ -2,7 +2,7 @@
 
 COSC 50303: Data Mining, Fall 2026 · Rahul Jha, Texas Christian University
 
-[Proposal](Project_Proposal.pdf) · [Midterm Report](midterm_report_ieee.pdf) · [LaTeX Source](midterm_report_ieee.tex)
+[Proposal](Project_Proposal.pdf) · [Midterm Report](midterm_report_ieee.pdf)
 
 ## Overview
 
@@ -95,17 +95,9 @@ uv run streamlit run demo_app.py
 ```
 Pre-computed mutation presets are available, and custom INSERT statements can be evaluated against the saved Random Forest model.
 
-## Report Compilation
+## Report
 
-The project progress report is available as [`midterm_report_ieee.pdf`](midterm_report_ieee.pdf), written in the standard IEEE conference format ([`midterm_report_ieee.tex`](midterm_report_ieee.tex)).
-
-Local compilation is performed via:
-```bash
-pdflatex -interaction=nonstopmode -halt-on-error midterm_report_ieee.tex
-pdflatex -interaction=nonstopmode -halt-on-error midterm_report_ieee.tex
-```
-
-For Overleaf, compilation is supported by uploading `midterm_report_ieee.tex` together with `analysis/results/midterm_numbers.tex` and `figures/fig5_shap_bar.png`.
+The project progress report is available as [`midterm_report_ieee.pdf`](midterm_report_ieee.pdf).
 
 ## Limitations and Next Steps
 
